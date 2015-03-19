@@ -18,7 +18,7 @@ class UserList(generics.ListCreateAPIView):
     """
     List all Users, or create a new User.
     """
-    model = User
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
@@ -26,5 +26,5 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update or delete a User.
     """
-    model = User
+    queryset = User.objects.all()
     serializer_class = UserSerializer
