@@ -4,7 +4,7 @@ from userapp import views
 
 urlpatterns = patterns('',
     url(r'^$', views.UserList.as_view(), name='user-list'),
-    url(r'^(?P<slug>[0-9]+)/$', views.UserDetail.as_view(), name='user-detail'),
+    url(r'^(?P<pk>[0-9]+)/$', views.UserDetail.as_view(), name='user-detail'),
 )
 
 
