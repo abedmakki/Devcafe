@@ -1,8 +1,9 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 # Create your models here.
-class User(models.Model):
+class UserModel(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User)
 
@@ -10,7 +11,7 @@ class User(models.Model):
     picture = models.ImageField(upload_to='profile_images', blank=True)
     birth_date = models.DateField(blank=True)
     country = models.CharField(max_length=100)
-    address = models.CharField(max_length=400, null=True)
+    address = models.CharField(max_length=400, blank=True, null=True)
     slug = models.SlugField(unique=True)
 
     # Override the __unicode__() method to return out something meaningful!
