@@ -10,3 +10,6 @@ class Idea(models.Model):
     description = models.CharField(max_length=500)
     rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
+
+    def __unicode__(self):
+        return self.title
