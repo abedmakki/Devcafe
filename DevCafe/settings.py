@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'userapp',
     'ideas',
-    'gunicorn_django'
 )
 
 MIDDLEWARE_CLASSES = (
