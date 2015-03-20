@@ -10,3 +10,8 @@ urlpatterns = patterns('',
     url(r'^users/', include('userapp.urls')),
     url(r'^ideas/', include('ideas.urls')),
 )
+
+
+urlpatterns += patterns('',
+        (r'^static/(?P<path>.*)$', 'DevCafe.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    )
