@@ -1,1 +1,1 @@
-web: gunicorn DevCafe.wsgi --log-file -
+web: gunicorn hellodjango.wsgi --log-file -
