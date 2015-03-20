@@ -1,1 +1,1 @@
-web: gunicorn DevCafe.wsgi --log-file -
+web: python DevCafe/manage.py collectstatic --noinput; bin/gunicorn_django --workers=4 --bind=0.0.0.0:$PORT DevCafe/settings.py
