@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
     birth_date = serializers.DateField()
     country = serializers.CharField()
     address = serializers.CharField()
-    slug = serializers.SlugField(read_only=True)
+    slug = serializers.CharField(read_only=True)
 
 
     # picture = serializers.Field(source='picture')
