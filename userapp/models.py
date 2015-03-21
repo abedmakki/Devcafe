@@ -9,15 +9,15 @@ class UserModel(models.Model):
 
     # The additional attributes we wish to include.
     picture = models.ImageField(upload_to='profile_images', blank=True)
-    birth_date = models.DateField(blank=True)
+    birth_date = models.DateField(blank=True , null=True)
     country = models.CharField(max_length=100)
     address = models.CharField(max_length=400, blank=True, null=True)
     slug = models.SlugField(unique=True)
 
     # Override the __unicode__() method to return out something meaningful!
     def save(self, *args, **kwargs):
-                self.slug = slugify(self.name)
-                super(UserProfile, self).save(*args, **kwargs)
+                self.slug = slugify(self.user.username)
+                super(UserModel, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.user.username

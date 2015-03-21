@@ -1,52 +1,40 @@
 from django.contrib.auth.models import User
-from django.forms import widgets
 from rest_framework import serializers
-from userapp.models import UserModel
-
+from .models import UserModel
 
 class UserSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(source='pk', read_only=True)
     username = serializers.CharField(source='user.username')
-    email = serializers.CharField(source='user.email')
-    password = serializers.CharField(source='user.password', write_only=True)
-    # date_joined = serializers.DateField(source='user.date_joined')
-    picture = serializers.ImageField(required=False)
-    birth_date = serializers.DateField()
-    country = serializers.CharField()
-    address = serializers.CharField()
-    slug = serializers.CharField(read_only=True)
-
-
-    # picture = serializers.Field(source='picture')
-    # birth_date = serializers.Field(source='birth_date')
-    # country = serializers.Field(source='country')
-    # address = serializers.Field(source='address')
-    # slug = serializers.Field(source='slug')
+    password = serializers.CharField(source='user.password' , write_only=True)
+    email = serializers.EmailField(source='user.email')
+    # this for blank picture (till found another solution)
+    picture = serializers.ImageField(allow_null=True)
 
     class Meta:
         model = UserModel
-        fields = ('id', 'username', 'email', 'picture', 'birth_date', 'country', 'address', 'slug', 'password')
-        # write_only_fields = ('password',)
-        # read_only_fields = ('slug',)
-        # extra_kwargs = {
-        #     'password': {
-        #         'write_only': True,
-        #     },
-        # }
+        fields = ('id', 'username','password', 'email','birth_date','picture','country','address','slug')
+        read_only_fields = ('slug',)
 
+    def create(self, validated_data):
+        user = User.objects.create_user(username=validated_data['user']['username'],
+                                        email=validated_data['user']['email'],
+                                        password=validated_data['user']['password'])
 
-    # def restore_object(self, attrs, instance=None):
-    #     """
-    #     Given a dictionary of deserialized field values, either update
-    #     an existing model instance, or create a new model instance.
-    #     """
-    #     if instance is not None:
-    #         instance.user.email = attrs.get('user.email', instance.user.email)
-    #         instance.user.password = attrs.get('user.password', instance.user.password)
-    #         instance.picture = attrs.get('picture', instance.picture)
-    #         instance.birth_date = attrs.get('birth_date', instance.birth_date)
-    #         instance.country = attrs.get('country', instance.country)
-    #         instance.address = attrs.get('address', instance.address)
-    #         return instance
+        user_model = UserModel.objects.create(user=user,
+                                             birth_date=validated_data['birth_date'],
+                                             picture=validated_data['picture'],
+                                             country=validated_data['country'],
+                                             address=validated_data['address'],
+                                             )
+        return user_model
 
-    #     user = User.objects.create_user(username=attrs.get('user.username'), email= attrs.get('user.email'), password=attrs.get('user.password'))
-    #     return UserModel(user=user)
+    # def update(self, instance, validated_data):
+    #     password = validated_data['user'].get('password', None)
+    #     print(password)
+    #     return
+#
+# class PasswordSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = UserModel
+#         fields = ('password')
+#         write
