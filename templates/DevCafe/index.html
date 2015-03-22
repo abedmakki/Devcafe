@@ -5,8 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Angular Demo</title>
-  <script src="/app/staticfiles/lib/angular/angular.min.js"></script>
-  <script src="/app/staticfiles/js/controllers.js"></script>
+  <script src="{{ STATIC_URL }}lib/angular/angular.min.js"></script>
+  <script src="{{ STATIC_URL }}js/controllers.js"></script>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
   <link rel="stylesheet" href="/app/staticfiles/css/style.css">
 </head>
 <body>
