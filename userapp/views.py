@@ -4,7 +4,7 @@ from rest_framework import generics , status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from userapp.models import UserModel
+from userapp.models import UserProfile
 from userapp.serializers import UserSerializer
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLogin
@@ -14,7 +14,7 @@ class UserList(generics.ListCreateAPIView):
     """
     List all Users, or create a new User.
     """
-    queryset = UserModel.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
@@ -22,12 +22,12 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve, update or delete a User.
     """
-    queryset = UserModel.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def destroy(self, request, *args, **kwargs):
         try:
-            usermodel = UserModel.objects.get(id=kwargs['pk'])
+            usermodel = UserProfile.objects.get(id=kwargs['pk'])
             user = usermodel.user
             usermodel.delete()
             user.delete()
@@ -38,9 +38,9 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     def update(self, request, *args, **kwargs):
         data=request.data
         try:
-            snippet = UserModel.objects.get(pk=kwargs['pk'])
+            snippet = UserProfile.objects.get(pk=kwargs['pk'])
             nativep = snippet.user.password
-        except UserModel.DoesNotExist:
+        except UserProfile.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         password = data.get('password',None)
         serializer = UserSerializer(snippet,data,partial=True)
