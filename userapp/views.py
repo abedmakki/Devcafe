@@ -7,14 +7,6 @@ from rest_framework.reverse import reverse
 from userapp.models import UserModel
 from userapp.serializers import UserSerializer
 
-@api_view(('GET',))
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
-    })
-
-
 class UserList(generics.ListCreateAPIView):
     """
     List all Users, or create a new User.
