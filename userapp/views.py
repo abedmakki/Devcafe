@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from userapp.models import UserModel
 from userapp.serializers import UserSerializer
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_auth.registration.views import SocialLogin
+
 
 class UserList(generics.ListCreateAPIView):
     """
@@ -50,3 +53,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class FacebookLogin(SocialLogin):
+#     adapter_class = FacebookOAuth2Adapter

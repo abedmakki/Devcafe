@@ -1,17 +1,45 @@
 {% load staticfiles %}
+{% load socialaccount %}
+
 
 <!doctype html>
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="UTF-8">
   <title>Angular Demo</title>
-  <script src="{{ STATIC_URL }}lib/angular/angular.min.js"></script>
-  <script src="{{ STATIC_URL }}js/controllers.js"></script>
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-
-  <link rel="stylesheet" href="/app/staticfiles/css/style.css">
+  <script src="{% static "lib/angular/angular.min.js" %}"></script>
+  <script src="{% static "js/controllers.js" %}"></script>
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body>
+
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1585592541690655',
+        xfbml      : true,
+        version    : 'v2.2'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+
+  <a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook OAuth2</a>
+
+  <div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+  </div>
 
 {% verbatim %}
   <div class="main" ng-controller = "MyController">
