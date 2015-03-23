@@ -25,34 +25,34 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    def destroy(self, request, *args, **kwargs):
-        try:
-            usermodel = UserProfile.objects.get(id=kwargs['pk'])
-            user = usermodel.user
-            usermodel.delete()
-            user.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        except:return Response(status=status.HTTP_404_NOT_FOUND)
+    # def destroy(self, request, *args, **kwargs):
+    #     try:
+    #         usermodel = UserProfile.objects.get(id=kwargs['pk'])
+    #         user = usermodel.user
+    #         usermodel.delete()
+    #         user.delete()
+    #         return Response(status=status.HTTP_204_NO_CONTENT)
+    #     except:return Response(status=status.HTTP_404_NOT_FOUND)
 
     ##need more work
-    def update(self, request, *args, **kwargs):
-        data=request.data
-        try:
-            snippet = UserProfile.objects.get(pk=kwargs['pk'])
-            nativep = snippet.user.password
-        except UserProfile.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        password = data.get('password',None)
-        serializer = UserSerializer(snippet,data,partial=True)
-        if serializer.is_valid():
-            if password:
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                print('none password')
+    # def update(self, request, *args, **kwargs):
+    #     data=request.data
+    #     try:
+    #         snippet = User.objects.get(pk=kwargs['pk'])
+    #         nativep = snippet.user.password
+    #     except User.DoesNotExist:
+    #         return Response(status=status.HTTP_404_NOT_FOUND)
+    #     password = data.get('password',None)
+    #     serializer = UserSerializer(snippet,data,partial=True)
+    #     if serializer.is_valid():
+    #         if password:
+    #             serializer.save()
+    #             return Response(serializer.data)
+    #         else:
+    #             print('none password')
 
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # class FacebookLogin(SocialLogin):
