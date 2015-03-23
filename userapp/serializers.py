@@ -38,8 +38,8 @@ class UserSerializer(UserDetailsSerializer):
                 profile.country = country
             if address:
                 profile.address = address
-            if slug:
-                profile.slug = slug
+            # if slug:
+            #     profile.slug = slug
             # else:
             #     profile.slug = slugify(username)
             profile.save()
