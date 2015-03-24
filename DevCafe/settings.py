@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'rest_auth.registration',
     'userapp',
     'ideas',
+    'extra',
 )
 
 MIDDLEWARE_CLASSES = (
