@@ -1,9 +1,10 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from time import strftime
 
 # Create your models here.
-class UserModel(models.Model):
+class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User)
 
@@ -16,8 +17,8 @@ class UserModel(models.Model):
 
     # Override the __unicode__() method to return out something meaningful!
     def save(self, *args, **kwargs):
-                self.slug = slugify(self.user.username)
-                super(UserModel, self).save(*args, **kwargs)
+                self.slug = slugify(self.user.username + str(self.user.pk) + strftime("%Y%m%d%S%M%H"))
+                super(UserProfile, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.user.username

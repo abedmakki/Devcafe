@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from userapp.models import UserModel
+from userapp.models import UserProfile
 from ideas.models import Idea
 
 

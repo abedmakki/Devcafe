@@ -9,3 +9,8 @@ urlpatterns = patterns('',
 
 
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+
+# urlpatterns += patterns('',
+#     url(r'^/rest-auth/facebook/$', views.FacebookLogin.as_view(), name='fb_login')
+# )
