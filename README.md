@@ -1,2 +1,2 @@
 # DevCafe
-Code Repository for DevCafe
+<!-- Code Repository for DevCafe -->
