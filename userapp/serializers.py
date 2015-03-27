@@ -58,7 +58,10 @@ class UserSerializer(UserDetailsSerializer):
 
         # print profile_data
 
-        instance = super(UserSerializer, self).create(validated_data)
+        # instance = super(UserSerializer, self).create(validated_data)
+        instance = User(**validated_data)
+        instance.set_password(validated_data.get('password'))
+        instance.save()
         # print instance
 
         useracc = UserProfile(picture=picture, birth_date=birth_date, country=country, address=address, user=User.objects.get(pk=instance.id))
