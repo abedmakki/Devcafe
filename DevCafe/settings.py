@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'userapp',
     'ideas',
     'general',
+    'project',
 )
 
 MIDDLEWARE_CLASSES = (

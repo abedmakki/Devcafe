@@ -10,3 +10,6 @@ class Project(models.Model):
 	plan = models.TextField()
 	logo = models.ImageField(upload_to='projects_images', blank=True)
 	slug = models.SlugField(unidue=True)
+
+	def __unicode__(self):
+        return self.title
