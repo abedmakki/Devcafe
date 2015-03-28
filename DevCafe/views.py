@@ -5,4 +5,4 @@ def home(request):
     """
     A index view.
     """
-    return render(request, 'DevCafe/index.html')
+    return render(request, 'index.html')
