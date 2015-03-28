@@ -2,10 +2,12 @@
 
 
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="DevCafe">
 <head>
   <meta charset="UTF-8">
-  <title>Angular Demo</title>
+  <title>DevCafe</title>
+
+    <base href="/" />
 
   {% include 'stylesheets.html' %}
 </head>
@@ -38,20 +40,13 @@
   data-width="450"
   data-show-faces="true">
   </div>
+ <a href="/idea">Idea</a>
 
-{% verbatim %}
-  <div class="main" ng-controller = "MyController">
-  <ul class="artistlist">
-    <li class="artist cf" ng-repeat="item in artists">
-      <div class="info">
-        <h2>Title: {{item.title}}</h2>
-        <h3>Description: {{item.description}}</h3>
-        <h3>Rating: {{item.rating}}</h3>
-      </div>
-    </li>
-  </ul>
-</div>
-{% endverbatim %}
+ <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 ng-view"></div>
+    </div>
+  </div>
 
 {% include 'javascripts.html' %}
 </body>
