@@ -1,7 +1,7 @@
 {% load socialaccount %}
  {# ng-app="DevCafe" #}
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="devcafe">
 <head>
   <meta charset="UTF-8">
   <title>DevCafe</title>
@@ -11,6 +11,8 @@
   {% include 'stylesheets.html' %}
 </head>
 <body>
+
+  {% include 'navbar.html' %}
 
   <script>
     window.fbAsyncInit = function() {
@@ -30,8 +32,9 @@
      }(document, 'script', 'facebook-jssdk'));
   </script>
 
-
-  <a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook OAuth2</a>
+  <div>
+    <a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook Auth</a>
+  </div>
 
   <div
   class="fb-like"
@@ -39,13 +42,13 @@
   data-width="450"
   data-show-faces="true">
   </div>
- <a href="/idea">Idea</a>
 
  <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12 ng-view"></div>
     </div>
   </div>
+
 
 {% include 'javascripts.html' %}
 </body>
