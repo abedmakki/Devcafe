@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'DevCafe.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'devcafe-db',
+        'NAME': 'devcafe',
         'USER': 'mina',
         'PASSWORD': 'psgpass',
         'HOST': 'localhost',

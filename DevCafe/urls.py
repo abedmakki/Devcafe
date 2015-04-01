@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from DevCafe.views import IndexView
+from django.conf.urls.static import static
+
 
 
 urlpatterns = patterns('',
@@ -14,5 +16,23 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^users/', include('userapp.urls')),
     url(r'^ideas/', include('ideas.urls')),
-    url('^.*$', IndexView.as_view(), name='index'),
+    url('^$', IndexView.as_view(), name='index'),
+    # url('^.*$', IndexView.as_view(), name='index'),
 )
+
+
+
+if settings.DEBUG:
+    urlpatterns += patterns(
+        'django.views.static',
+        (r'^media/(?P<path>.*)',
+        'serve',
+        {'document_root': settings.MEDIA_ROOT}),
+    )
+
+
+# if settings.DEBUG:
+#     urlpatterns += patterns(
+# (r'^media/(?P<path>.*)$',
+#  'django.views.static.serve',
+#  {'document_root': settings.MEDIA_ROOT, 'show_indexes':True}),)
