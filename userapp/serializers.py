@@ -3,9 +3,20 @@ from rest_framework import serializers
 from userapp.models import UserProfile
 from django.template.defaultfilters import slugify
 from rest_auth.serializers import UserDetailsSerializer
+from rest_framework.authtoken.models import Token
+
+
+class TokenSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Token model.
+    """
+
+    class Meta:
+        model = Token
+        fields = ('key', 'user')
+
 
 class UserSerializer(UserDetailsSerializer):
-
     picture = serializers.ImageField(source="userprofile.picture", allow_null=True)
     birth_date = serializers.DateField(source="userprofile.birth_date")
     country = serializers.CharField(source="userprofile.country")
