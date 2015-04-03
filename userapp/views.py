@@ -8,6 +8,7 @@ from userapp.models import UserProfile
 from userapp.serializers import UserSerializer
 from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
 from rest_auth.registration.views import SocialLogin
+from userapp.permissions import IsOwnerOrReadOnly
 
 
 class UserList(generics.ListCreateAPIView):
@@ -24,6 +25,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
     # def destroy(self, request, *args, **kwargs):
     #     try:
