@@ -140,7 +140,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOGIN_REDIRECT_URL = '/'
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'userapp.serializers.UserSerializer'
+    'USER_DETAILS_SERIALIZER': 'userapp.serializers.UserSerializer',
+    'TOKEN_SERIALIZER': 'userapp.serializers.TokenSerializer',
 }
 
 # Static files (CSS, JavaScript, Images)
