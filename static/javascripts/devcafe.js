@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('devcafe', ['devcafe.routes','devcafe.config','devcafe.userapp']);
+    angular.module('devcafe', ['devcafe.routes', 'devcafe.config','devcafe.userapp', 'devcafe.layout']);
 
     angular.module('devcafe.routes', ['ngRoute']);
 

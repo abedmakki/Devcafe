@@ -16,6 +16,15 @@
       controller: 'ProfileController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/userapp/profile.html'
-    }).otherwise('/');
+    }).when('/register/', {
+      controller: 'RegisterController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/userapp/register.html'
+        }).when('/login', {
+      controller: 'LoginController',
+      controllerAs: 'vm',
+      templateUrl: '/static/templates/userapp/login.html'
+        }).otherwise('/');
   }
 })();
+
