@@ -5,8 +5,15 @@ from DevCafe.views import IndexView
 from django.conf.urls.static import static
 
 
+if settings.DEBUG:
+    urlpatterns = patterns(
+        'django.views.static',
+        (r'^media/(?P<path>.*)',
+        'serve',
+        {'document_root': settings.MEDIA_ROOT}),
+    )
 
-urlpatterns = patterns('',
+urlpatterns += patterns('',
     # Examples:
     # url(r'^$', 'DevCafe.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -16,19 +23,12 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^users/', include('userapp.urls')),
     url(r'^ideas/', include('ideas.urls')),
-    url('^$', IndexView.as_view(), name='index'),
+    url('^.*$', IndexView.as_view(), name='index'),
     # url('^.*$', IndexView.as_view(), name='index'),
 )
 
 
 
-if settings.DEBUG:
-    urlpatterns += patterns(
-        'django.views.static',
-        (r'^media/(?P<path>.*)',
-        'serve',
-        {'document_root': settings.MEDIA_ROOT}),
-    )
 
 
 # if settings.DEBUG:
