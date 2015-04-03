@@ -5,7 +5,11 @@
 
       <section id="bio">
         <h2>Profile</h2>
-            <img class="img-rounded" ng-src="{{user.picture}}" />
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="profile-img ">
+                   <img class="img-responsive" ng-src="{{user.picture}}" />
+                </div>
+     </div>
         <ul class="clearfix">
           <div>
             <p>Username: {{user.username}}</p>
