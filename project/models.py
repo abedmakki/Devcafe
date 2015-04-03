@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
 
 
 class Project(models.Model):
@@ -14,7 +15,7 @@ class Project(models.Model):
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
-		#self.PM = request.user
+		self.PM = request.user
 		super(Project, self).save(*args, **kwargs)
 
 	def __unicode__(self):
