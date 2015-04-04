@@ -1,8 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse
 
 
 class Project(models.Model):
