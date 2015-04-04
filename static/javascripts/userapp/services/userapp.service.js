@@ -41,7 +41,10 @@
                 password: password,
                 country: country,
                 email: email,
-                address: address
+                address: address,
+                picture: null
+            }).then(function() {
+                window.location = '/';
             });
         }
 
