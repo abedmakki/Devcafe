@@ -9,3 +9,5 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'PM', 'title', 'description', 'plan', 'logo' , 'modelslug')
+        read_only_fields = ('PM',)
+
