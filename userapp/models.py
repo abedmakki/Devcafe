@@ -5,7 +5,6 @@ from time import strftime
 
 # Create your models here.
 class UserProfile(models.Model):
-    # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User)
 
     # The additional attributes we wish to include.
@@ -15,7 +14,6 @@ class UserProfile(models.Model):
     address = models.CharField(max_length=400, blank=True, null=True)
     slug = models.SlugField(unique=True)
 
-    # Override the __unicode__() method to return out something meaningful!
     def save(self, *args, **kwargs):
                 self.slug = slugify(self.user.username + str(self.user.pk) + strftime("%Y%m%d%S%M%H"))
                 super(UserProfile, self).save(*args, **kwargs)
