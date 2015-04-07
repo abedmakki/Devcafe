@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from time import strftime
+from general.models import Comment
 
 
 class Idea(models.Model):
@@ -17,3 +18,11 @@ class Idea(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class IdeaComment(Comment):
+    # idea = models.ForeignKey(Idea)
+    idea = models.ForeignKey(Idea, related_name='comments')
+
+    def __unicode__(self):
+        return self.text[:20] + ' - by:' + self.owner
