@@ -13,18 +13,22 @@
   */
   function config($routeProvider) {
     $routeProvider.when('/profile/', {    //na2es/profile/number . ":num" de s7.. eslam
-      controller: 'ProfileController',
-      controllerAs: 'vm',
-      templateUrl: '/static/templates/userapp/profile.html'
+        controller: 'ProfileController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/userapp/profile.html'
     }).when('/register/', {
-      controller: 'RegisterController',
-      controllerAs: 'vm',
-      templateUrl: '/static/templates/userapp/register.html'
-        }).when('/login', {
-      controller: 'LoginController',
-      controllerAs: 'vm',
-      templateUrl: '/static/templates/userapp/login.html'
-        }).otherwise('/');
-  }
+        controller: 'RegisterController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/userapp/register.html'
+    }).when('/login', {
+        controller: 'LoginController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/userapp/login.html'
+    }).when('/', {
+        controller: 'IndexController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/layout/index.html'
+    })
+}
 })();
 
