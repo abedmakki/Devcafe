@@ -24,6 +24,7 @@ urlpatterns += patterns('',
     url(r'^users/', include('userapp.urls')),
     url(r'^ideas/', include('ideas.urls')),
     url(r'^projects/', include('project.urls')),
+    url(r'^general/', include('general.urls')),
     url('^.*$', IndexView.as_view(), name='index'),
 )
 
