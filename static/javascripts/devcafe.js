@@ -7,8 +7,6 @@
 
     angular.module('devcafe.config', []);
 
-    angular.module('devcafe.utils', []);
-
     angular.module('devcafe').run(run);
 
     run.$inject = ['$http'];
