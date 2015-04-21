@@ -43,25 +43,30 @@
 
             <div class="collapse navbar-collapse" id="collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <li ><a href="#">Profile</a></li>
-                    <li><a href="#">Idea</a></li>
-                    <li><a href="#">Project</a></li> 
+                    <li><a href="/" class="navbar-brand">DevCafe</a></li>
                     
                     </ul>
 
-                <ul class="nav navbar-nav navbar-right ">
-                    <li><a href="#">Login</a></li>
-                    <li style="padding:7px">  
+                <ul class="nav navbar-nav pull-right ">
+                    <li style="padding:7px">
                         <form class="form-inline">
                             <div class="input-group">
-                                <input type="text"  class="form-control" placeholder="Search">
+                                <input type="text"  class="form-control" placeholder="Search"> <!-- not yet implemented -->
                                 <div class="input-group-btn">
                                     <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>
                             </div>
                         </form>
                     </li> 
+                    {% if user.is_authenticated %}
+                        <li ><a href="/profile">+{{ user.username }}</a></li>
+                    {% else %}
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                    {% endif %}
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/ideas">Ideas</a></li>
+                    <li><a href="/projects">Projects</a></li> <!-- not yet implemented -->
                 </ul>
             </div>
         </nav> 
