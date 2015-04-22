@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from project.serializers import ProjectSerializer, PostSerializer, ContributerSerializer
+from project.models import Project, Post, Contributer
 from project.serializers import ProjectSerializer
 from project.models import Project
 from rest_framework import generics
@@ -21,3 +23,18 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = (IsOwnerOrReadOnly, permissions.IsAuthenticatedOrReadOnly)
+
+
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    #def perform_create(self, serializer):
+        #serializer.save(project=self.request.project)
+
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

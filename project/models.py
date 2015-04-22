@@ -19,3 +19,16 @@ class Project(models.Model):
 
 	def __unicode__(self):
 		return self.title
+
+
+class Post(models.Model):
+	project = models.ForeignKey(Project)
+	text = models.TextField(blank = True)
+
+	def __unicode__(self):
+		return self.text
+
+
+class Contributer(models.Model):
+	name = models.ForeignKey(User)
+	project = models.ForeignKey(Project)
