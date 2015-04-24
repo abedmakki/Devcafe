@@ -39,7 +39,7 @@
         * @memberOf devcafe.userapp.controllers.LoginController
         */
         function login() {
-            Userapp.login(vm.username, vm.password);
+            Userapp.login(vm.username, vm.password , vm.remember);
         }
     }
 })();
