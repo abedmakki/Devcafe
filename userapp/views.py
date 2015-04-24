@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User ,AnonymousUser
 from rest_framework import generics , status
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from userapp.models import UserProfile
@@ -26,6 +25,19 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsOwnerOrReadOnly,)
+
+
+class UserProfile(generics.RetrieveAPIView):
+    """
+    Retrieve only the User who request
+    """
+    def retrieve(self, request):
+        if isinstance(request.user, AnonymousUser):
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            serializer = UserSerializer(request.user)
+            return Response(serializer.data)
+
 
     # def destroy(self, request, *args, **kwargs):
     #     try:

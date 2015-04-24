@@ -49,20 +49,25 @@
         }
 
 
-        function login(username, password) {
+        function login(username, password , remember) {
             return $http.post('/rest-auth/login/', {
                 username: username,
                 password: password
             }).then(loginSuccessFn, loginErrorFn);
 
             function loginSuccessFn(data, status, headers, config) {
-                Userapp.setAuthenticatedAccount(data.data.key);
+                if(remember){
+                    setCookie('authenticatedAccount' , data.data.key , 20)
+                }
+                else{
+                    Userapp.setAuthenticatedAccount(data.data.key);
+                }
                 Userapp.setAccId(data.data.user);
                 window.location = '/';
             }
 
             function loginErrorFn(data, status, headers, config) {
-                console.error('Login failure!');
+                alert('login faild')
             }
         }
 
@@ -71,17 +76,22 @@
             if (!$cookies.authenticatedAccount) {
                 return;
             }
-            return JSON.parse($cookies.authenticatedAccount);
+            return $cookies.authenticatedAccount;
         }
 
-
+        function setCookie(cname, cvalue, exdays) {
+                        var d = new Date();
+                        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                        var expires = "expires="+d.toUTCString();
+                        document.cookie = cname + "="+ cvalue + "; " + expires;
+                    }
         function isAuthenticated() {
             return !!$cookies.authenticatedAccount;
         }
 
 
         function setAuthenticatedAccount(account) {
-            $cookies.authenticatedAccount = JSON.stringify(account);
+            $cookies.authenticatedAccount = account;
         }
 
 
@@ -102,12 +112,14 @@
         }
 
         function unauthenticate() {
+            setCookie('authenticatedAccount' , '',-1);
             delete $cookies.authenticatedAccount;
+            setCookie('accId' , '',-1);
             delete $cookies.accId;
         }
 
         function setAccId(account) {
-            $cookies.accId = JSON.stringify(account);
+            $cookies.accId = account;
         }
 
         function getAccId() {
@@ -117,7 +129,7 @@
             else if ($cookies.accId === 'undefined') {
                 return;
             }
-            return JSON.parse($cookies.accId);
+            return $cookies.accId;
         }
     }
 
