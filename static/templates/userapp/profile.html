@@ -1,6 +1,10 @@
-<div id="w">
+<div id="w" xmlns="http://www.w3.org/1999/html">
     <div id="content" class="clearfix">
-      <div id="userphoto" ng-repeat="us in ProfileController.users"><img ng-src="{{user.picture}}" alt="../../stylesheets/images/avatar.png"></div>
+      <div id="userphoto" ng-if="user.picture"  style="text-align: center;">
+          <img ng-src="{{user.picture}}" alt="template" style="height: 100px;width: 100px;" class="profilepic">
+          </br>
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#profilePhotoModel">change photo</button>
+      </div>
       <h1>{{user.username}}</h1>
 
      <!-- <nav id="profiletabs">
@@ -54,3 +58,44 @@ handle success and error, concole.log & window.location = profile
 
 
   </div><!-- @end #w -->
+
+
+
+<div ng-app="fileUpload" ng-controller="uploadCtrl" class="modal fade" id="profilePhotoModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">change picture</h4>
+      </div>
+      <div class="modal-body">
+
+        <button type="file" ngf-select="" ng-model="files" accept="image/*" class="btn-sm">Browse pictures</button>
+          </br>
+          <div>
+          <img ng-show="files[0] != null" ngf-thumbnail="files[0]" class="thumb" style="height: 100px;width: 110px;">
+          </div>
+
+          <div>
+              <span class="progress" ng-show="files.progress >= 0">
+			<div style="width:100%" ng-bind="files.progress + '%'" class="ng-binding">100%</div>
+		</span>
+              <span ng-show="files.result" class="">Upload Successful</span>
+          </div>
+
+
+          <div class="progress" ng-show="files.progress >= 0">
+  <div ng-bind="files.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ files.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ files.progress }}%;">
+    0%
+  </div>
+</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="files=null">Close</button>
+        <button type="button" class="btn btn-primary sjqclass" ng-click="upload(files)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
