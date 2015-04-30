@@ -9,16 +9,16 @@
     .module('devcafe.layout.controllers')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', 'Userapp', 'ideas', 'Snackbar'];
+  IndexController.$inject = ['$scope', 'Userapp', 'idea', 'Snackbar'];
 
   /**
   * @namespace IndexController
   */
-  function IndexController($scope, Userapp, ideas, Snackbar) {
+  function IndexController($scope, Userapp, idea, Snackbar) {
     var vm = this;
 
     vm.isAuthenticated = Userapp.isAuthenticated();
-    vm.ideas = [];
+    vm.idea = [];
 
     activate();
 
@@ -28,31 +28,31 @@
     * @memberOf devcafe.layout.controllers.IndexController
     */
     function activate() {
-      ideas.all().then(ideasSuccessFn, ideasErrorFn);
+      idea.all().then(ideaSuccessFn, ideaErrorFn);
 
       $scope.$on('idea.created', function (event, idea) {
-        vm.ideas.unshift(idea);
+        vm.idea.unshift(idea);
       });
 
       $scope.$on('idea.created.error', function () {
-        vm.ideas.shift();
+        vm.idea.shift();
       });
 
 
       /**
-      * @name ideasSuccessFn
-      * @desc Update ideas array on view
+      * @name ideaSuccessFn
+      * @desc Update idea array on view
       */
-      function ideasSuccessFn(data, status, headers, config) {
-        vm.ideas = data.data;
+      function ideaSuccessFn(data, status, headers, config) {
+        vm.idea = data.data;
       }
 
 
       /**
-      * @name ideasErrorFn
+      * @name ideaErrorFn
       * @desc Show snackbar with error
       */
-      function ideasErrorFn(data, status, headers, config) {
+      function ideaErrorFn(data, status, headers, config) {
         Snackbar.error(data.error);
       }
     }
