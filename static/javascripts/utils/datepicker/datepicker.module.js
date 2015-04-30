@@ -11,16 +11,18 @@
         restrict: 'A',
         require: 'ngModel',
          link: function (scope, element, attrs, ngModelCtrl) {
-            element.datepicker({
-                showOtherMonths: true,
-                dateFormat: "yy-mm-dd",
-                changeMonth: true,
-                changeYear: true,
-                maxDate: "-12M",
-                onSelect: function (date) {
-                    scope.$apply();
-                }
-            });
+             element.datepicker({
+                 showOtherMonths: true,
+                 dateFormat: "yy-mm-dd",
+                 changeMonth: true,
+                 changeYear: true,
+                 maxDate: "-12M",
+                 onSelect: function (date) {
+                     scope.$apply(function () {
+                         ngModelCtrl.$setViewValue(date);
+                     });
+                 }
+             });
         }
     };
 });
