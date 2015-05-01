@@ -1,36 +1,36 @@
 /**
-* idea
-* @namespace devcafe.idea.services
+* Ideas
+* @namespace devcafe.Ideas.services
 */
 (function () {
   'use strict';
 
   angular
     .module('devcafe.ideas.services')
-    .factory('idea', idea);
+    .factory('Ideas', Ideas);
 
-  idea.$inject = ['$http'];
+  Ideas.$inject = ['$http'];
 
   /**
-  * @namespace idea
+  * @namespace Ideas
   * @returns {Factory}
   */
-  function idea($http) {
-    var idea = {
+  function Ideas($http) {
+    var Ideas = {
       all: all,
       create: create,
       get: get
     };
 
-    return idea;
+    return Ideas;
 
     ////////////////////
 
     /**
     * @name all
-    * @desc Get all idea
+    * @desc Get all Ideas
     * @returns {Promise}
-    * @memberOf devcafe.idea.services.idea
+    * @memberOf devcafe.Ideas.services.Ideas
     */
     function all() {
       return $http.get('/ideas/');
@@ -42,7 +42,7 @@
     * @desc Create a new Post
     * @param {string} content The content of the new Post
     * @returns {Promise}
-    * @memberOf devcafe.idea.services.idea
+    * @memberOf devcafe.Ideas.services.Ideas
     */
     function create(title , content) {
       return $http.post('/ideas/', {
@@ -51,16 +51,16 @@
         tags: null,
         rate:null
       }).then(function() {
-                window.location = '/idea';
+                window.location = '/ideas';
             });;
     }
 
     /**
      * @name get
-     * @desc Get the idea of a given user
-     * @param {string} username The username to get idea for
+     * @desc Get the Ideas of a given user
+     * @param {string} username The username to get Ideas for
      * @returns {Promise}
-     * @memberOf devcafe.idea.services.idea
+     * @memberOf devcafe.Ideas.services.Ideas
      */
     function get(id) {
       return $http.get('/ideas/' + id + '/');

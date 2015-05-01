@@ -9,12 +9,12 @@
     .module('devcafe.layout.controllers')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', 'Userapp', 'idea', 'Snackbar'];
+  IndexController.$inject = ['$scope', 'Userapp', 'Ideas', 'Snackbar'];
 
   /**
   * @namespace IndexController
   */
-  function IndexController($scope, Userapp, idea, Snackbar) {
+  function IndexController($scope, Userapp, Ideas, Snackbar) {
     var vm = this;
 
     vm.isAuthenticated = Userapp.isAuthenticated();
@@ -28,7 +28,7 @@
     * @memberOf devcafe.layout.controllers.IndexController
     */
     function activate() {
-      idea.all().then(ideaSuccessFn, ideaErrorFn);
+      Ideas.all().then(ideaSuccessFn, ideaErrorFn);
 
       $scope.$on('idea.created', function (event, idea) {
         vm.idea.unshift(idea);
@@ -44,7 +44,7 @@
       * @desc Update idea array on view
       */
       function ideaSuccessFn(data, status, headers, config) {
-        vm.idea = data.data;
+        vm.ideas = data.data;
       }
 
 

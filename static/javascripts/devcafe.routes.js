@@ -28,6 +28,10 @@
         controller: 'IndexController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/layout/index.html'
+    }).when('/ideas', {
+        controller: 'IdeasController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/ideas/ideas.html'
     })
 }
 })();

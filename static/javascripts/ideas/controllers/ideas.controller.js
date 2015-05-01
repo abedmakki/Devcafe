@@ -7,20 +7,24 @@
 
   angular
     .module('devcafe.ideas.controllers')
-    .controller('ideasController', ideasController);
+    .controller('IdeasController', IdeasController);
 
-  ideasController.$inject = ['$scope'];
+  IdeasController.$inject = ['$http', '$location','$scope', 'Ideas'];
 
   /**
   * @namespace ideasController
   */
-  function ideasController($scope) {
-    var vm = this;
+  // function ideasController($scope) {
+  //   var vm = this;
 
-    vm.columns = [];
+  //   vm.columns = [];
 
-    activate();
-
+  //   activate();
+  function IdeasController($http, $location, $scope, Ideas) {
+            //var userid = Userapp.getAccId();      //we don't need it any more
+            Ideas.all().success(function(data, status, headers, config) {
+                $scope.ideas = data;
+            })
 
     /**
     * @name activate
