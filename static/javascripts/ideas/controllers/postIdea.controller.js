@@ -39,7 +39,7 @@
         * @memberOf devcafe.userapp.controllers.PostIdeaController
         */
         function PostIdea() {
-            idea.create(vm.title , vm.content);
+            Ideas.create(vm.title , vm.content);
         }
     }
 })();
