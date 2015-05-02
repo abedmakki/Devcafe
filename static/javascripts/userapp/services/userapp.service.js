@@ -44,12 +44,12 @@
                 address: address,
                 picture: null
             }).then(function() {
-                window.location = '/';
+                window.location = '/login';
             });
         }
 
 
-        function login(username, password , remember) {
+        function login(username, password , remember , scp) {
             return $http.post('/rest-auth/login/', {
                 username: username,
                 password: password
@@ -67,7 +67,8 @@
             }
 
             function loginErrorFn(data, status, headers, config) {
-                alert('login faild')
+                //alert('login faild')
+                scp.error=data.data.non_field_errors
             }
         }
 
