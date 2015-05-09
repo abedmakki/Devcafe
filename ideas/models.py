@@ -11,7 +11,7 @@ class Idea(models.Model):
     description = models.CharField(max_length=500)
     rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
-    tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_ideas')
+    tags = models.ManyToManyField(Tag, blank=True, null=True, related_name='tagged_ideas')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title + str(self.owner.pk) + strftime("%Y%m%d%S%M%H"))
