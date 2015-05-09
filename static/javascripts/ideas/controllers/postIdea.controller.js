@@ -27,8 +27,8 @@
         * @desc Log the user in
         * @memberOf devcafe.userapp.controllers.PostIdeaController
         */
-        function PostIdea() {
-            Ideas.create(vm.title , vm.content);
+        function PostIdea(title, description) {
+            Ideas.create(vm.title , vm.description);
         }
     }
 })();
