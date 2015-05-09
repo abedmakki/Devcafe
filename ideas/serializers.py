@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from ideas.models import Idea, IdeaComment
+from userapp.models import UserProfile
 from userapp.serializers import UserSerializer
 from general.serializers import TagSerializer
 
@@ -20,6 +21,7 @@ class IdeaSerializer(serializers.ModelSerializer):
     comments = IdeaCommentSerializer(many=True, read_only=True)
     # tags = TagSerializer(many=True, read_only=True)
     tags = serializers.StringRelatedField(many=True)
+    owner = serializers.StringRelatedField()
 
     class Meta:
         model = Idea
