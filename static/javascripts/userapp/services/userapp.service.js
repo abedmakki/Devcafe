@@ -27,7 +27,6 @@
             getAccId: getAccId,
             setAccId: setAccId,
             logout: logout
-            edit: edit
         };
 
         return Userapp;
@@ -132,31 +131,6 @@
                 return;
             }
             return $cookies.accId;
-        }
-
-
-        function edit(username, first_name, last_name, birth_date, password, country, email, address) {
-            return $http.post('/users/' + getAccId(), {
-                username: username,
-                first_name: first_name,
-                last_name: last_name,
-                birth_date: birth_date,
-                password: password,
-                country: country,
-                email: email,
-                address: address,
-                picture: null
-            }).then(loginSuccessFn, loginErrorFn);
-
-            function loginSuccessFn(data, status, headers, config) {
-                
-                window.location = '/profile';
-            }
-
-            function loginErrorFn(data, status, headers, config) {
-                console.error('Login failure!');
-            }
-
         }
     }
 
