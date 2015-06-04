@@ -48,8 +48,8 @@
       return $http.post('/ideas/', {
         description: description,
         title: title,
-        tags: null,
-        rating: null
+        rating: 5,
+        tags: []
       }).then(function() {
             window.location = '/ideas';
         });

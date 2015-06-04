@@ -19,8 +19,6 @@
 
         vm.PostIdea = PostIdea;
         
-        activate();
-
 
         /**
         * @name PostIdea
