@@ -16,6 +16,12 @@ class IdeaCommentSerializer(serializers.ModelSerializer):
         read_only_fields = ('owner',)
 
 
+class PostIdeaCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IdeaComment
+        fields = ('id', 'text')
+
+
 class IdeaSerializer(serializers.ModelSerializer):
     modelslug = serializers.SlugField(read_only=True, source='slug')
     comments = IdeaCommentSerializer(many=True, read_only=True)
