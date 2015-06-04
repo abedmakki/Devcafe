@@ -42,7 +42,7 @@
 	                    <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />  
 	                </div>
                     <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong><br>
-                    <small><span class="glyphicon glyphicon-calendar"></span>[[COMMENT POST DATE]]</small><br>
+                    <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small><br>
                 </div>
                 <div class="panel-body">
                     <p>{{comment.text}}</p>
