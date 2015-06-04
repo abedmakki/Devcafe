@@ -28,10 +28,10 @@
         controller: 'IndexController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/layout/index.html'
-    }).when('/editprofile', {
-        controller: 'ProfileController',
+    }).when('/ideas', {
+        controller: 'IdeasController',
         controllerAs: 'vm',
-        templateUrl: '/static/templates/layout/edit.html'
+        templateUrl: '/static/templates/ideas/ideas.html'
     })
 }
 })();
