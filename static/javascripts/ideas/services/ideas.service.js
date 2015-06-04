@@ -44,15 +44,15 @@
     * @returns {Promise}
     * @memberOf devcafe.Ideas.services.Ideas
     */
-    function create(title , content) {
+    function create(title , description) {
       return $http.post('/ideas/', {
-        content: content,
+        description: description,
         title: title,
-        tags: null,
-        rate:null
+        rating: 5,
+        tags: []
       }).then(function() {
-                window.location = '/ideas';
-            });;
+            window.location = '/ideas';
+        });
     }
 
     /**
