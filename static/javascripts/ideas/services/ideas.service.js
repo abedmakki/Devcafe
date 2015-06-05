@@ -19,7 +19,8 @@
     var Ideas = {
       all: all,
       create: create,
-      get: get
+      get: get,
+      comment: comment
     };
 
     return Ideas;
@@ -51,7 +52,7 @@
         rating: 5,
         tags: []
       }).then(function() {
-            window.location = '/ideas';
+          window.location = '/ideas';
         });
     }
 
@@ -64,6 +65,14 @@
      */
     function get(id) {
       return $http.get('/ideas/' + id + '/');
+    }
+
+    function comment(id, text) {
+      return $http.post('/ideas/' + id + '/add_comment/', {
+        text: text
+      }).then(function() {
+        window.location = '/ideas';
+      });
     }
   }
 })();

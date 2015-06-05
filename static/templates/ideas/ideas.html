@@ -46,7 +46,7 @@
         <div class="comment media">
           <div class="panel-heading">
             <div class="pull-left">
-              <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />  
+              <img class="avatar" ng-src={{comment.owner.picture}} alt="" height="50" width="50" />  
             </div>
               <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong><br>
               <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small><br>
@@ -58,13 +58,13 @@
       </div>
 
       <!-- Start Comment Form -->
-      <div class="comment-form">
+      <div class="comment-form" ng-controller="CommentController as commentCtrl">
       <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p> -->
-        <form name="comment-form" id="comment-form">
+        <form name="comment-form" id="comment-form" ng-submit="commentCtrl.AddComment()">
             <div class="row-fluid">
                              
             </div>
-            <textarea rows="3" name="message" id="message" required="required" class="form-control" placeholder="Comment here ..."></textarea>
+            <textarea rows="3" name="message" id="message" required="required" class="form-control" placeholder="Comment here ..." ng-model="commentCtrl.text"></textarea>
             <input type="submit" value="Submit Comment" class="btn btn-large btn-primary" />
         </form>
       </div>
