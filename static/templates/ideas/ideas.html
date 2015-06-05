@@ -1,51 +1,26 @@
-<!-- -->
  <div class= "idea-body">
-    <div id="idea-body">
-        <div ng-controller="PostIdeaController  as postIdeaCtrl">
-            <form class="form-inline" ng-submit= "postIdeaCtrl.PostIdea()">
-                <div >
-                    <img ng-src= "">
-
-                        <div class="form-group">
-                    <input type="text" class="form-control pull-left" placeholder="Ideas are Better with Title...," style="margin: 20px;padding 10px; width: 400px; height: 25px;" ng-model="postIdeaCtrl.title" > </input>
-                            <textarea class="form-control input-lg col-md-12" placeholder="Ideas are Worth Spreading,..." style="margin: 10px;padding 10px; width: 400px; height: 50px;" ng-model="postIdeaCtrl.description"></textarea>
-                            <button type="submit" class="btn btn-primary" style="margin: 20px; padding 1px; width: 100px; height: 30px;" >Spread</button>
-
-                        </div>
-                </div>
-                                
-            </form>           
+  <div id="idea-body">
+    <div ng-controller="PostIdeaController as postIdeaCtrl">
+      <form class="form-inline" ng-submit= "postIdeaCtrl.PostIdea()">
+        <div>
+          <div class="form-group">
+            <input type="text" class="form-control pull-left" placeholder="Ideas are Better with Title...," style="margin: 20px;padding 10px; width: 400px; height: 25px;" ng-model="postIdeaCtrl.title" > </input>
+            <textarea class="form-control input-lg col-md-12" placeholder="Ideas are Worth Spreading,..." style="margin: 10px;padding 10px; width: 400px; height: 50px;" ng-model="postIdeaCtrl.description"></textarea>
+            <button type="submit" class="btn btn-primary" style="margin: 20px; padding 1px; width: 100px; height: 30px;" >Spread</button>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 </div>
 
-<div class="blog-item well" ng-repeat="item in ideas">
-    <h3 class="pull-left">{{item.title}}</h3>
-        <div class="blog-meta clearfix">
-            <p>
-                <div>
-                    <!-- <img src="" alt="" /> -->
-                    by  
-                    <h5 style="margin-top: 0"> <a href="#">{{item.owner}} </a></h5>
-                </div> 
-                    
-
-            </p>
-        </div>
-      <p><img src="" width="100%" alt="" /></p>
-      <p><i class="icon-calendar"></i> May 16th, 2015</p>
-      <h3>Description: </h3>
-      <p class="clearfix">{{item.description}}</p>
-      <h3> Rating: {{item.rating}} </h3>
 <div class="blog-item well" ng-repeat="item in ideas" >
        <h2 style="text-align:left;display:inline">{{item.title}}</h2>  by <h5 style="margin-top: 0;display:inline"> <a href="#">{{item.owner}} </a></h5>
        <br />
         <div class="blog-meta clearfix">
-            <!-- <p> -->
-                 <div>
-            		<img src="" alt="[[IDEA IMAGE]]" />
-        		</div>
-          	<!-- </p> -->
+          <div>
+        		<img src="" alt="[[IDEA IMAGE]]" />
+        	</div>
         </div>
       <p><img src="" width="100%" alt="" /></p>
       <p><span class="glyphicon glyphicon-calendar"></span>[[IDEA POST DATE]]</p> 
@@ -54,59 +29,46 @@
       <h2 style="text-align:left"> Rating: {{item.rating}} </h2>
 
       <div class="tag">
-      <h3>Tags</h3>
-        <li class="artist cf" ng-repeat="tag in item.tags">
-
-<div class="main">
-    <ul class="artistlist">
-        <li class="artist cf" ng-repeat="item in ideas">
+        <h3>Tags</h3>
+          <li class="artist cf" ng-repeat="tag in item.tags">
             <div class="info">
               <a href="#" style="display:inline"><span class="label label-primary">{{tag}}</span></a>
             </div>
-        </li>
-    </div>                       
-
-    
-       
-        <div class="media-body">
-            
-        </div>
+          </li>
+      </div>
    
     <p>&nbsp;</p>
     
     <div id="comments" class="comments">
 
-        <h4>{{item.comments.length}} Comments</h4>
-        <div class="comments-list panel panel-default" ng-repeat="comment in item.comments">
-            <div class="comment media">
-
-                <div class="panel-heading">
-	                <div class="pull-left">
-	                    <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />  
-	                </div>
-                    <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong><br>
-                    <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small><br>
-                </div>
-                <div class="panel-body">
-                    <p>{{comment.text}}</p>
-                </div>
+      <h4>{{item.comments.length}} Comments</h4>
+      <div class="comments-list panel panel-default" ng-repeat="comment in item.comments">
+        <div class="comment media">
+          <div class="panel-heading">
+            <div class="pull-left">
+              <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />  
             </div>
-       </div>
-
-        <!-- Start Comment Form -->
-        <div class="comment-form">
-        <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p> -->
-            <form name="comment-form" id="comment-form">
-                <div class="row-fluid">
-                                 
-                </div>
-                <textarea rows="3" name="message" id="message" required="required" class="form-control" placeholder="Comment here ..."></textarea>
-                <input type="submit" value="Submit Comment" class="btn btn-large btn-primary" />
-            </form>
+              <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong><br>
+              <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small><br>
+          </div>
+          <div class="panel-body">
+            <p>{{comment.text}}</p>
+          </div>
         </div>
-        <!-- End Comment Form -->
+      </div>
+
+      <!-- Start Comment Form -->
+      <div class="comment-form">
+      <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p> -->
+        <form name="comment-form" id="comment-form">
+            <div class="row-fluid">
+                             
+            </div>
+            <textarea rows="3" name="message" id="message" required="required" class="form-control" placeholder="Comment here ..."></textarea>
+            <input type="submit" value="Submit Comment" class="btn btn-large btn-primary" />
+        </form>
+      </div>
+      <!-- End Comment Form -->
 
     </div>
-
 </div>
-<!-- End Blog Item -->
