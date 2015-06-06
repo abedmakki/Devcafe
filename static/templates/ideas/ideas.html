@@ -58,14 +58,14 @@
       </div>
 
       <!-- Start Comment Form -->
-      <div class="comment-form" ng-controller="CommentController as commentCtrl">
+      <div class="comment-form">
       <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p> -->
-        <form name="comment-form" id="comment-form" ng-submit="commentCtrl.AddComment()">
+        <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, vm.text)">
             <div class="row-fluid">
                              
             </div>
-            <textarea rows="3" name="message" id="message" required="required" class="form-control" placeholder="Comment here ..." ng-model="commentCtrl.text"></textarea>
-            <input type="submit" value="Submit Comment" class="btn btn-large btn-primary" />
+            <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="vm.text"></textarea>
+            <button type="submit" class="btn btn-primary form-control">Comment</button>
         </form>
       </div>
       <!-- End Comment Form -->
