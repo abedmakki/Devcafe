@@ -90,5 +90,5 @@ class UpdateProfilePicture(generics.CreateAPIView):
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class FacebookLogin(SocialLogin):
-#     adapter_class = FacebookOAuth2Adapter
+class FacebookLogin(SocialLogin):
+    adapter_class = FacebookOAuth2Adapter

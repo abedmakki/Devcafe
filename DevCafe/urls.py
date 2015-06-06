@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 from DevCafe.views import IndexView
 from django.conf.urls.static import static
+from userapp.views import FacebookLogin
 
 
 if settings.DEBUG:
@@ -25,6 +26,7 @@ urlpatterns += patterns('',
     url(r'^ideas/', include('ideas.urls')),
     url(r'^projects/', include('project.urls')),
     url(r'^general/', include('general.urls')),
+    url(r'^rest-auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
     url('^.*$', IndexView.as_view(), name='index'),
 )
 
