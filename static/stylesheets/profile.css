@@ -106,8 +106,8 @@ h1:after {
   content: "";
   position: relative;
   display: inline-block;
-  width: 50%;
-  height: 1px;
+  width:50%;
+  height:1px;
   vertical-align: middle;
   background: #f0f0f0;
 }
