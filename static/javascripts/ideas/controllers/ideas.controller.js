@@ -22,6 +22,8 @@
   //   activate();
   function IdeasController($http, $location, $scope, Ideas) {
             //var userid = Userapp.getAccId();      //we don't need it any more
+            var vm = this;
+            vm.AddComment = AddComment;
             Ideas.all().success(function(data, status, headers, config) {
                 $scope.ideas = data;
             })
@@ -34,6 +36,14 @@
     function activate() {
       $scope.$watchCollection(function () { return $scope.ideas; }, render);
       $scope.$watch(function () { return $(window).width(); }, render);
+    }
+
+
+    function AddComment(item, text) {
+        var idea = item;
+        console.log(item);
+        console.log(text);
+        Ideas.comment(idea, text);
     }
 
 
