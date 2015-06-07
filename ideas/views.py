@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from ideas.serializers import IdeaSerializer, IdeaCommentSerializer, PostIdeaCommentSerializer
+from ideas.serializers import IdeaSerializer, IdeaCommentSerializer, PostIdeaCommentSerializer, RateIdeaSerializer
 from ideas.models import Idea, IdeaComment
 from rest_framework import generics
 from rest_framework import permissions
@@ -56,3 +56,15 @@ class AddComment(APIView):
         # comment.save()
 
         # return Response(IdeaCommentSerializer(comment), status=status.HTTP_201_CREATED)
+
+
+class Rate(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def post(self, request, pk):
+        idea = Idea.objects.get(id=pk)
+        rating = RateIdeaSerializer(data=request.data)
+        if rating.is_valid():
+            rating.save(idea=idea, owner=request.user)
+            return Response(rating.data, status=status.HTTP_201_CREATED)
+        return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
