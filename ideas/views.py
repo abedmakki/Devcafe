@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User
 from ideas.serializers import IdeaSerializer, IdeaCommentSerializer, PostIdeaCommentSerializer, RateIdeaSerializer
-from ideas.models import Idea, IdeaComment
+from ideas.models import Idea, IdeaComment, IdeaRating
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.views import APIView
 from ideas.permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models import Avg
 
 
 class IdeaList(generics.ListCreateAPIView):
@@ -57,7 +58,6 @@ class AddComment(APIView):
 
         # return Response(IdeaCommentSerializer(comment), status=status.HTTP_201_CREATED)
 
-
 class Rate(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
@@ -66,5 +66,8 @@ class Rate(APIView):
         rating = RateIdeaSerializer(data=request.data)
         if rating.is_valid():
             rating.save(idea=idea, owner=request.user)
+            total_rating = idea.ratings.all().aggregate(Avg('value'))
+            idea.avg_rating = total_rating['value__avg']
+            idea.save()
             return Response(rating.data, status=status.HTTP_201_CREATED)
         return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
