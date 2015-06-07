@@ -9,7 +9,7 @@ class Idea(models.Model):
     owner = models.ForeignKey(User)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
-    rating = models.FloatField(default=0)
+    avg_rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_ideas')
 
@@ -27,3 +27,12 @@ class IdeaComment(Comment):
 
     def __unicode__(self):
         return self.text[:20] + ' - by:' + self.owner
+
+
+class IdeaRating(models.Model):
+    owner = models.ForeignKey(User)
+    idea = models.ForeignKey(Idea, related_name='ratings')
+    value = models.PositiveSmallIntegerField(default=0)
+
+    def __unicode__(self):
+        return str(self.value)
