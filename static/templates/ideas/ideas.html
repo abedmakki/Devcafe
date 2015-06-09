@@ -33,7 +33,7 @@
 <!-- -->
 <div style="
 margin:20px 270px;width:750px;height:auto;padding:10px;margin-bottom: 20px;background-color: #fefefe;border: 1px solid #fefefe;
-border-radius: 4px;" ng-repeat="item in ideas">
+border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
     <h1 style="display:inline"> <a href="/profile"> {{item.owner}} </a> </h1>
     <br/>
     <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
