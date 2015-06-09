@@ -36,7 +36,7 @@ margin:20px 270px;width:750px;height:auto;padding:10px;margin-bottom: 20px;backg
 border-radius: 4px;" ng-repeat="item in ideas">
     <h1 style="display:inline"> <a href="/profile"> {{item.owner}} </a> </h1>
     <br/>
-    <h5> <span class="glyphicon glyphicon-time"></span> [[IDEA POST DATE]]</h5>
+    <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
     <div class="acidjs-rating-stars pull-right">
     
         <form>

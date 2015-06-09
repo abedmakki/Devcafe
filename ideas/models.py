@@ -9,6 +9,7 @@ class Idea(models.Model):
     owner = models.ForeignKey(User)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
+    timestamp = models.DateTimeField(auto_now=True)
     avg_rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_ideas')
