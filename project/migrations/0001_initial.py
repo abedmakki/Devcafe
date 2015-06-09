@@ -13,18 +13,39 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Contributer',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Post',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('text', models.TextField(blank=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Project',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=50)),
                 ('description', models.CharField(max_length=500)),
-                ('plan', models.TextField()),
-                ('logo', models.ImageField(upload_to=b'projects_images', blank=True)),
+                ('plan', models.TextField(blank=True)),
+                ('logo', models.ImageField(null=True, upload_to=b'project_images', blank=True)),
                 ('slug', models.SlugField(unique=True)),
                 ('PM', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
-            options={
-            },
-            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='post',
+            name='project',
+            field=models.ForeignKey(to='project.Project'),
+        ),
+        migrations.AddField(
+            model_name='contributer',
+            name='project',
+            field=models.ForeignKey(to='project.Project'),
         ),
     ]

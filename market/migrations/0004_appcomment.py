@@ -9,19 +9,21 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('market', '0003_app_avg_rating'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UserProfile',
+            name='AppComment',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('picture', models.ImageField(upload_to=b'profile_images', blank=True)),
-                ('birth_date', models.DateField(null=True, blank=True)),
-                ('country', models.CharField(max_length=100)),
-                ('address', models.CharField(max_length=400, null=True, blank=True)),
-                ('slug', models.SlugField(unique=True)),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('timestamp', models.DateTimeField(auto_now=True)),
+                ('text', models.CharField(max_length=1500)),
+                ('App', models.ForeignKey(related_name='comments', to='market.App')),
+                ('owner', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
+            options={
+                'abstract': False,
+            },
         ),
     ]

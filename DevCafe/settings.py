@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'ideas',
     'general',
     'project',
+    'market',
 )
 
 MIDDLEWARE_CLASSES = (
