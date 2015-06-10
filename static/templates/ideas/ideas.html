@@ -40,8 +40,8 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
     <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
 
     <div ng-controller="RatingIdeasController as RatingCtrl">
-        <h3>Rating</h3>
-        <div ng-init="rating = star.rating + 1"></div>
+<!--         <h3>Rating</h3> -->
+        <div ng-init="rating = item.avg_rating"></div>
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
     </div>
@@ -84,7 +84,7 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
                 </div>
             </li>
         </ul>
-        <h2 style="text-align:left"> Rating: {{item.avg_rating | number : 2}} </h2>
+        <!-- <h2 style="text-align:left"> Rating: {{item.avg_rating | number : 2}} </h2> -->
     </div>
     <!--End of tags code -->
     <div class="comments">
