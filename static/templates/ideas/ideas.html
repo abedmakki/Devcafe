@@ -41,7 +41,8 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
 
     <div ng-controller="RatingIdeasController as RatingCtrl">
 <!--         <h3>Rating</h3> -->
-        <div ng-init="rating = item.avg_rating"></div>
+        <div ng-init="star.rating = item.avg_rating"></div>
+        <div ng-init="rating = star.rating + 1"></div>
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
     </div>
