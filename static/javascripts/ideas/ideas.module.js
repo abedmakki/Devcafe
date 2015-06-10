@@ -4,7 +4,8 @@
   angular
     .module('devcafe.ideas', [
       'devcafe.ideas.controllers',
-      'devcafe.ideas.services'
+      'devcafe.ideas.services',
+      'devcafe.ideas.directives'
     ]);
 
   angular
@@ -12,4 +13,7 @@
 
   angular
     .module('devcafe.ideas.services', []);
+
+  angular
+    .module('devcafe.ideas.directives', []);
 })();

@@ -20,7 +20,8 @@
       all: all,
       create: create,
       get: get,
-      comment: comment
+      comment: comment,
+      rate: rate
     };
 
     return Ideas;
@@ -49,7 +50,7 @@
       return $http.post('/ideas/', {
         description: description,
         title: title,
-        rating: 5,
+        rating: 0,
         tags: []
       }).then(function() {
           window.location = '/ideas';
@@ -72,6 +73,18 @@
         text: text
       }).then(function() {
         window.location = '/ideas';
+      });
+    }
+
+
+    function rate(id, value) {
+      // return $http.post('/ideas/' + id + '/rate/', {
+      //   value: value        
+      // }).then(function() {
+      //       window.location = '/ideas';
+      // });
+      return $http.post('/ideas/' + id + '/rate/', {
+        value: value        
       });
     }
   }
