@@ -82,7 +82,7 @@ border-radius: 4px;" ng-repeat="item in ideas">
                 </div>
             </li>
         </ul>
-        <h2 style="text-align:left"> Rating: {{item.rating}} </h2>
+        <h2 style="text-align:left"> Rating: {{item.avg_rating | number : 2}} </h2>
     </div>
     <!--End of tags code -->
     <div class="comments">

@@ -78,10 +78,13 @@
 
 
     function rate(id, value) {
-      return $http.post('/ideas/' + id + '/', {
+      // return $http.post('/ideas/' + id + '/rate/', {
+      //   value: value        
+      // }).then(function() {
+      //       window.location = '/ideas';
+      // });
+      return $http.post('/ideas/' + id + '/rate/', {
         value: value        
-      }).then(function() {
-            window.location = '/ideas';
       });
     }
   }
