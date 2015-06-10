@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^comments/(?P<pk>[0-9]+)/$', views.IdeaCommentDetail.as_view(), name='ideaComment-detail'),
     url(r'^(?P<pk>[0-9]+)/add_comment/$', views.AddComment.as_view(), name='comment-on-idea'),
     url(r'^(?P<pk>[0-9]+)/rate/$', views.Rate.as_view(), name='rate-idea'),
+    url(r'^(?P<pk>[0-9]+)/like/$', views.Like.as_view(), name='like-idea'),
 )
 
 

@@ -10,6 +10,7 @@ class Idea(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=500)
     timestamp = models.DateTimeField(auto_now=True)
+    likes = models.PositiveSmallIntegerField(default=0)
     avg_rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_ideas')
@@ -37,3 +38,20 @@ class IdeaRating(models.Model):
 
     def __unicode__(self):
         return str(self.value)
+
+
+class IdeaLike(models.Model):
+    owner = models.ForeignKey(User)
+    idea = models.ForeignKey(Idea)
+
+    def save(self, *args, **kwargs):
+        super(IdeaLike, self).save(*args, **kwargs)
+        idea_obj = self.idea
+        idea_obj.likes = idea_obj.idealike_set.count()
+        idea_obj.save()
+
+    def delete(self, *args, **kwargs):
+        super(IdeaLike, self).delete(*args, **kwargs)
+        idea_obj = self.idea
+        idea_obj.likes = idea_obj.idealike_set.count()
+        idea_obj.save()

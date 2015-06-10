@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from ideas.serializers import IdeaSerializer, IdeaCommentSerializer, PostIdeaCommentSerializer, RateIdeaSerializer
-from ideas.models import Idea, IdeaComment, IdeaRating
+from ideas.models import Idea, IdeaComment, IdeaRating, IdeaLike
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.views import APIView
@@ -71,3 +71,28 @@ class Rate(APIView):
             idea.save()
             return Response(rating.data, status=status.HTTP_201_CREATED)
         return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Like(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def post(self, request, pk):
+        idea = Idea.objects.get(id=pk)
+        # if (own_like = IdeaLike.objects.get(owner=request.user, idea=idea).exists()):
+        #     own_like.delete()
+        #     return Response(status=status.HTTP_200_SUCCESS)
+        # else:
+        #     IdeaLike.objects.create(owner=request.user, idea=idea)
+        #     return Response(status=status.HTTP_200_SUCCESS)
+        try:
+            own_like = IdeaLike.objects.filter(owner=request.user, idea=idea)
+            for like in own_like:
+                like.delete()
+                return Response(status=status.HTTP_200_OK)
+            IdeaLike.objects.create(owner=request.user, idea=idea)
+            return Response(status=status.HTTP_200_OK)
+            # else:
+        except Exception, e:
+            raise e
+            # IdeaLike.objects.create(owner=request.user, idea=idea)
+            # return Response(status=status.HTTP_200_OK)

@@ -41,10 +41,10 @@ class IdeaSerializer(serializers.ModelSerializer):
     tags = serializers.StringRelatedField(many=True)
     owner = serializers.StringRelatedField()
     # rating = serializers.StringRelatedField(many=True)
-    ratings = IdeaRatingSerializer(many=True, read_only=True)
+    # ratings = IdeaRatingSerializer(many=True, read_only=True)
 
     class Meta:
         model = Idea
-        fields = ('id', 'owner', 'title', 'description', 'timestamp', 'ratings', 'modelslug', 'comments', 'tags', 'avg_rating')
+        fields = ('id', 'owner', 'title', 'description', 'timestamp', 'likes', 'modelslug', 'comments', 'tags', 'avg_rating')
         read_only_fields = ('owner',)
 
