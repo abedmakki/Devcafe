@@ -1,16 +1,16 @@
 <div class="idea-body">
-    <div id="idea-body">
-        <div ng-controller="PostIdeaController as postIdeaCtrl">
-            <form class="form-inline" ng-submit="postIdeaCtrl.PostIdea()">
-                <div>
-                    <div class="form-group">
-                        <input type="text" class="form-control pull-left" placeholder="Ideas are Better with Title...," style="margin: 20px;padding 10px; width: 400px; height: 25px;" ng-model="postIdeaCtrl.title"> </input>
-                        <textarea class="form-control input-lg col-md-12" placeholder="Ideas are Worth Spreading,..." style="margin: 10px;padding 10px; width: 400px; height: 50px;" ng-model="postIdeaCtrl.description"></textarea>
-                        <button type="submit" class="btn btn-primary" style="margin: 20px; padding 1px; width: 100px; height: 30px;">Spread</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div ng-controller="PostIdeaController as postIdeaCtrl">
+        <form ng-submit="postIdeaCtrl.PostIdea()">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title"> </input>
+            </div>
+            <div class="form-group">
+                <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" style="margin:0px 270px; width: 100px; height: 30px;">Spread</button>
+            </div>
+        </form>
     </div>
 </div>
 <!-- <div class="blog-item well" ng-repeat="item in ideas" >
@@ -89,7 +89,7 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
     <!--End of tags code -->
     <div class="comments">
         <h4>{{item.comments.length}} Comments</h4>
-        <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments">
+        <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
             <div class="comment media">
                 <div class="panel-heading">
                     <div class="pull-left">
