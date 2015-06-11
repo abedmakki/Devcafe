@@ -24,6 +24,7 @@
             //var userid = Userapp.getAccId();      //we don't need it any more
             var vm = this;
             vm.AddComment = AddComment;
+            vm.LikeIdea = LikeIdea;
             Ideas.all().success(function(data, status, headers, config) {
                 $scope.ideas = data;
             })
@@ -44,6 +45,14 @@
         console.log(item);
         console.log(text);
         Ideas.comment(idea, text);
+    }
+
+    var hasLiked = false;
+
+    function LikeIdea(item) {
+        var idea = item;
+        console.log(item);
+        Ideas.like(idea);
     }
 
 
