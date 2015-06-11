@@ -32,6 +32,10 @@
         controller: 'IdeasController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/ideas/ideas.html'
+    }).when('/market', {
+        controller: 'MarketplaceController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/marketplace/market-view.html'
     })
 }
 })();
