@@ -1,132 +1,98 @@
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<div class="container">
 
-    <!-- Custom CSS -->
-    <link href="css/shop-item.css" rel="stylesheet">
+    <div class="row">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <div class="col-md-3">
+            <p class="lead">Category</p>
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Software</a>
+                <a href="#" class="list-group-item">Hardware</a>
+                <a href="#" class="list-group-item">Embedded Systems</a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            
+            <div class="thumbnail">
+                <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                <div class="caption-full">
+                <h1><a href="#">{{vm.appId.name}}</a></h1>
+                <h1>Rating: {{appId.avg_rating}}</h1>
+                <section ng-controller="TabController as tab">
+                    <ul class="nav nav-pills">
+                        <li ng-class="{ active:tab.isSet(1) }">
+                        <a href="" ng-click="tab.setTab(1)">Description</a>
+                        </li>
+                        <li ng-class="{ active:tab.isSet(2) }">
+                        <a href="" ng-click="tab.setTab(2)">Price</a>
+                        </li>
+                    </ul>
+                        <div ng-show="tab.isSet(1)">
+                        <blockquote>{{appId.description}}</blockquote>
+                        </div>
+                        <div ng-show="tab.isSet(2)">
+                        <blockquote>{{appId.price}}</blockquote>
+                        </div>
+                        
+
+                  <!--   <ul>
+                        <h4>Reviews</h4>
+                        <li>
+                        <blockquote>
+                        <strong> Stars</strong>
+
+                        <cite class="clearfix">—</cite>
+                        </blockquote>
+                        </li>
+                    </ul>
+                   -->      
+                   </div>
+
+                </section>
 
 
 
-    <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-md-3">
-                <p class="lead">Category</p>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Software</a>
-                    <a href="#" class="list-group-item">Hardware</a>
-                    <a href="#" class="list-group-item">Embedded Systems</a>
-                </div>
             </div>
 
-            <div class="col-md-9">
-                
-                <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
-                    <div class="caption-full">
-                        
-                        <section class="tab" ng-controller="TabController as tabCtrl">
-                            <h4><a href="#">{{Product Name}}</a></h4>
-                            <ul class="nav nav-pills">
-                                <li ng-class="">
-                                    <a href>Description</a></li>
-                                <li>
-                                    <a href>Specs</a></li>
-                                <li>
-                                    <a href>Reviews</a></li>
-                            </ul>
-                            <div>
-                                <h4>Description</h4>
-                                <blockquote></blockquote>
-                            </div>
-                            <div>
-                                <h4>Specs</h4>
-                                <blockquote>Shine: </blockquote>
-                            </div>
-                            <div>
-                                <h4>Reviews</h4>
-                                <blockquote></blockquote>
-                            </div>
-                        </section>
+            <div class="well">
 
+                <form ng-submit="vm.AddComment(appId.id, text)">
+                <div class="text-right">
+                    <input type="text" ng-model="text"></input>
+                    <button type="submit" class="btn btn-success">Leave a Review</button>
 
-
-
-                        <!--<h4 class="pull-right">{{product.price | currency}}</h4>
-                        <h4><a href="#">{{Product Name}}</a></h4>
-                        <p>{{app.description}}</p>
-                    </div>
-                    <div class="ratings">
-                        <p class="pull-right">{{app.comments.length}}</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 stars
-                        </p>
-                    </div> -->
                 </div>
+                </form>
+                <hr>
 
-                <div class="well">
-
-                    <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
+                <div class="row">
+                    <div class="col-md-12" ng-repeat = "comment in appId.comments">
+                    <h4>{{appId.comments.length}} Comments</h4>
+                    <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
+                    <div class="comment media">
+                    <div class="panel-heading">
+                    <div class="pull-left">
+                    <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />
                     </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">10 days ago</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
-                        </div>
+                    <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong>
+                    <br>
+                    <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
+                    <br>
                     </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
-                        </div>
+                    <div class="panel-body">
+                    <p>{{comment.text}}</p>
                     </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
                     </div>
-
+                </div>
+                        <!-- <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        Anonymous
+                        <span class="pull-right">10 days ago</span>
+                        <p>This appId was great in terms of quality. I would definitely buy another!</p> -->
+                    </div>
                 </div>
 
             </div>
@@ -134,7 +100,9 @@
         </div>
 
     </div>
-    <!-- /.container -->
+
+</div>
+<!-- /.container -->
 
     <div class="container">
 
@@ -151,13 +119,3 @@
 
     </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>

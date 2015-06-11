@@ -36,6 +36,10 @@
         controller: 'MarketplaceController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/market-view.html'
+    }).when('/market/:id', {
+        controller: 'MarketplaceController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/marketplace/shop-app-page.html'
     })
 }
 })();

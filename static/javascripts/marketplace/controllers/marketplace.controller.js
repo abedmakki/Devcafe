@@ -14,7 +14,8 @@
   function MarketplaceController($http, $location, $scope, Market) {
             var vm = this;
             vm.AddComment = AddComment;
-            vm.rating = rating;
+            var appId = null;
+            // vm.Like = Like;
             Market.all().success(function(data, status, headers, config) {
                 $scope.apps = data;
             })
@@ -27,13 +28,25 @@
         Market.comment(id, text);
     }
 
-  function rating($http, $location, $scope, Market) {
-    $scope.rateFunction = function(id, value) {
-      Market.rate(id, value);
-    };
-    }
+  $scope.rateFunction = function(id, value) {
+    Market.rate(id, value);
+  };
 
-    
+
+    // function Like(item) {
+    //     var id = item;
+    //     console.log(item);
+    //     Market.like(id);
+    // }
+
+    function goToDetail(product) {
+      // $scope.appDetail = product;
+      Market.get(product).success(function(data, status, headers, config) {
+        $location.path('/market/' + product);
+        appId = data;
+        console.log(appId);
+      })
+    }
 
   }
 })();

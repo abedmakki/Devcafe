@@ -11,8 +11,9 @@
   function Market($http) {
     var Market = {
       all: all,
-      // get: get,
+      get: get,
       comment: comment,
+      // like : like,
       rate: rate
     };
 
@@ -21,6 +22,10 @@
    
     function all() {
       return $http.get('/market/');
+    }
+
+    function get(id) {
+      return $http.get('/market/' + id + '/');
     }
 
 
@@ -34,9 +39,17 @@
 
     function rate(id, value) {
       return $http.post('/market/' + id + '/rate/', {
-        value: value        
+        value: value
       });
-  }
+    }
+
+
+    // function like(id) {
+    //   return $http.post('/market/' + id + '/like/', {
+    //   }).then(function() {
+    //     window.location = '/market';
+    //   });
+    // }
 }
 
 })();

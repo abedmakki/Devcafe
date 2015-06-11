@@ -48,21 +48,29 @@
 
                     <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in apps">
                         <div class="thumbnail">
-                            <img src={{product.image}} alt="">
+                            <img src={{product.picture}} alt="">
                             <div class="caption">
-                                <h4 class="pull-right">{{product.price}}</h4>
-                                <h4><a href="/market/" + {{product.id}}>{{product.name}}</a>
-                                </h4>
+                                <h3 class="pull-right">{{product.price | currency}}</h3>
+                                <!--t3deel ellink <h4><a href="/market/">{{product.owner}}</a> -->
+                                <h2><a href="/market/{{product.id}}" ng-click="vm.goToDetail(product.id)">{{product.name}}</a>
+                                </h2>
                                 <p>{{product.description}}</p>
-                                <p>{{product.tags}}</p>
+                                
+                                <div ng-repeat="tag in product.tags">
+                                    <p>{{tag}}</p>
+                                </div>
+                                <p class="pull-right" style="dispaly:inline-block">{{product.comments.length}} reviews</p>
                                 <!-- rateeeeee here -->
-                                <div ng-controller="MarketplaceController">
+                                <div>
                                     <h3>Rating</h3>
-                                    <div ng-init="rating = star.rating + 1"></div>
+                                   <!-- <div ng-init="star.rating = product.avg_rating"></div> -->
+                                    <div ng-init="rating = product.avg_rating"></div>
                                     <div class="rating" star-rating rating-value="rating"
-                                     data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
+                                     data-max="5" on-rating-selected="rateFunction(product.id, rating)">
+                                    </div>
 
-                            </div>
+
+                                </div>
                             <!-- <div class="ratings">
                                 <p class="pull-right">{{item.comments.length}} reviews</p>
                                 <p>
@@ -73,11 +81,11 @@
                                     <span class="glyphicon glyphicon-star"></span>
                                 </p>
                             </div> -->
+                            </div>
                         </div>
+
+
                     </div>
-
-
-                        </div>
                     </div>
                 </div>
 
