@@ -42,10 +42,12 @@
     function goToDetail(product) {
       // $scope.appDetail = product;
       Market.get(product).success(function(data, status, headers, config) {
+        console.log(product);
         $location.path('/market/' + product);
         appId = data;
         console.log(appId);
       })
+      console.log("HELLO");
     }
 
   }
