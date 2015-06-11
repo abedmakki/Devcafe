@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from market.models import App, AppRating, AppComment
+from market.models import App, AppRating, AppComment, AppTransaction
 from userapp.models import UserProfile
 from userapp.serializers import UserSerializer
 
@@ -33,6 +33,13 @@ class PostAppCommentSerializer(serializers.ModelSerializer):
         fields = ('id', 'text')
 
 
+class AppTransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AppTransaction
+        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time')
+        read_only_fields = ('owner', 'app',)
+
+
 class AppSerializer(serializers.ModelSerializer):
     modelslug = serializers.SlugField(read_only=True, source='slug')
     owner = serializers.StringRelatedField()
@@ -42,7 +49,7 @@ class AppSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = App
-        fields = ('id', 'owner', 'name', 'picture', 'description', 'price', 'ratings', 'modelslug', 'comments', 'tags', 'avg_rating')
+        fields = ('id', 'owner', 'name', 'picture', 'description', 'price', 'ratings', 'modelslug', 'comments', 'tags', 'avg_rating', 'transactions')
         read_only_fields = ('owner',)
 
 

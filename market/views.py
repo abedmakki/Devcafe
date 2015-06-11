@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
-from market.serializers import AppSerializer, RateAppSerializer, PostAppCommentSerializer, AppCommentSerializer
-from market.models import App, AppRating, AppComment
+from market.serializers import AppSerializer, RateAppSerializer, PostAppCommentSerializer, AppCommentSerializer, AppTransactionSerializer
+from market.models import App, AppRating, AppComment, AppTransaction
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.views import APIView
-from ideas.permissions import IsOwnerOrReadOnly
+from market.permissions import IsOwnerOrReadOnly, IsOwnerOrNone
 from rest_framework.response import Response
 from rest_framework import status
 from django.db.models import Avg
@@ -66,3 +66,19 @@ class AddComment(APIView):
             comment.save(app=app, owner=request.user)
             return Response(comment.data, status=status.HTTP_201_CREATED)
         return Response(comment.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ViewTransactions(APIView):
+    # queryset = AppTransaction.objects.all()
+    # serializer_class = AppTransactionSerializer
+    # permission_classes = (IsOwnerOrNone,)
+
+    # def perform_create(self, serializer):
+    #     serializer.save(owner=self.request.user)
+    def get(self, request):
+        # transactions = AppTransaction.objects.filter(owner=request.user)
+        if request.user.is_authenticated():
+            serializer = AppTransactionSerializer(AppTransaction.objects.filter(owner=request.user), many=True)
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
