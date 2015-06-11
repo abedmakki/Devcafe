@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from market.serializers import AppSerializer, RateAppSerializer, PostAppCommentSerializer, AppCommentSerializer, AppTransactionSerializer
+from market.serializers import AppSerializer, RateAppSerializer, PostAppCommentSerializer, AppCommentSerializer, AppTransactionSerializer, BuyAppSerializer
 from market.models import App, AppRating, AppComment, AppTransaction
 from rest_framework import generics
 from rest_framework import permissions
@@ -82,3 +82,15 @@ class ViewTransactions(APIView):
             return Response(serializer.data)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class Buy(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def post(self, request, pk):
+        app = App.objects.get(id=pk)
+        transaction = BuyAppSerializer(data=request.data)
+        if transaction.is_valid():
+            transaction.save(app=app, owner=request.user)
+            return Response(transaction.data, status=status.HTTP_201_CREATED)
+        return Response(transaction.errors, status=status.HTTP_400_BAD_REQUEST)

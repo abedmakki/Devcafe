@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>[0-9]+)/rate/$', views.Rate.as_view(), name='rate-app'),
     url(r'^(?P<pk>[0-9]+)/add_comment/$', views.AddComment.as_view(), name='comment-on-app'),
     url(r'^view_transactions/$', views.ViewTransactions.as_view(), name='view-transactions'),
+    url(r'^(?P<pk>[0-9]+)/buy/$', views.Buy.as_view(), name='buy'),
     # url(r'^(?P<pk>[0-9]+)/buy/$', views.Buy.as_view(), name='buy-app'),
 )
 

@@ -40,6 +40,12 @@ class AppTransactionSerializer(serializers.ModelSerializer):
         read_only_fields = ('owner', 'app',)
 
 
+class BuyAppSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AppTransaction
+        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time')
+        read_only_fields = ('owner', 'app', 'unique_id')
+
 class AppSerializer(serializers.ModelSerializer):
     modelslug = serializers.SlugField(read_only=True, source='slug')
     owner = serializers.StringRelatedField()
