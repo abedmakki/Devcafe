@@ -51,20 +51,18 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
     <!--End of tags code -->
     <div class="comments">
         <h4>{{item.comments.length}} Comments</h4>
-        <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
+        <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
             <div class="comment media">
                 <div class="panel-heading">
                     <div class="pull-left">
-                        <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />
+                        <img class="avatar" ng-src={{comment.owner.picture}} alt="" height="50" width="50" />
                     </div>
                     <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong>
                     <br>
                     <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
-                    <br>
-                </div>
-                <div class="panel-body">
                     <p>{{comment.text}}</p>
                 </div>
+
             </div>
         </div>
         <!-- Start Comment Form -->
