@@ -21,7 +21,8 @@
       create: create,
       get: get,
       comment: comment,
-      rate: rate
+      rate: rate,
+      like: like
     };
 
     return Ideas;
@@ -87,5 +88,14 @@
         value: value        
       });
     }
+
+
+    function like(id) {
+      return $http.post('/ideas/' + id + '/like/', {
+      }).then(function() {
+        window.location = '/ideas';
+      });
+    }
+
   }
 })();

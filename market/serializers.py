@@ -42,7 +42,7 @@ class AppSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = App
-        fields = ('id', 'owner', 'name', 'description', 'price', 'ratings', 'modelslug', 'comments', 'tags', 'avg_rating')
+        fields = ('id', 'owner', 'name', 'picture', 'description', 'price', 'ratings', 'modelslug', 'comments', 'tags', 'avg_rating')
         read_only_fields = ('owner',)
 
 
