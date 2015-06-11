@@ -60,9 +60,6 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
                     <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong>
                     <br>
                     <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
-                    <br>
-                </div>
-                <div class="panel-body">
                     <p>{{comment.text}}</p>
                 </div>
             </div>
