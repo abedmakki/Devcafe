@@ -4,7 +4,8 @@
   angular
     .module('devcafe.marketplace', [
       'devcafe.marketplace.controllers',
-      'devcafe.marketplace.services'
+      'devcafe.marketplace.services',
+      'devcafe.marketplace.directives'
     ]);
 
   angular
@@ -12,4 +13,7 @@
 
   angular
     .module('devcafe.marketplace.services', ['ngCookies']);
+
+  angular
+    .module('devcafe.marketplace.directives', []);
 })();

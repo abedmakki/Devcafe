@@ -38,6 +38,12 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
     <h2 style="text-align:left;display:inline">{{item.title}}</h2>
     <br/>
     <p class="clearfix">{{item.description}}</p>
+    <div>
+        <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px;">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            {{liked}} {{item.likes}}
+        </button>
+    </div>
     <!-- idea tags specified code-->
     <!-- <div class="main">
         <ul class="artistlist">
