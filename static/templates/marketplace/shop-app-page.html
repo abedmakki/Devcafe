@@ -54,6 +54,12 @@
 
             </div>
 
+
+            <div ng-init="star.rating = appId.avg_rating"></div>
+                <div ng-init="rating = star.rating + 1"></div>
+                <div class="rating" star-rating rating-value="rating"
+         data-max="5" on-rating-selected="rateFunction(appId.id, rating)"></div>
+
             <div class="well">
 
                 <form ng-submit="vm.AddComment(appId.id, text)">
@@ -65,21 +71,9 @@
                 </form>
                 <hr>
 
-                <div>
-                 <!-- ng-controller="MarketplaceDetailController as MarketDetail" -->
-                <h3>Rating</h3>
-               <!-- <div ng-init="star.rating = appId.avg_rating"></div> -->
-                <div ng-init="rating = appId.avg_rating"></div>
-                <div class="rating" star-rating rating-value="rating"
-                 data-max="5" on-rating-selected="rateFunction(appId.id, rating)">
-                </div>
-                </div>
-
-
                 <div class="row">
-                    <div class="col-md-12" ng-repeat = "comment in appId.comments">
                     <h4>{{appId.comments.length}} Comments</h4>
-                    <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
+                    <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in appId.comments | orderBy : 'timestamp'">
                     <div class="comment media">
                     <div class="panel-heading">
                     <div class="pull-left">
@@ -110,23 +104,4 @@
 
         </div>
 
-    </div>
-
 </div>
-<!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
