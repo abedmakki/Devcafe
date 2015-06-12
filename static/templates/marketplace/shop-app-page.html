@@ -2,22 +2,28 @@
 
     <div class="row">
 
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <p class="lead">Category</p>
             <div class="list-group">
                 <a href="#" class="list-group-item active">Software</a>
                 <a href="#" class="list-group-item">Hardware</a>
                 <a href="#" class="list-group-item">Embedded Systems</a>
             </div>
+        </div> -->
+        <div class="col-md-3">
+            <p class="lead">Categories</p>
+            <div class="list-group">
+                <a href="#" class="list-group-item" ng-repeat="tag in appId.tags">{{tag}}</a>
+            </div>
         </div>
 
         <div class="col-md-9">
             
             <div class="thumbnail">
-                <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                <img class="img-responsive" ng-src="{{appId.picture}}" alt="">
                 <div class="caption-full">
                 <h1><a href="#">{{appId.name}}</a></h1>
-                <h1>Rating: {{appId.avg_rating}}</h1>
+                <!-- <h1>Rating: {{appId.avg_rating}}</h1> -->
                 <section ng-controller="TabController as tab">
                     <ul class="nav nav-pills">
                         <li ng-class="{ active:tab.isSet(1) }">
@@ -31,7 +37,7 @@
                         <blockquote>{{appId.description}}</blockquote>
                         </div>
                         <div ng-show="tab.isSet(2)">
-                        <blockquote>{{appId.price}}</blockquote>
+                        <blockquote>{{appId.price | currency}}</blockquote>
                         </div>
                         
 
@@ -49,23 +55,22 @@
                 </section>
                 </div>
                 
-                <div ng-init="star.rating = appIdRating"></div>
-                <div ng-init="rating = star.rating + 1"></div>
-                <div class="rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(appId.id, rating)"></div>
-
+                
             </div>
 
 
             <div class="well">
 
-                <form ng-submit="vm.AddComment(appId.id, text)">
+                <form class="form-group" ng-submit="vm.AddComment(appId.id, text)">
                 <div class="text-right">
-                    <input type="text" ng-model="text"></input>
-                    <button type="submit" class="btn btn-success">Leave a Review</button>
-
+                    <input type="text" class="form-control" ng-model="text"></input>
+                    <button type="submit" class="btn btn-success" style="margin-top: 1%">Leave a Review</button>
                 </div>
+                <div ng-init="star.rating = appIdRating"></div>
+                <div ng-init="rating = star.rating + 1"></div>
+                <div class="rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(appId.id, rating)"></div>
+
                 </form>
-                <hr>
 
                 <div class="row">
                     <h4>{{appId.comments.length}} Comments</h4>
@@ -80,9 +85,9 @@
                     <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
                     <br>
                     </div>
-                    <div class="panel-body">
+                    <!-- <div class="panel-body"> -->
                     <p>{{comment.text}}</p>
-                    </div>
+                    <!-- </div> -->
                     </div>
                 </div>
                         <!-- <span class="glyphicon glyphicon-star"></span>
