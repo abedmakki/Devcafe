@@ -65,6 +65,17 @@
                 </form>
                 <hr>
 
+                <div>
+                 <!-- ng-controller="MarketplaceDetailController as MarketDetail" -->
+                <h3>Rating</h3>
+               <!-- <div ng-init="star.rating = appId.avg_rating"></div> -->
+                <div ng-init="rating = appId.avg_rating"></div>
+                <div class="rating" star-rating rating-value="rating"
+                 data-max="5" on-rating-selected="rateFunction(appId.id, rating)">
+                </div>
+                </div>
+
+
                 <div class="row">
                     <div class="col-md-12" ng-repeat = "comment in appId.comments">
                     <h4>{{appId.comments.length}} Comments</h4>

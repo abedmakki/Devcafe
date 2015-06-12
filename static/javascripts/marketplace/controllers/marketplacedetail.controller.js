@@ -13,7 +13,7 @@
 
   function MarketplaceDetailController($http, $location, $scope, $routeParams, Market) {
     var vm = this;
-    // vm.AddComment = AddComment;
+    vm.AddComment = AddComment;
     // vm.goToDetail = goToDetail;
     // var appId = null;
     // vm.Like = Like;
@@ -21,5 +21,19 @@
       // console.log(data);
       $scope.appId = data;
     })
+
+    $scope.rateFunction = function(id, value) {
+    Market.rate(id, value);
+  };
+
+    function AddComment(item, text) {
+        var id = item;
+        // console.log(item);
+        // console.log(text);
+        Market.comment(id, text);
+    }
+
+
+
   }
 })();
