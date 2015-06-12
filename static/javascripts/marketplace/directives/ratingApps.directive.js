@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('devcafe.ideas.directives')
+    .module('devcafe.marketplace.directives')
     .directive('starRating',
   function() {
     return {
@@ -30,7 +30,7 @@
         scope.toggle = function(index) {
           scope.ratingValue = index + 1;
           scope.onRatingSelected({
-            rating : index
+            rating : index + 1
           });
         };
         
