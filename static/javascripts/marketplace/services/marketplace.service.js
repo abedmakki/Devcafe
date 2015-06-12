@@ -13,8 +13,8 @@
       all: all,
       get: get,
       comment: comment,
-      // like : like,
-      rate: rate
+      rate: rate,
+      buy: buy
     };
 
     return Market;
@@ -43,7 +43,18 @@
       });
     }
 
-
+    function buy(id) {
+      return $http.post('/market/' + id + '/buy/', {
+        // home_no: home_no,
+        // phone_no: phone_no,
+        // delivery_address: delivery_address,
+        // delivery_time: delivery_time,
+        home_no: "123456",
+        phone_no: "654321",
+        delivery_address: "sjfhfkfjk",
+        delivery_time: "2015-07-20TZ12:50",
+      });
+    }
     // function like(id) {
     //   return $http.post('/market/' + id + '/like/', {
     //   }).then(function() {

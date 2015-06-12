@@ -40,7 +40,11 @@
         controller: 'MarketplaceDetailController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/shop-app-page.html'
-    })
+    }).when('/market/:id/buy', {
+        controller: 'MarketplaceDetailController',
+        controllerAs: 'vm',
+        templateUrl: 'static/templates/marketplace/payment-page.html'
+    }).otherwise('/')
 }
 })();
 
