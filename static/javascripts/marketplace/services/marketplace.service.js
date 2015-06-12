@@ -33,7 +33,7 @@
       return $http.post('/market/' + id + '/add_comment/', {
         text: text
       }).then(function() {
-        window.location = '/market';
+        window.location = '/market/'+ id;
       });
     }
 
