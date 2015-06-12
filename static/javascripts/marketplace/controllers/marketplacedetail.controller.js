@@ -22,9 +22,9 @@
       $scope.appId = data;
     })
 
-    $scope.rateFunction = function(id, value) {
-    Market.rate(id, value);
-  };
+  //   $scope.rateFunction = function(id, value) {
+  //   Market.rate(id, value);
+  // };
 
     function AddComment(item, text) {
         var id = item;
