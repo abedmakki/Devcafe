@@ -17,6 +17,9 @@
             // vm.Like = Like;
             Market.all().success(function(data, status, headers, config) {
                 $scope.apps = data;
+                // $scope.$watch("rating", function(){
+                //   console.log($scope.rating);
+                // });
             })
 
 

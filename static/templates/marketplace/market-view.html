@@ -56,15 +56,15 @@
                                 </h2>
                                 <p>{{product.description}}</p>
                                 
-                                <div ng-repeat="tag in product.tags">
+                                <!-- <div ng-repeat="tag in product.tags">
                                     <p>{{tag}}</p>
-                                </div>
+                                </div> -->
                                 <p class="pull-right" style="dispaly:inline-block">{{product.comments.length}} reviews</p>
                                 <!-- rateeeeee here -->
                                 <div>
                                     <h3>Rating</h3>
-                                   <!-- <div ng-init="star.rating = product.avg_rating"></div> -->
-                                    <div ng-init="rating = product.avg_rating"></div>
+                                    <div ng-init="star.rating = product.avg_rating == 0.0 ? 3 : product.avg_rating"></div>
+                                    <div ng-init="rating = star.rating"></div>
                                     <div class="rating" star-rating rating-value="rating"
                                      data-max="5" on-rating-selected="rateFunction(product.id, rating)">
                                     </div>

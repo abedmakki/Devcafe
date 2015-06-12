@@ -21,6 +21,15 @@
       $scope.appId = data;
       $scope.appIdRating = data.avg_rating;
       console.log($scope.appId.avg_rating);
+      // $scope.$watch("rating", function(){
+      //   console.log($scope.rating);
+      // });
+      if (data.avg_rating === 0) {
+        $scope.rating = 3;
+      }
+      else {
+        $scope.rating = data.avg_rating;
+      }
     })
 
     $scope.rateFunction = function(id, value) {
