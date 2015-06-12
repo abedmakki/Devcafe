@@ -45,20 +45,17 @@
                         </blockquote>
                         </li>
                     </ul>
-                   -->      
-                   </div>
-
+                   -->
                 </section>
-
-
+                </div>
+                
+                <div ng-init="star.rating = appIdRating"></div>
+                <div ng-init="rating = star.rating + 1"></div>
+                <div class="rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(appId.id, rating)"></div>
 
             </div>
 
-
-            <div ng-init="star.rating = appId.avg_rating"></div>
-                <div ng-init="rating = star.rating + 1"></div>
-                <div class="rating" star-rating rating-value="rating"
-         data-max="5" on-rating-selected="rateFunction(appId.id, rating)"></div>
+            
 
             <div class="well">
 

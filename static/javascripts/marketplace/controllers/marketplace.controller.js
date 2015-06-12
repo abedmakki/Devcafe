@@ -22,33 +22,19 @@
             })
 
 
-  function AddComment(item, text) {
-        var id = item;
-        // console.log(item);
-        // console.log(text);
-        Market.comment(id, text);
-    }
-
-  $scope.rateFunction = function(id, value) {
-    Market.rate(id, value);
-  };
-
-
-    // function Like(item) {
-    //     var id = item;
-    //     console.log(item);
-    //     Market.like(id);
-    // }
+    $scope.rateFunction = function(id, value) {
+      Market.rate(id, value);
+    };
 
     function goToDetail(id) {
       // $scope.appDetail = product;
       Market.get(id).success(function(data, status, headers, config) {
-        console.log(id);
+        // console.log(id);
         $location.path('/market/' + id);
         $scope.appId = data;
-        console.log(appId);
+        // console.log(appId);
       })
-      console.log("HELLO");
+      // console.log("HELLO");
     }
 
   }
