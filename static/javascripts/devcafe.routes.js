@@ -44,6 +44,10 @@
         controller: 'MarketplaceDetailController',
         controllerAs: 'vm',
         templateUrl: 'static/templates/marketplace/payment-page.html'
+    }).when('/market/:id/buy/deliveryinfo', {
+        controller: 'MarketplaceDetailController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/marketplace/market-required-info-application.html'
     }).otherwise('/')
 }
 })();

@@ -14,7 +14,8 @@
   function MarketplaceDetailController($http, $location, $scope, $routeParams, Market) {
     var vm = this;
     vm.AddComment = AddComment;
-    vm.getDeliveryInfo = getDeliveryInfo;
+    vm.ChoosePaymentMethod = ChoosePaymentMethod;
+    vm.GetDeliveryInfo = GetDeliveryInfo;
     vm.Buy = Buy;
     // var appId = null;
     // vm.Like = Like;
@@ -51,15 +52,23 @@
       Market.comment(id, text);
     }
 
-    function getDeliveryInfo(id) {
+    function ChoosePaymentMethod(id) {
       $location.path('/market/' + id + '/buy');
+      // console.log(id);
+    }
+
+    function GetDeliveryInfo(id) {
+      $location.path('/market/' + id + '/buy/deliveryinfo');
       // console.log(id);
     }
 
     function Buy(id) {
       // console.log(item);
       // console.log(text);
-      Market.buy(id);
+      Market.buy(id, vm.firstname,
+       vm.lastname, vm.email, vm.address, vm.ddate, vm.mobile, vm.hphone).success(function(){
+        $location.url('/market');
+       });
     }
 
   }

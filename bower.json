@@ -20,5 +20,9 @@
     "underscore": "~1.7.0",
     "jquery-ui": "~1.11.4",
     "ng-file-upload": "~4.0.4"
+  },
+  "resolutions": {
+    "bootstrap": "~3.3.0",
+    "jquery": ">= 1.9.1"
   }
 }

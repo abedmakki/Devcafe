@@ -43,16 +43,16 @@
       });
     }
 
-    function buy(id) {
+    function buy(id, firstname, lastname, email, address, ddate, mobile, hphone) {
       return $http.post('/market/' + id + '/buy/', {
-        // home_no: home_no,
-        // phone_no: phone_no,
-        // delivery_address: delivery_address,
-        // delivery_time: delivery_time,
-        home_no: "123456",
-        phone_no: "654321",
-        delivery_address: "sjfhfkfjk",
-        delivery_time: "2015-07-20TZ12:50",
+        home_no: hphone,
+        phone_no: mobile,
+        delivery_address: address,
+        delivery_time: ddate,
+        // home_no: "123456",
+        // phone_no: "654321",
+        // delivery_address: "sjfhfkfjk",
+        // delivery_time: "2015-07-20TZ12:50",
       });
     }
     // function like(id) {
