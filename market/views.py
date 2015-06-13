@@ -30,14 +30,28 @@ class Rate(APIView):
 
     def post(self, request, pk):
         app = App.objects.get(id=pk)
-        rating = RateAppSerializer(data=request.data)
-        if rating.is_valid():
-            rating.save(app=app, owner=request.user)
-            total_rating = app.ratings.all().aggregate(Avg('value'))
-            app.avg_rating = total_rating['value__avg']
-            app.save()
-            return Response(rating.data, status=status.HTTP_201_CREATED)
-        return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            own_rating = AppRating.objects.filter(owner=request.user, app=app)
+            for rate in own_rating:
+                rate.delete()
+                rating = RateAppSerializer(data=request.data)
+                if rating.is_valid():
+                    rating.save(app=app, owner=request.user)
+                    total_rating = app.ratings.all().aggregate(Avg('value'))
+                    app.avg_rating = total_rating['value__avg']
+                    app.save()
+                    return Response(rating.data, status=status.HTTP_201_CREATED)
+                return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+            rating = RateAppSerializer(data=request.data)
+            if rating.is_valid():
+                rating.save(app=app, owner=request.user)
+                total_rating = app.ratings.all().aggregate(Avg('value'))
+                app.avg_rating = total_rating['value__avg']
+                app.save()
+                return Response(rating.data, status=status.HTTP_201_CREATED)
+            return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception, e:
+            raise e
 
 
 class AppCommentList(generics.ListAPIView):
@@ -92,5 +106,7 @@ class Buy(APIView):
         transaction = BuyAppSerializer(data=request.data)
         if transaction.is_valid():
             transaction.save(app=app, owner=request.user)
+            app.transactions += 1
+            app.save()
             return Response(transaction.data, status=status.HTTP_201_CREATED)
         return Response(transaction.errors, status=status.HTTP_400_BAD_REQUEST)
