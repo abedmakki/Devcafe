@@ -92,5 +92,7 @@ class Buy(APIView):
         transaction = BuyAppSerializer(data=request.data)
         if transaction.is_valid():
             transaction.save(app=app, owner=request.user)
+            app.transactions += 1
+            app.save()
             return Response(transaction.data, status=status.HTTP_201_CREATED)
         return Response(transaction.errors, status=status.HTTP_400_BAD_REQUEST)
