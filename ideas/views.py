@@ -63,14 +63,37 @@ class Rate(APIView):
 
     def post(self, request, pk):
         idea = Idea.objects.get(id=pk)
-        rating = RateIdeaSerializer(data=request.data)
-        if rating.is_valid():
-            rating.save(idea=idea, owner=request.user)
-            total_rating = idea.ratings.all().aggregate(Avg('value'))
-            idea.avg_rating = total_rating['value__avg']
-            idea.save()
-            return Response(rating.data, status=status.HTTP_201_CREATED)
-        return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+        # rating = RateIdeaSerializer(data=request.data)
+        # if rating.is_valid():
+        #     rating.save(idea=idea, owner=request.user)
+        #     total_rating = idea.ratings.all().aggregate(Avg('value'))
+        #     idea.avg_rating = total_rating['value__avg']
+        #     idea.save()
+        #     return Response(rating.data, status=status.HTTP_201_CREATED)
+        # return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            own_rating = IdeaRating.objects.filter(owner=request.user, idea=idea)
+            for rate in own_rating:
+                rate.delete()
+                rating = RateIdeaSerializer(data=request.data)
+                if rating.is_valid():
+                    rating.save(idea=idea, owner=request.user)
+                    total_rating = idea.ratings.all().aggregate(Avg('value'))
+                    idea.avg_rating = total_rating['value__avg']
+                    idea.save()
+                    return Response(rating.data, status=status.HTTP_201_CREATED)
+                return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+            rating = RateIdeaSerializer(data=request.data)
+            if rating.is_valid():
+                rating.save(idea=idea, owner=request.user)
+                total_rating = idea.ratings.all().aggregate(Avg('value'))
+                idea.avg_rating = total_rating['value__avg']
+                idea.save()
+                return Response(rating.data, status=status.HTTP_201_CREATED)
+            return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception, e:
+            raise e
+
 
 
 class Like(APIView):

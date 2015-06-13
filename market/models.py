@@ -29,7 +29,7 @@ class AppRating(models.Model):
     owner = models.ForeignKey(User)
     app = models.ForeignKey(App, related_name='ratings')
     value = models.PositiveSmallIntegerField(default=0)
-
+    
     def __unicode__(self):
         return str(self.value)
 
