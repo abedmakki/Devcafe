@@ -1,0 +1,35 @@
+<div style="margin:20px 270px;width:750px;height:500px;padding:10px;margin-bottom: 20px">
+        <h1>Upload Your Application</h1>
+
+        <div class="well">
+            <form name="upload form" role="form" ng-submit="" novalidate>
+
+                <div class="form-group">
+                    <label for="upload__applicationname">Application Name</label>
+                    <input type="text" class="form-control" id="delivery__applicationname" ng-model=".appname" required="true" ng-focus data-content="Valid Application Name required"/>
+                </div>
+                <div class="form-group">
+                    <label for="upload__price">Price(minimum price is 1$):</label>
+                    <input type="number" class="form-control" id="upload__price" type="submit" min="1" ng-model=".price" required="true" ng-focus data-content="Valid Price required"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="upload__description">Description: </label>
+                    <input type="text" class="form-control" id="upload__description" ng-model=".description" required="true" ng-focus data-content="Valid Description required"/>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="delivery__deliverydate">Delivery Date: </label>
+                    <input type="text" class="form-control" id="delivery__deliverydate" ng-model="vm.ddate" jqdatepicker ng-pattern='/^((\d{4})-(\d{2})-(\d{2}))$/' required="true" ng-focus data-content="Valid Delivery Date required"/>
+                </div> -->
+                <div class="form-group">
+                    <label for="InputFile">Application Picture</label>
+                    <input type="file" id="exampleInputFile">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" ng-disabled="DeliveryForm.$invalid">Next</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
