@@ -47,7 +47,6 @@ class BuyAppSerializer(serializers.ModelSerializer):
         read_only_fields = ('owner', 'app', 'unique_id')
 
 class AppSerializer(serializers.ModelSerializer):
-    modelslug = serializers.SlugField(read_only=True, source='slug')
     owner = serializers.StringRelatedField()
     comments = AppCommentSerializer(many=True, read_only=True)
     tags = serializers.StringRelatedField(many=True)
@@ -55,9 +54,5 @@ class AppSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = App
-        fields = ('id', 'owner', 'name', 'picture', 'description', 'price', 'ratings', 'modelslug', 'comments', 'tags', 'avg_rating', 'transactions')
-        read_only_fields = ('owner',)
-
-
-
-
+        fields = ('id', 'owner', 'name', 'picture', 'description', 'price', 'ratings', 'comments', 'tags', 'avg_rating', 'transactions', 'url',)
+        read_only_fields = ('owner', 'transactions', 'ratings')
