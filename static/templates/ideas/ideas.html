@@ -1,11 +1,13 @@
 <div class="idea-body">
     <div ng-controller="PostIdeaController as postIdeaCtrl">
         <form ng-submit="postIdeaCtrl.PostIdea()">
+            
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title"> </input>
+                <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title" required="true" ng-minlength="1" ng-focus data-content="Valid Title"> </input>
             </div>
-            <div class="form-group">
-                <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description"></textarea>
+           
+             <div class="form-group">
+                <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description" required="true"></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" style="margin:0px 270px; width: 100px; height: 30px;">Spread</button>
@@ -77,10 +79,14 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
             <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)">
                 <div class="row-fluid">
                 </div>
-                <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name"></textarea>
+
+                 <div class="form-group">
+                    <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
+                </div>
+                
                 <ul>
                     <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button> -->
-                    <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Comment</button>
+                    <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-disabled="comment-form.$invalid">Comment</button>
                     <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Share</button>
                     <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Realize</button>
                 </ul>
