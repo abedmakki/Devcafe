@@ -8,13 +8,14 @@ from general.models import Tag, Comment
 class App(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(max_length=50)
-    picture = models.ImageField(upload_to='market_images', blank=True)
+    picture = models.ImageField(upload_to='market_images', blank=True, null=True)
     description = models.CharField(max_length=500)
     avg_rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_apps')
     price = models.PositiveSmallIntegerField(default=0)
     transactions = models.PositiveSmallIntegerField(default=0)
+    url = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name + str(self.owner.pk) + strftime("%Y%m%d%S%M%H"))
