@@ -15,7 +15,7 @@ class App(models.Model):
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_apps')
     price = models.PositiveSmallIntegerField(default=0)
     transactions = models.PositiveSmallIntegerField(default=0)
-    url = models.URLField(blank=True, null=True)
+    uploaded_file = models.FileField(upload_to='app_files', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name + str(self.owner.pk) + strftime("%Y%m%d%S%M%H"))

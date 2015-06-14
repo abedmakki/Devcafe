@@ -6,6 +6,7 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 from market.permissions import IsOwnerOrReadOnly, IsOwnerOrNone
 from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser
 from rest_framework import status
 from django.db.models import Avg
 
@@ -110,3 +111,35 @@ class Buy(APIView):
             app.save()
             return Response(transaction.data, status=status.HTTP_201_CREATED)
         return Response(transaction.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UploadAppFiles(APIView):
+    parser_classes = (FileUploadParser,)
+
+    def post(self, request, pk):
+        user = request.user
+        if not user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        photo = request.FILES['file']
+        if photo:
+            try:
+                app = App.objects.get(id=pk)
+                app.picture = photo
+                app.save()
+                # serializer = AppSerializer(data=request.data)
+            except App.DoesNotExist:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            # return Response(data=serializer.data , status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_200_OK)
+
+            # uploaded_file = request.FILES['file']
+            # if photo:
+            #     try:
+            #         app = App.objects.get(id=pk)
+            #         app.picture = photo
+            #         app.save()
+            #         # serializer = AppSerializer(data=request.data)
+            #     except App.DoesNotExist:
+            #         return Response(status=status.HTTP_400_BAD_REQUEST)
+            #     # return Response(data=serializer.data , status=status.HTTP_200_OK)
+            #     return Response(status=status.HTTP_200_OK)

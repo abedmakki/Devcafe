@@ -9,7 +9,7 @@
     ]);
 
   angular
-    .module('devcafe.marketplace.controllers', []);
+    .module('devcafe.marketplace.controllers', ['ngFileUpload']);
 
   angular
     .module('devcafe.marketplace.services', ['ngCookies']);
