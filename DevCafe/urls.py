@@ -26,6 +26,7 @@ urlpatterns += patterns('',
     url(r'^projects/', include('project.urls')),
     url(r'^market/', include('market.urls')),
     url(r'^general/', include('general.urls')),
+    url(r'^payment_sys/', include('payment_sys.urls')),
     url('^.*$', IndexView.as_view(), name='index'),
 )
 

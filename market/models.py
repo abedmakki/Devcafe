@@ -49,6 +49,7 @@ class AppTransaction(models.Model):
     delivery_address = models.CharField(max_length=300)
     delivery_time = models.DateTimeField()
     purchase_time = models.DateTimeField(auto_now_add=True)
+    paid = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         app_obj = self.app
