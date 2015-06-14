@@ -3,7 +3,7 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Category</p>
+                <p class="lead"><strong>Category</strong></p>
                 <div class="list-group">
                     <a href="#" class="list-group-item">Software</a>
                     <a href="#" class="list-group-item">Hardware</a>
@@ -47,7 +47,7 @@
                 <div class="row">
 
                     <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in apps">
-                        <div class="thumbnail branch-name" style="height:auto">
+                        <div class="thumbnail branch-name" > <!-- style="height:auto"-->
                             <img ng-src={{product.picture}} alt="">
                             <h3 style="font-size:12px" class="pull-right">{{product.price | currency}}</h3>
                             <div class="caption product-name-font">
