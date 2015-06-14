@@ -13,11 +13,11 @@
                         {% for transaction in transactions %}
                          <li type="submit" class="list-group-item" style="padding-left: 5%">{{ transaction.owner }} {{ transaction.app }} {{ transaction.app.price }} {{ transaction.paid }}
                             {% if not transaction.paid %}
-                            <a class="btn btn-primary" style="margin:0px 270px; width: 100px; height: 30px;" href="pay/{{transaction.id}}/">
+                            <a class="btn btn-primary pull-right" style="margin:0px 100px; width: 100px; height: 30px;" href="pay/{{transaction.id}}/">
                                 Paid
                             </a>
                             {% else %}
-                            <button class="btn btn-primary" style="margin:0px 270px; width: 100px; height: 30px;">
+                            <button class="btn btn-primary pull-right" style="margin:0px 100px; width: 100px; height: 30px;">
                                 Unpaid
                             </button>
                             {% endif %}
