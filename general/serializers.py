@@ -4,7 +4,7 @@ from general.models import Tag
 
 
 class TagSerializer(serializers.ModelSerializer):
-	# tagged_ideas = IdeaSerializer(many=True, read_only=True)
+	#tagged_ideas = IdeaSerializer(many=True, read_only=True)
 	class Meta:
 		model = Tag
 		fields = ('id', 'name', 'slug', 'tagged_ideas')

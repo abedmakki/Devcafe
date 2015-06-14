@@ -7,6 +7,8 @@
             </div>
            
              <div class="form-group">
+
+
                 <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description" required="true"></textarea>
             </div>
             <div class="form-group">
@@ -36,6 +38,66 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
     </div>
+
+                
+                <div width = "500">
+                  <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+    <!--             
+                <div id="containingBlock">
+                <div class="videoWrapper">
+                <object width="480" height="295">
+                    <param name="movie" value="https://www.youtube.com/embed/dpX5fq4kMnA"></param>
+                    <param name="allowFullScreen" value="true"></param>
+                    <param name="allowscriptaccess" value="always"></param>
+                    <embed src="https://www.youtube.com/embed/dpX5fq4kMnA" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="295"></embed>
+                </object>
+              </div>
+            </div>
+ -->
+
+<!-- 
+                 <div style="text-align:center"> 
+                  <button onclick="playPause()">Play/Pause</button> 
+                  <button onclick="makeBig()">Big</button>
+                  <button onclick="makeSmall()">Small</button>
+                  <button onclick="makeNormal()">Normal</button>
+                  <br> 
+                  <video id="video1" width="420">
+                  
+                    <source src="https://www.youtube.com/embed/dpX5fq4kMnA" type="video/webm">
+                    <source src="mov_bbb.ogg" type="video/ogg">
+                    Your browser does not support HTML5 video.
+                  </video>
+                </div> 
+
+                <script> 
+                var myVideo = document.getElementById("video1"); 
+
+                function playPause() { 
+                    if (myVideo.paused) 
+                        myVideo.play(); 
+                    else 
+                        myVideo.pause(); 
+                } 
+
+                function makeBig() { 
+                    myVideo.width = 560; 
+                } 
+
+                function makeSmall() { 
+                    myVideo.width = 320; 
+                } 
+
+                function makeNormal() { 
+                    myVideo.width = 420; 
+                } 
+                </script> 
+
+                <p>click <a href="https://www.youtube.com/embed/dpX5fq4kMnA" target="_blank">here</a> to open video.</p>
+
+ -->
 
     <h2 style="text-align:left;display:inline">{{item.title}}</h2>
     <br/>
