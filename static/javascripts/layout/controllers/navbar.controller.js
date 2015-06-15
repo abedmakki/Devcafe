@@ -9,16 +9,19 @@
         .module('devcafe.layout.controllers')
         .controller('NavbarController', NavbarController);
 
-        NavbarController.$inject = ['$scope', 'Userapp'];
+        NavbarController.$inject = ['$scope', '$rootScope', 'Userapp'];
 
     /**
     * @namespace NavbarController
     */
-    function NavbarController($scope, Userapp) {
+    function NavbarController($scope, $rootScope, Userapp) {
         var vm = this;
 
         vm.logout = logout;
 
+        $scope.$watch('search', function() {
+            $rootScope.searchQuery = $scope.search;
+        });
         /**
         * @name logout
         * @desc Log the user out

@@ -23,9 +23,7 @@
         <h3>Tags</h3>
           <li class="artist cf" ng-repeat="tag in item.tags">
 -->
-<div style="
-margin:20px 270px;width:750px;height:auto;padding:10px;margin-bottom: 20px;background-color: #fefefe;border: 1px solid #fefefe;
-border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
+<div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | orderBy : '-timestamp' | filter: search">
     <h2 style="display:inline">{{item.title}}</h2> by <a href="/profile"> {{item.owner}} </a>
     <br/>
  <!-- <p style="text-align:left;display:inline">{{item.title}} By: </p>  -->
@@ -38,9 +36,9 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
     </div>      
-        <div width = "500">
+        <!-- <div width = "500">
           <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
-        </div>
+        </div> -->
 
     <!-- <h2 style="text-align:left;display:inline">{{item.title}}</h2> -->
     <br/>
@@ -84,7 +82,7 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         <!-- Start Comment Form -->
         <div class="comment-form">
             <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
-            <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px;">
+            <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                 {{liked}} {{item.likes}}
             </button>
