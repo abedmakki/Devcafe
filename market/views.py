@@ -93,7 +93,17 @@ class ViewTransactions(APIView):
     def get(self, request):
         # transactions = AppTransaction.objects.filter(owner=request.user)
         if request.user.is_authenticated():
-            serializer = AppTransactionSerializer(AppTransaction.objects.filter(owner=request.user), many=True)
+            serializer = AppTransactionSerializer(AppTransaction.objects.filter(owner=request.user), many=True, context={'request': request})
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class ViewMyApps(APIView):
+
+    def get(self, request):
+        if request.user.is_authenticated():
+            serializer = AppSerializer(App.objects.filter(owner=request.user), many=True, context={'request': request})
             return Response(serializer.data)
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)

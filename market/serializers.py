@@ -33,13 +33,6 @@ class PostAppCommentSerializer(serializers.ModelSerializer):
         fields = ('id', 'text')
 
 
-class AppTransactionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AppTransaction
-        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time')
-        read_only_fields = ('owner', 'app',)
-
-
 class BuyAppSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppTransaction
@@ -59,6 +52,13 @@ class AppSerializer(serializers.ModelSerializer):
         read_only_fields = ('owner', 'transactions', 'ratings', 'avg_rating')
 
 
+class AppTransactionSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(read_only=True)
+    app = AppSerializer(read_only=True)
+    class Meta:
+        model = AppTransaction
+        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time')
+        read_only_fields = ('owner', 'app',)
 # class UploadAppSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = App
