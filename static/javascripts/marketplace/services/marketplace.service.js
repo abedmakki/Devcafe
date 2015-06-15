@@ -16,7 +16,9 @@
       comment: comment,
       rate: rate,
       buy: buy,
-      tags: tags
+      tags: tags,
+      view_transactions: view_transactions,
+      view_my_apps: view_my_apps
     };
 
     return Market;
@@ -68,6 +70,14 @@
 
     function tags() {
       return $http.get('/general/tags/');
+    }
+
+    function view_transactions(){
+      return $http.get('/market/view_transactions/');
+    }
+
+    function view_my_apps(){
+      return $http.get('/market/view_my_apps/')
     }
     // function like(id) {
     //   return $http.post('/market/' + id + '/like/', {

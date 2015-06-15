@@ -1,0 +1,34 @@
+<div class="row placeholders">
+    <div class="placeholder">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Transactions</h3>
+            </div>
+        </div>
+                    <ul class="list-group" ng-repeat="transaction in transactions">
+                         <li type="submit" class="list-group-item" style="padding-left: 5%">
+                            {{transaction.owner.username}} {{transaction.app.name}} {{transaction.app.price}} {{transaction.paid}}
+                         </li>
+                    </ul>
+    </div>
+</div>
+<div class="row placeholders">
+    <div class="placeholder">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">My Apps</h3>
+            </div>
+        </div>
+                    <ul class="list-group" >
+                         <li type="submit" class="list-group-item" style="padding-left: 5%">
+                            {{my_apps[0].name}} your profit: {{my_apps[0].price*my_apps[0].transactions}}
+                         </li>
+                         <li type="submit" class="list-group-item" style="padding-left: 5%">
+                            {{my_apps[1].name}} your profit: {{my_apps[1].price*my_apps[1].transactions}}
+                         </li>
+                         <li type="submit" class="list-group-item" style="padding-left: 5%">
+                            {{my_apps[2].name}} your profit: {{my_apps[2].price*my_apps[2].transactions}}
+                         </li>
+                    </ul>
+    </div>
+</div>
