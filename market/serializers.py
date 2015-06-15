@@ -57,8 +57,8 @@ class AppTransactionSerializer(serializers.ModelSerializer):
     app = AppSerializer(read_only=True)
     class Meta:
         model = AppTransaction
-        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time')
-        read_only_fields = ('owner', 'app',)
+        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time', 'paid')
+        read_only_fields = ('owner', 'app')
 # class UploadAppSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = App

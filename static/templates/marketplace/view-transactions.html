@@ -2,12 +2,26 @@
     <div class="placeholder">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">Transactions</h3>
+                <h3 class="panel-title text-center">Paid Transactions</h3>
             </div>
         </div>
-                    <ul class="list-group" ng-repeat="transaction in transactions">
+                    <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:true}">
                          <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            {{transaction.owner.username}} {{transaction.app.name}} {{transaction.app.price}} {{transaction.paid}}
+                            <b>Transaction Owner: </b> {{transaction.owner.username}} <b> , App Name: </b> {{transaction.app.name}} <b> , App Price: </b> {{transaction.app.price}} <b> , Transaction ID: </b> {{transaction.unique_id}} <b> , Is Paid For: </b> {{transaction.paid}}
+                         </li>
+                    </ul>
+    </div>
+</div>
+<div class="row placeholders">
+    <div class="placeholder">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Unpaid Transactions</h3>
+            </div>
+        </div>
+                    <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:false}">
+                         <li type="submit" class="list-group-item" style="padding-left: 5%">
+                            <b>Transaction Owner: </b> {{transaction.owner.username}} <b> , App Name: </b> {{transaction.app.name}} <b> , App Price: </b> {{transaction.app.price}} <b> , Transaction ID: </b> {{transaction.unique_id}} <b> , Is Paid For: </b> {{transaction.paid}}
                          </li>
                     </ul>
     </div>
@@ -21,13 +35,13 @@
         </div>
                     <ul class="list-group" >
                          <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            {{my_apps[0].name}} your profit: {{my_apps[0].price*my_apps[0].transactions}}
+                            App Name: {{my_apps[0].name}} , Your Profit: {{my_apps[0].price*my_apps[0].transactions}}
                          </li>
                          <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            {{my_apps[1].name}} your profit: {{my_apps[1].price*my_apps[1].transactions}}
+                            App Name: {{my_apps[1].name}} , Your Profit: {{my_apps[1].price*my_apps[1].transactions}}
                          </li>
                          <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            {{my_apps[2].name}} your profit: {{my_apps[2].price*my_apps[2].transactions}}
+                            App Name: {{my_apps[2].name}} , Your Profit: {{my_apps[2].price*my_apps[2].transactions}}
                          </li>
                     </ul>
     </div>
