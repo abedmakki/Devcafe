@@ -7,7 +7,7 @@
         </div>
                     <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:true}">
                          <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            <b>Transaction Owner: </b> {{transaction.owner.username}} <b> , App Name: </b> {{transaction.app.name}} <b> , App Price: </b> {{transaction.app.price}} <b> , Transaction ID: </b> {{transaction.unique_id}} <b> , Is Paid For: </b> {{transaction.paid}}
+                            Transaction Owner: {{transaction.owner.username}} , App Name: {{transaction.app.name}} , App Price: {{transaction.app.price}} , Transaction ID: {{transaction.unique_id}} , Is Paid For: {{transaction.paid}} , Download Link: {{transaction.app.uploaded_file}}
                          </li>
                     </ul>
     </div>
@@ -21,7 +21,7 @@
         </div>
                     <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:false}">
                          <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            <b>Transaction Owner: </b> {{transaction.owner.username}} <b> , App Name: </b> {{transaction.app.name}} <b> , App Price: </b> {{transaction.app.price}} <b> , Transaction ID: </b> {{transaction.unique_id}} <b> , Is Paid For: </b> {{transaction.paid}}
+                            Transaction Owner: {{transaction.owner.username}} , App Name: {{transaction.app.name}} , App Price: {{transaction.app.price}} , Transaction ID: {{transaction.unique_id}} , Is Paid For: {{transaction.paid}}
                          </li>
                     </ul>
     </div>
