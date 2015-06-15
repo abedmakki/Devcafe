@@ -50,11 +50,11 @@
         templateUrl: '/static/templates/marketplace/market-required-info-application.html'
     }).when('/market/post/new', {
         controller: 'MarketplaceController',
-        vm: 'vm',
+        controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/upload-page-info.html'
     }).when('/market/post/new/upload', {
         controller: 'MarketplaceController',
-        vm: 'vm',
+        controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/upload-app-files.html'
     }).otherwise('/')
 }
