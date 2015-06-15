@@ -23,12 +23,10 @@
         <h3>Tags</h3>
           <li class="artist cf" ng-repeat="tag in item.tags">
 -->
-<div style="
-margin:20px 270px;width:750px;height:auto;padding:10px;margin-bottom: 20px;background-color: #fefefe;border: 1px solid #fefefe;
-border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
-    <h1 style="display:inline"> <a href="/profile"> {{item.owner}} </a> </h1>
+<div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | orderBy : '-timestamp' | filter: search">
+    <h2 style="display:inline">{{item.title}}</h2> by <a href="/profile"> {{item.owner}} </a>
     <br/>
-
+ <!-- <p style="text-align:left;display:inline">{{item.title}} By: </p>  -->
     <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
 
     <div ng-controller="RatingIdeasController as RatingCtrl">
@@ -37,77 +35,20 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         <div ng-init="rating = star.rating"></div>
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
-    </div>
+    </div>      
+        <!-- <div width = "500">
+          <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
+        </div> -->
 
-                
-                <div width = "500">
-                  <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
-                </div>
-
-    <!--             
-                <div id="containingBlock">
-                <div class="videoWrapper">
-                <object width="480" height="295">
-                    <param name="movie" value="https://www.youtube.com/embed/dpX5fq4kMnA"></param>
-                    <param name="allowFullScreen" value="true"></param>
-                    <param name="allowscriptaccess" value="always"></param>
-                    <embed src="https://www.youtube.com/embed/dpX5fq4kMnA" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="295"></embed>
-                </object>
-              </div>
-            </div>
- -->
-
-<!-- 
-                 <div style="text-align:center"> 
-                  <button onclick="playPause()">Play/Pause</button> 
-                  <button onclick="makeBig()">Big</button>
-                  <button onclick="makeSmall()">Small</button>
-                  <button onclick="makeNormal()">Normal</button>
-                  <br> 
-                  <video id="video1" width="420">
-                  
-                    <source src="https://www.youtube.com/embed/dpX5fq4kMnA" type="video/webm">
-                    <source src="mov_bbb.ogg" type="video/ogg">
-                    Your browser does not support HTML5 video.
-                  </video>
-                </div> 
-
-                <script> 
-                var myVideo = document.getElementById("video1"); 
-
-                function playPause() { 
-                    if (myVideo.paused) 
-                        myVideo.play(); 
-                    else 
-                        myVideo.pause(); 
-                } 
-
-                function makeBig() { 
-                    myVideo.width = 560; 
-                } 
-
-                function makeSmall() { 
-                    myVideo.width = 320; 
-                } 
-
-                function makeNormal() { 
-                    myVideo.width = 420; 
-                } 
-                </script> 
-
-                <p>click <a href="https://www.youtube.com/embed/dpX5fq4kMnA" target="_blank">here</a> to open video.</p>
-
- -->
-
-    <h2 style="text-align:left;display:inline">{{item.title}}</h2>
+    <!-- <h2 style="text-align:left;display:inline">{{item.title}}</h2> -->
     <br/>
     <p class="clearfix">{{item.description}}</p>
-    <div>
+ <!--    <div>
         <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px;">
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             {{liked}} {{item.likes}}
         </button>
-    </div>
+    </div> -->
     <!-- idea tags specified code-->
     <!-- <div class="main">
         <ul class="artistlist">
@@ -119,8 +60,11 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         </ul>
     </div> -->
     <!--End of tags code -->
-    <div class="comments">
-        <h4>{{item.comments.length}} Comments</h4>
+    
+        <!-- Start Comment Form -->
+        <div class="comments">
+        <!-- <h4>{{item.comments.length}} Comments</h4> -->
+        <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
         <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
             <div class="comment media">
                 <div class="panel-heading">
@@ -137,7 +81,11 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         </div>
         <!-- Start Comment Form -->
         <div class="comment-form">
-            <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p> -->
+            <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
+            <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                {{liked}} {{item.likes}}
+            </button>
             <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)">
                 <div class="row-fluid">
                 </div>
@@ -147,7 +95,7 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
                 </div>
                 
                 <ul>
-                    <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button> -->
+                    <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button>  -->
                     <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-disabled="comment-form.$invalid">Comment</button>
                     <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Share</button>
                     <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Realize</button>

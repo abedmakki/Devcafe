@@ -9,7 +9,7 @@
     .module('devcafe.ideas.controllers')
     .controller('IdeasController', IdeasController);
 
-  IdeasController.$inject = ['$http', '$location','$scope', 'Ideas'];
+  IdeasController.$inject = ['$http', '$location','$scope', '$rootScope', 'Ideas'];
 
   /**
   * @namespace ideasController
@@ -20,14 +20,18 @@
   //   vm.columns = [];
 
   //   activate();
-  function IdeasController($http, $location, $scope, Ideas) {
+  function IdeasController($http, $location, $scope, $rootScope, Ideas) {
             //var userid = Userapp.getAccId();      //we don't need it any more
             var vm = this;
             vm.AddComment = AddComment;
             vm.LikeIdea = LikeIdea;
             Ideas.all().success(function(data, status, headers, config) {
-                $scope.ideas = data;
+              $scope.ideas = data;
             })
+
+            $rootScope.$watch('searchQuery', function() {
+              $scope.search = $rootScope.searchQuery;
+            });
 
     /**
     * @name activate
