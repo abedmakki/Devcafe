@@ -1,11 +1,15 @@
 <div class="idea-body">
     <div ng-controller="PostIdeaController as postIdeaCtrl">
         <form ng-submit="postIdeaCtrl.PostIdea()">
+            
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title"> </input>
+                <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title" required="true" ng-minlength="1" ng-focus data-content="Valid Title"> </input>
             </div>
-            <div class="form-group">
-                <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description"></textarea>
+           
+             <div class="form-group">
+
+
+                <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description" required="true"></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" style="margin:0px 270px; width: 100px; height: 30px;">Spread</button>
@@ -19,12 +23,10 @@
         <h3>Tags</h3>
           <li class="artist cf" ng-repeat="tag in item.tags">
 -->
-<div style="
-margin:20px 270px;width:750px;height:auto;padding:10px;margin-bottom: 20px;background-color: #fefefe;border: 1px solid #fefefe;
-border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
-    <h1 style="display:inline"> <a href="/profile"> {{item.owner}} </a> </h1>
+<div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | orderBy : '-timestamp' | filter: search">
+    <h2 style="display:inline">{{item.title}}</h2> by <a href="/profile"> {{item.owner}} </a>
     <br/>
-
+ <!-- <p style="text-align:left;display:inline">{{item.title}} By: </p>  -->
     <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
 
     <div ng-controller="RatingIdeasController as RatingCtrl">
@@ -33,17 +35,20 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         <div ng-init="rating = star.rating"></div>
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
-    </div>
+    </div>      
+        <!-- <div width = "500">
+          <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
+        </div> -->
 
-    <h2 style="text-align:left;display:inline">{{item.title}}</h2>
+    <!-- <h2 style="text-align:left;display:inline">{{item.title}}</h2> -->
     <br/>
     <p class="clearfix">{{item.description}}</p>
-    <div>
+ <!--    <div>
         <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px;">
         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             {{liked}} {{item.likes}}
         </button>
-    </div>
+    </div> -->
     <!-- idea tags specified code-->
     <!-- <div class="main">
         <ul class="artistlist">
@@ -55,8 +60,11 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         </ul>
     </div> -->
     <!--End of tags code -->
-    <div class="comments">
-        <h4>{{item.comments.length}} Comments</h4>
+    
+        <!-- Start Comment Form -->
+        <div class="comments">
+        <!-- <h4>{{item.comments.length}} Comments</h4> -->
+        <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
         <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
             <div class="comment media">
                 <div class="panel-heading">
@@ -73,14 +81,22 @@ border-radius: 4px;" ng-repeat="item in ideas | orderBy : '-timestamp'">
         </div>
         <!-- Start Comment Form -->
         <div class="comment-form">
-            <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p> -->
+            <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
+            <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                {{liked}} {{item.likes}}
+            </button>
             <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)">
                 <div class="row-fluid">
                 </div>
-                <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name"></textarea>
+
+                 <div class="form-group">
+                    <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
+                </div>
+                
                 <ul>
-                    <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button>
-                    <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Comment</button>
+                    <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button>  -->
+                    <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-disabled="comment-form.$invalid">Comment</button>
                     <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Share</button>
                     <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Realize</button>
                 </ul>

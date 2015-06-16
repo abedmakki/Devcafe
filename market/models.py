@@ -8,13 +8,14 @@ from general.models import Tag, Comment
 class App(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(max_length=50)
-    picture = models.ImageField(upload_to='market_images', blank=True)
+    picture = models.ImageField(upload_to='market_images', blank=True, null=True)
     description = models.CharField(max_length=500)
     avg_rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_apps')
     price = models.PositiveSmallIntegerField(default=0)
     transactions = models.PositiveSmallIntegerField(default=0)
+    uploaded_file = models.FileField(upload_to='app_files', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name + str(self.owner.pk) + strftime("%Y%m%d%S%M%H"))
@@ -28,15 +29,16 @@ class AppRating(models.Model):
     owner = models.ForeignKey(User)
     app = models.ForeignKey(App, related_name='ratings')
     value = models.PositiveSmallIntegerField(default=0)
-
+    
     def __unicode__(self):
         return str(self.value)
 
 
 class AppComment(Comment):
     app = models.ForeignKey(App, related_name='comments')
+    
     def __unicode__(self):
-        return self.text[:20] + ' - by:' + self.owner  
+        return self.text[:20] + ' - by:' + str(self.owner)  
 
 
 class AppTransaction(models.Model):
@@ -48,6 +50,7 @@ class AppTransaction(models.Model):
     delivery_address = models.CharField(max_length=300)
     delivery_time = models.DateTimeField()
     purchase_time = models.DateTimeField(auto_now_add=True)
+    paid = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         app_obj = self.app

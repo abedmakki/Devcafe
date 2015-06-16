@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'general',
     'project',
     'market',
+    'payment_sys',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -12,9 +12,13 @@
     var Market = {
       all: all,
       get: get,
+      create: create,
       comment: comment,
       rate: rate,
-      buy: buy
+      buy: buy,
+      tags: tags,
+      view_transactions: view_transactions,
+      view_my_apps: view_my_apps
     };
 
     return Market;
@@ -28,6 +32,14 @@
       return $http.get('/market/' + id + '/');
     }
 
+    function create(name, price, description, picture) {
+      return $http.post('/market/', {
+        name: name,
+        description: description,
+        price: price,
+        tags: []
+      });
+    }
 
     function comment(id, text) {
       return $http.post('/market/' + id + '/add_comment/', {
@@ -54,6 +66,18 @@
         // delivery_address: "sjfhfkfjk",
         // delivery_time: "2015-07-20TZ12:50",
       });
+    }
+
+    function tags() {
+      return $http.get('/general/tags/');
+    }
+
+    function view_transactions(){
+      return $http.get('/market/view_transactions/');
+    }
+
+    function view_my_apps(){
+      return $http.get('/market/view_my_apps/')
     }
     // function like(id) {
     //   return $http.post('/market/' + id + '/like/', {

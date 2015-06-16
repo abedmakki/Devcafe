@@ -31,7 +31,7 @@
  <!-- <div class="container" ng-controller="NavbarController as vm"> -->
     <!-- row 1: navigation -->
     <!-- <div class="row"> -->
-        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" ng-controller="NavbarController as vm">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" ng-controller="NavbarController as navCtrl">
         <!-- <nav class="navbar navbar-default navbar-inverse" ng-controller="NavbarController as vm"> -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -51,7 +51,7 @@
                     <li style="padding:7px">
                         <form class="form-inline">
                             <div class="input-group">
-                                <input type="text"  class="form-control" placeholder="Search"> <!-- not yet implemented -->
+                                <input type="text"  class="form-control" placeholder="Search" ng-model="search"> <!-- not yet implemented -->
                                 <div class="input-group-btn">
                                     <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>
@@ -60,7 +60,7 @@
                     </li> 
                     {% if user.is_authenticated %}
                         <li ><a href="/profile">+{{ user.username }}</a></li>
-                        <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
+                        <li><a href="javascript:void(0)" ng-click="navCtrl.logout()">Logout</a></li>
                     {% else %}
                         <li><a href="/login">Login</a></li>
                         <li><a href="/register">Register</a></li>
@@ -69,6 +69,7 @@
                     <li><a href="/ideas">Ideas</a></li>
                     <li><a href="/projects">Projects</a></li> <!-- not yet implemented -->
                     <li><a href="/market">Market</a></li>
+                    <li><a href="/view_transactions">View Transactions</a></li>
                 </ul>
             </div>
         </nav> 

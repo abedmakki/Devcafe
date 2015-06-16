@@ -48,6 +48,18 @@
         controller: 'MarketplaceDetailController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/market-required-info-application.html'
+    }).when('/market/post/new', {
+        controller: 'MarketplaceController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/marketplace/upload-page-info.html'
+    }).when('/market/post/new/upload', {
+        controller: 'MarketplaceController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/marketplace/upload-app-files.html'
+    }).when('/view_transactions', {
+        controller: 'ViewTransactionsController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/marketplace/view-transactions.html'
     }).otherwise('/')
 }
 })();

@@ -33,21 +33,14 @@ class PostAppCommentSerializer(serializers.ModelSerializer):
         fields = ('id', 'text')
 
 
-class AppTransactionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AppTransaction
-        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time')
-        read_only_fields = ('owner', 'app',)
-
-
 class BuyAppSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppTransaction
         fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time')
         read_only_fields = ('owner', 'app', 'unique_id')
 
+
 class AppSerializer(serializers.ModelSerializer):
-    modelslug = serializers.SlugField(read_only=True, source='slug')
     owner = serializers.StringRelatedField()
     comments = AppCommentSerializer(many=True, read_only=True)
     tags = serializers.StringRelatedField(many=True)
@@ -55,9 +48,18 @@ class AppSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = App
-        fields = ('id', 'owner', 'name', 'picture', 'description', 'price', 'ratings', 'modelslug', 'comments', 'tags', 'avg_rating', 'transactions')
-        read_only_fields = ('owner',)
+        fields = ('id', 'owner', 'name', 'picture', 'description', 'price', 'ratings', 'comments', 'tags', 'avg_rating', 'transactions', 'url', 'uploaded_file',)
+        read_only_fields = ('owner', 'transactions', 'ratings', 'avg_rating')
 
 
-
-
+class AppTransactionSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(read_only=True)
+    app = AppSerializer(read_only=True)
+    class Meta:
+        model = AppTransaction
+        fields = ('id', 'owner', 'app', 'unique_id', 'home_no', 'phone_no', 'delivery_address', 'delivery_time', 'purchase_time', 'paid')
+        read_only_fields = ('owner', 'app')
+# class UploadAppSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = App
+#         fields = ('id', 'picture', 'url')
