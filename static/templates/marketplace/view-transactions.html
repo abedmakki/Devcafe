@@ -6,8 +6,8 @@
             </div>
         </div>
                     <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:true}">
-                         <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            Transaction Owner: {{transaction.owner.username}} , App Name: {{transaction.app.name}} , App Price: {{transaction.app.price}} , Transaction ID: {{transaction.unique_id}} , Is Paid For: {{transaction.paid}} , Download Link: {{transaction.app.uploaded_file}}
+                         <li type="submit" class="list-group-item" style="padding-left: 1%" class="page-header">
+                            <h2>Owner: <small>{{transaction.owner.username}}</small> , App Name: <small>{{transaction.app.name}}</small> , App Price: <small>{{transaction.app.price}}</small> , Transaction ID: <small>{{transaction.unique_id}}</small> , Download Link: <small>{{transaction.app.uploaded_file}}</small></h2>
                          </li>
                     </ul>
     </div>
@@ -20,8 +20,8 @@
             </div>
         </div>
                     <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:false}">
-                         <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            Transaction Owner: {{transaction.owner.username}} , App Name: {{transaction.app.name}} , App Price: {{transaction.app.price}} , Transaction ID: {{transaction.unique_id}} , Is Paid For: {{transaction.paid}}
+                         <li type="submit" class="list-group-item" style="padding-left: 1%" class="page-header">
+                            <h2>Transaction Owner: <small>{{transaction.owner.username}}</small> , App Name: <small>{{transaction.app.name}}</small> , App Price: <small>{{transaction.app.price}}</small> , Transaction ID: <small>{{transaction.unique_id}}</small></h2>
                          </li>
                     </ul>
     </div>
@@ -34,15 +34,10 @@
             </div>
         </div>
                     <ul class="list-group" >
-                         <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            App Name: {{my_apps[0].name}} , Your Profit: {{my_apps[0].price*my_apps[0].transactions}}
-                         </li>
-                         <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            App Name: {{my_apps[1].name}} , Your Profit: {{my_apps[1].price*my_apps[1].transactions}}
-                         </li>
-                         <li type="submit" class="list-group-item" style="padding-left: 5%">
-                            App Name: {{my_apps[2].name}} , Your Profit: {{my_apps[2].price*my_apps[2].transactions}}
+                         <li type="submit" ng-repeat="app in my_apps" class="list-group-item" style="padding-left: 1%" class="page-header">
+                            <h2>App Name: <small>{{app.name}}</small> , Your Profit: <small>{{app.price*app.transactions}}</small></h2>
                          </li>
                     </ul>
+
     </div>
 </div>
