@@ -10,7 +10,8 @@ urlpatterns = patterns('',
     url(r'^view_transactions/$', views.ViewTransactions.as_view(), name='view-transactions'),
     url(r'^view_my_apps/$', views.ViewMyApps.as_view(), name='view-my-apps'),
     url(r'^(?P<pk>[0-9]+)/buy/$', views.Buy.as_view(), name='buy'),
-    url(r'^(?P<pk>[0-9]+)/upload/$', views.UploadAppFiles.as_view(), name='upload'),
+    url(r'^(?P<pk>[0-9]+)/upload/$', views.UploadAppPicture.as_view(), name='upload'),
+    url(r'^(?P<pk>[0-9]+)/upload_file/$', views.UploadAppFile.as_view(), name='upload-file'),
     # url(r'^(?P<pk>[0-9]+)/buy/$', views.Buy.as_view(), name='buy-app'),
 )
 

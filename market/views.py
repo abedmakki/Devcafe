@@ -123,7 +123,7 @@ class Buy(APIView):
         return Response(transaction.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UploadAppFiles(APIView):
+class UploadAppPicture(APIView):
     parser_classes = (FileUploadParser,)
 
     def post(self, request, pk):
@@ -142,14 +142,23 @@ class UploadAppFiles(APIView):
             # return Response(data=serializer.data , status=status.HTTP_200_OK)
             return Response(status=status.HTTP_200_OK)
 
-            # uploaded_file = request.FILES['file']
-            # if photo:
-            #     try:
-            #         app = App.objects.get(id=pk)
-            #         app.picture = photo
-            #         app.save()
-            #         # serializer = AppSerializer(data=request.data)
-            #     except App.DoesNotExist:
-            #         return Response(status=status.HTTP_400_BAD_REQUEST)
-            #     # return Response(data=serializer.data , status=status.HTTP_200_OK)
-            #     return Response(status=status.HTTP_200_OK)
+
+class UploadAppFile(APIView):
+    parser_classes = (FileUploadParser,)
+
+    def post(self, request, pk):
+        user = request.user
+        if not user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        app_file = request.FILES['file']
+        if app_file:
+            try:
+                app = App.objects.get(id=pk)
+                app.uploaded_file = app_file
+                app.save()
+                # serializer = AppSerializer(data=request.data)
+            except App.DoesNotExist:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            # return Response(data=serializer.data , status=status.HTTP_200_OK)
+            return Response(status=status.HTTP_200_OK)
+
