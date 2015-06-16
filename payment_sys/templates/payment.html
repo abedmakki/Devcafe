@@ -11,7 +11,7 @@
               {% if transactions %}
                     <ul class="list-group">
                         {% for transaction in transactions %}
-                         <li type="submit" class="list-group-item" style="padding-left: 5%">{{ transaction.owner }} {{ transaction.app }} {{ transaction.app.price }} {{ transaction.paid }}
+                         <li type="submit" class="list-group-item" style="padding-left: 5%">Transaction Owner: {{ transaction.owner }}, App Name: {{ transaction.app }}, Price: {{ transaction.app.price }}, Paid For: {{ transaction.paid }}
                             {% if not transaction.paid %}
                             <a class="btn btn-danger pull-right" style="margin:0px 100px; width: 100px; height: 30px;" href="pay/{{transaction.id}}/">
                                 Unpaid
