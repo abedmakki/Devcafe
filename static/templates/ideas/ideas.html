@@ -36,9 +36,9 @@
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
     </div>      
-        <!-- <div width = "500">
+        <div width = "500">
           <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
-        </div> -->
+        </div>
 
     <!-- <h2 style="text-align:left;display:inline">{{item.title}}</h2> -->
     <br/>
@@ -60,14 +60,18 @@
         </ul>
     </div> -->
     <!--End of tags code -->
-    
+    <br />
+     <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                {{liked}} {{item.likes}}
+            </button>
         <!-- Start Comment Form -->
         <div class="comments">
         <!-- <h4>{{item.comments.length}} Comments</h4> -->
         <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
         <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
             <div class="comment media">
-                <div class="panel-heading">
+                <div class="panel-heading" style="background-color: rgba(149, 171, 161, 0.13);">
                     <div class="pull-left">
                         <img class="avatar" ng-src={{comment.owner.picture}} alt="" height="50" width="50" />
                     </div>
@@ -82,10 +86,7 @@
         <!-- Start Comment Form -->
         <div class="comment-form">
             <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
-            <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
-            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                {{liked}} {{item.likes}}
-            </button>
+           
             <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)">
                 <div class="row-fluid">
                 </div>
