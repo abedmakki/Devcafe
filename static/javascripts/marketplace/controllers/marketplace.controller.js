@@ -30,8 +30,8 @@
                 // });
             })
 
-            $scope.$watch('files', function () {
-                if($scope.files==null || $scope.files==undefined || $scope.files==''){
+            $scope.$watch('pics', function () {
+                if($scope.pics==null || $scope.pics==undefined || $scope.pics==''){
             $( ".sjqclass").attr("disabled", 'disabled' )
                 }
                 else{
@@ -53,13 +53,37 @@
       $location.path('/market/post/new/upload');
     }
 
-    $scope.upload = function (files) {
+    $scope.upload = function (pics, files) {
         console.log('ID is: ' + window.createdAppId);
+        if (pics && pics.length) {
+            for (var i = 0; i < pics.length; i++) {
+                var file = pics[i];
+                Upload.upload({
+                    url: '/market/' + window.createdAppId + '/upload/',
+                    file: file
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                    $scope.pics.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                    $scope.pics.result = data;
+                    $( ".sjqclass").attr("disabled", 'disabled' )
+
+                    $('#marketPhotoModel').on('hide.bs.modal', function (e) {
+                        $( ".profilepic").attr("ng-src", data.picture )
+                        $( ".profilepic").attr("src", data.picture )
+                    })
+
+                });
+            }
+        }
+
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 Upload.upload({
-                    url: '/market/' + window.createdAppId + '/upload/',
+                    url: '/market/' + window.createdAppId + '/upload_file/',
                     file: file
                 }).progress(function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -78,29 +102,6 @@
                 });
             }
         }
-        // if (files && files.length) {
-        //     for (var i = 0; i < files.length; i++) {
-        //         var pic = files[i];
-        //         Upload.upload({
-        //             url: '/market/' + window.createdAppId + '/upload/',
-        //             pic: pic
-        //         }).progress(function (evt) {
-        //             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        //             console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-        //             $scope.files.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-        //         }).success(function (data, status, headers, config) {
-        //             console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-        //             $scope.files.result = data;
-        //             $( ".sjqclass").attr("disabled", 'disabled' )
-
-        //             $('#profilePhotoModel').on('hide.bs.modal', function (e) {
-        //                 $( ".profilepic").attr("ng-src", data.picture )
-        //                 $( ".profilepic").attr("src", data.picture )
-        //             })
-
-        //         });
-        //     }
-        // }
     };
 
 

@@ -1,31 +1,27 @@
 <div style="margin:20px 270px;width:750px;height:500px;padding:10px;margin-bottom: 20px">
-    <h1>create Your Application</h1>
+  <h1>Create Your Application</h1>
 
-    <div class="well">
-        <form name="create-form" id="create-form" role="form" ng-submit="Create(vm.appname, vm.price, vm.description, vm.picture)">
+  <div class="well">
+    <form name="create-form" id="create-form" role="form" ng-submit="Create(vm.appname, vm.price, vm.description, vm.picture)">
 
-            <div class="form-group">
-                <label for="create__applicationname">Application Name</label>
-                <input type="text" class="form-control" id="create__applicationname" ng-model="vm.appname" required="true" ng-focus data-content="Valid Application Name required"/>
-            </div>
-            <div class="form-group">
-                <label for="create__price">Price(minimum price is 1$):</label>
-                <input type="number" class="form-control" id="create__price" min="1" ng-model="vm.price" required="true" ng-focus data-content="Valid Price required"/>
-            </div>
+      <div class="form-group">
+        <label for="create__applicationname">Application Name</label>
+        <input type="text" class="form-control" id="create__applicationname" ng-model="vm.appname" required="true" ng-focus data-content="Valid Application Name required"/>
+      </div>
+      <div class="form-group">
+        <label for="create__price">Price(minimum price is 1$):</label>
+        <input type="number" class="form-control" id="create__price" min="1" ng-model="vm.price" required="true" ng-focus data-content="Valid Price required"/>
+      </div>
 
-            <div class="form-group">
-                <label for="create__description">Description: </label>
-                <input type="text" class="form-control" id="create__description" ng-model="vm.description" required="true" ng-focus data-content="Valid Description required"/>
-            </div>
-            <!-- <div class="form-group">
-                <label for="create__createdate">create Date: </label>
-                <input type="text" class="form-control" id="create__createdate" ng-model="vm.ddate" jqdatepicker ng-pattern='/^((\d{4})-(\d{2})-(\d{2}))$/' required="true" ng-focus data-content="Valid create Date required"/>
-            </div> -->
+      <div class="form-group">
+        <label for="create__description">Description: </label>
+        <input type="text" class="form-control" id="create__description" ng-model="vm.description" required="true" ng-focus data-content="Valid Description required"/>
+      </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-success" ng-disabled="create-form.$invalid">Next</button>
-            </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success" ng-disabled="create-form.$invalid">Next</button>
+      </div>
 
-        </form>
-    </div>
+    </form>
+  </div>
 </div>
