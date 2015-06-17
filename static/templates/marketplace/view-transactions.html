@@ -1,43 +1,42 @@
 <div class="row placeholders">
-    <div class="placeholder">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">Paid Transactions</h3>
-            </div>
-        </div>
-                    <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:true}">
-                         <li type="submit" class="list-group-item" style="padding-left: 1%" class="page-header">
-                            <h2>Owner: <small>{{transaction.owner.username}}</small> , App Name: <small>{{transaction.app.name}}</small> , App Price: <small>{{transaction.app.price}}</small> , Transaction ID: <small>{{transaction.unique_id}}</small> , Download Link: <small>{{transaction.app.uploaded_file}}</small></h2>
-                         </li>
-                    </ul>
+  <div class="placeholder">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">Paid Transactions</h3>
+      </div>
     </div>
+    <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:true}">
+     <li type="submit" class="list-group-item" style="padding-left: 1%" class="page-header">
+      <h2>Owner: <small>{{transaction.owner.username}}</small> , App Name: <small>{{transaction.app.name}}</small> , App Price: <small>{{transaction.app.price}}</small> , Transaction ID: <small>{{transaction.unique_id}}</small> , Download Link: <small>{{transaction.app.uploaded_file}}</small></h2>
+    </li>
+  </ul>
+</div>
 </div>
 <div class="row placeholders">
-    <div class="placeholder">
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">Unpaid Transactions</h3>
-            </div>
-        </div>
-                    <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:false}">
-                         <li type="submit" class="list-group-item" style="padding-left: 1%" class="page-header">
-                            <h2>Transaction Owner: <small>{{transaction.owner.username}}</small> , App Name: <small>{{transaction.app.name}}</small> , App Price: <small>{{transaction.app.price}}</small> , Transaction ID: <small>{{transaction.unique_id}}</small></h2>
-                         </li>
-                    </ul>
+  <div class="placeholder">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">Unpaid Transactions</h3>
+      </div>
     </div>
+    <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:false}">
+     <li type="submit" class="list-group-item" style="padding-left: 1%" class="page-header">
+      <h2>Transaction Owner: <small>{{transaction.owner.username}}</small> , App Name: <small>{{transaction.app.name}}</small> , App Price: <small>{{transaction.app.price}}</small> , Transaction ID: <small>{{transaction.unique_id}}</small></h2>
+    </li>
+  </ul>
+</div>
 </div>
 <div class="row placeholders">
-    <div class="placeholder">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title text-center">My Apps</h3>
-            </div>
-        </div>
-                    <ul class="list-group" >
-                         <li type="submit" ng-repeat="app in my_apps" class="list-group-item" style="padding-left: 1%" class="page-header">
-                            <h2>App Name: <small>{{app.name}}</small> , Your Profit: <small>{{app.price*app.transactions}}</small></h2>
-                         </li>
-                    </ul>
-
+  <div class="placeholder">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">My Apps</h3>
+      </div>
     </div>
+    <ul class="list-group" >
+      <li type="submit" ng-repeat="app in my_apps" class="list-group-item" style="padding-left: 1%" class="page-header">
+        <h2>App Name: <small>{{app.name}}</small> , Your Profit: <small>{{app.price*app.transactions}}</small></h2>
+      </li>
+    </ul>
+  </div>
 </div>

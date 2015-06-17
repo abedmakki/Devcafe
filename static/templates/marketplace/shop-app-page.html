@@ -1,111 +1,80 @@
 <div class="container">
 
-    <div class="row">
+  <div class="row">
+    <div class="col-md-3">
+      <p class="lead">Categories</p>
+      <div class="list-group">
+        <a href="#" class="list-group-item" ng-repeat="tag in appId.tags">{{tag}}</a>
+      </div>
+    </div>
 
-        <!-- <div class="col-md-3">
-            <p class="lead">Category</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item active">Software</a>
-                <a href="#" class="list-group-item">Hardware</a>
-                <a href="#" class="list-group-item">Embedded Systems</a>
+    <div class="col-md-9">
+
+      <div class="thumbnail">
+        <img class="img-responsive" ng-src="{{appId.picture}}" alt="">
+        <div class="caption-full">
+          <h1><a href="#">{{appId.name}}</a></h1>
+          <!-- <h1>Rating: {{appId.avg_rating}}</h1> -->
+          <section ng-controller="TabController as tab">
+            <ul class="nav nav-pills">
+              <li ng-class="{ active:tab.isSet(1) }">
+                <a href="" ng-click="tab.setTab(1)">Description</a>
+              </li>
+              <li ng-class="{ active:tab.isSet(2) }">
+                <a href="" ng-click="tab.setTab(2)">Price</a>
+              </li>
+            </ul>
+            <div ng-show="tab.isSet(1)">
+              <blockquote>{{appId.description}}</blockquote>
             </div>
-        </div> -->
-        <div class="col-md-3">
-            <p class="lead">Categories</p>
-            <div class="list-group">
-                <a href="#" class="list-group-item" ng-repeat="tag in appId.tags">{{tag}}</a>
+            <div ng-show="tab.isSet(2)">
+              <blockquote>{{appId.price | currency}}</blockquote>
             </div>
+
+          </section>
         </div>
 
-        <div class="col-md-9">
-            
-            <div class="thumbnail">
-                <img class="img-responsive" ng-src="{{appId.picture}}" alt="">
-                <div class="caption-full">
-                <h1><a href="#">{{appId.name}}</a></h1>
-                <!-- <h1>Rating: {{appId.avg_rating}}</h1> -->
-                <section ng-controller="TabController as tab">
-                    <ul class="nav nav-pills">
-                        <li ng-class="{ active:tab.isSet(1) }">
-                        <a href="" ng-click="tab.setTab(1)">Description</a>
-                        </li>
-                        <li ng-class="{ active:tab.isSet(2) }">
-                        <a href="" ng-click="tab.setTab(2)">Price</a>
-                        </li>
-                    </ul>
-                        <div ng-show="tab.isSet(1)">
-                        <blockquote>{{appId.description}}</blockquote>
-                        </div>
-                        <div ng-show="tab.isSet(2)">
-                        <blockquote>{{appId.price | currency}}</blockquote>
-                        </div>
-                        
+        <button type="submit" class="btn btn-success" style="margin-top: 1%" ng-click="vm.ChoosePaymentMethod(appId.id)">Buy</button>
+      </div>
 
-                  <!--   <ul>
-                        <h4>Reviews</h4>
-                        <li>
-                        <blockquote>
-                        <strong> Stars</strong>
 
-                        <cite class="clearfix">—</cite>
-                        </blockquote>
-                        </li>
-                    </ul>
-                   -->
-                </section>
+      <div class="well">
+
+        <form class="form-group" ng-submit="vm.AddComment(appId.id, text)">
+
+          <div class="text-right">
+            <input type="text" class="form-control" ng-model="text" required="true" ng-minlength="1" ng-focus data-content="Valid Comment"></input>
+            <button type="submit" class="btn btn-success" style="margin-top: 1%">Leave a Review</button>
+          </div>
+
+          <div ng-init="star.rating = appIdRating"></div>
+          <div ng-init="rating = star.rating + 1"></div>
+          <div class="rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(appId.id, rating)"></div>
+
+        </form>
+
+        <div class="row">
+          <!-- <h4>{{appId.comments.length}} Comments</h4> -->
+          <h4><ng-pluralize count="appId.comments.length" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
+          <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in appId.comments | orderBy : 'timestamp'">
+            <div class="comment media">
+              <div class="panel-heading">
+                <div class="pull-left">
+                  <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />
                 </div>
-                
-                <button type="submit" class="btn btn-success" style="margin-top: 1%" ng-click="vm.ChoosePaymentMethod(appId.id)">Buy</button>
+                <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong>
+                <br>
+                <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
+                <br>
+              </div>
+              <p>{{comment.text}}</p>
             </div>
-
-
-            <div class="well">
-
-                <form class="form-group" ng-submit="vm.AddComment(appId.id, text)">
-                
-                <div class="text-right">
-                    <input type="text" class="form-control" ng-model="text" required="true" ng-minlength="1" ng-focus data-content="Valid Comment"></input>
-                    <button type="submit" class="btn btn-success" style="margin-top: 1%">Leave a Review</button>
-                </div>
-
-                <div ng-init="star.rating = appIdRating"></div>
-                <div ng-init="rating = star.rating + 1"></div>
-                <div class="rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(appId.id, rating)"></div>
-
-                </form>
-
-                <div class="row">
-                    <!-- <h4>{{appId.comments.length}} Comments</h4> -->
-                    <h4><ng-pluralize count="appId.comments.length" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
-                    <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in appId.comments | orderBy : 'timestamp'">
-                    <div class="comment media">
-                    <div class="panel-heading">
-                    <div class="pull-left">
-                    <img class="avatar" src={{comment.owner.picture}} alt="" height="50" width="50" />
-                    </div>
-                    <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong>
-                    <br>
-                    <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
-                    <br>
-                    </div>
-                    <!-- <div class="panel-body"> -->
-                    <p>{{comment.text}}</p>
-                    <!-- </div> -->
-                    </div>
-                </div>
-                        <!-- <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        Anonymous
-                        <span class="pull-right">10 days ago</span>
-                        <p>This appId was great in terms of quality. I would definitely buy another!</p> -->
-                    </div>
-                </div>
-
-            </div>
-
+          </div>
         </div>
+      </div>
+
+    </div>
+
+  </div>
 
 </div>

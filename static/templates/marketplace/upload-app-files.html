@@ -1,78 +1,54 @@
 <div style="margin:20px 270px;width:750px;height:500px;padding:10px;margin-bottom: 20px">
-    <h1>Upload Your Application</h1>
+  <h1>Upload Your Application</h1>
 
-    <div class="well">
-        <!-- <form name="upload-form" id="upload-form" role="form" ng-submit="Create(vm.appname, vm.price, vm.description, vm.picture)" novalidate> -->
+  <div class="well">
 
-            <!-- <div class="form-group">
-                <label for="InputFile">Application Picture</label>
-                <input type="file" id="InputFile" ng-model="vm.picture"/>
-            </div>
+    <div style="margin-bottom:10px">
+      <label for="pics" style="font-size:14px">Upload a Picture</label>
+      <button type="file" ngf-select="" ng-model="pics" id="pics" accept="image/*" class="btn-sm">Browse pictures</button>
+      <br />
+      <div>
+        <img ng-show="pics[0] != null" ngf-thumbnail="pics[0]" class="thumb" style="height: 100px;width: 110px;">
+      </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-success" ng-disabled="upload-form.$invalid">Next</button>
-            </div>
- -->
-            <!-- <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#marketPhotoModel">Upload photo</button> -->
-            <!-- <div ng-init="x = createdAppId"></div> -->
-
-            <!-- <div class="modal fade" id="marketPhotoModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header"> -->
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">change picture</h4>
-                  </div>
-                  <div class="modal-body">
-
-                    <button type="file" ngf-select="" ng-model="pics" accept="image/*" class="btn-sm">Browse pictures</button>
-                      <br />
-                      <div>
-                      <img ng-show="pics[0] != null" ngf-thumbnail="pics[0]" class="thumb" style="height: 100px;width: 110px;">
-                      </div>
-
-                      <div>
-                          <span class="progress" ng-show="pics.progress >= 0">
-                        <div style="width:100%" ng-bind="pics.progress + '%'" class="ng-binding">100%</div>
-                          </span>
-                          <span ng-show="pics.result" class="">Upload Successful</span>
-                      </div>
+      <div>
+        <span class="progress" ng-show="pics.progress >= 0">
+          <div style="width:100%" ng-bind="pics.progress + '%'" class="ng-binding">100%</div>
+        </span>
+        <span ng-show="pics.result" class="">Upload Successful</span>
+      </div>
 
 
-                      <div class="progress" ng-show="pics.progress >= 0">
-                          <div ng-bind="pics.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ pics.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{pics.progress }}%;">
-                            0%
-                          </div>
-                      </div>
-
-                      <button type="file" ngf-select="" ng-model="files" class="btn-sm">Browse files</button>
-                      <br />
-                      <div>
-                      <img ng-show="files[0] != null" ngf-thumbnail="files[0]" class="thumb" style="height: 100px;width: 110px;">
-                      </div>
-
-                      <div>
-                          <span class="progress" ng-show="files.progress >= 0">
-                        <div style="width:100%" ng-bind="files.progress + '%'" class="ng-binding">100%</div>
-                          </span>
-                          <span ng-show="files.result" class="">Upload Successful</span>
-                      </div>
-
-
-                      <div class="progress" ng-show="files.progress >= 0">
-                          <div ng-bind="files.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ files.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ files.progress }}%;">
-                            0%
-                          </div>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="files=null">Close</button>
-                    <button type="button" class="btn btn-primary sjqclass" ng-click="upload(pics, files)">Save changes</button>
-                  <!-- </div>
-                </div>
-              </div>
-            </div> -->
-
-        <!-- </form> -->
+      <div class="progress" ng-show="pics.progress >= 0">
+        <div ng-bind="pics.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ pics.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{pics.progress }}%;">
+          0%
+        </div>
+      </div>
     </div>
+    <label for="files" style="font-size:14px">Upload a File</label>
+    <button type="file" ngf-select="" ng-model="files" id="files" class="btn-sm">Browse files</button>
+    <br />
+    <div>
+      <img ng-show="files[0] != null" ngf-thumbnail="files[0]" class="thumb" style="height: 100px;width: 110px;">
+    </div>
+
+    <div>
+      <span class="progress" ng-show="files.progress >= 0">
+        <div style="width:100%" ng-bind="files.progress + '%'" class="ng-binding">100%</div>
+      </span>
+      <span ng-show="files.result" class="">Upload Successful</span>
+    </div>
+
+
+    <div class="progress" ng-show="files.progress >= 0">
+      <div ng-bind="files.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ files.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ files.progress }}%;">
+        0%
+      </div>
+    </div>
+    <!-- </div> -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="files=null">Close</button>
+      <button type="button" class="btn btn-primary sjqclass" ng-click="upload(pics, files)">Save changes</button>
+    </div>
+  </div>
 </div>

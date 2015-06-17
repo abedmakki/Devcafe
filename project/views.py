@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from project.serializers import ProjectSerializer, PostSerializer, ContributerSerializer
-from project.models import Project, Post, Contributer
+from project.serializers import ProjectSerializer, PostSerializer, ContributorSerializer
+from project.models import Project, Post, Contributor
 from project.serializers import ProjectSerializer
 from project.models import Project
 from rest_framework import generics
