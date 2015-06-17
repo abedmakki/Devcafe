@@ -22,7 +22,7 @@ class Project(models.Model):
 
 
 class Post(models.Model):
-	project = models.ForeignKey(Project)
+	project = models.ForeignKey(Project, related_name='posts')
 	text = models.TextField(blank = True)
 
 	def __unicode__(self):
@@ -31,6 +31,6 @@ class Post(models.Model):
 
 class Contributor(models.Model):
 	name = models.ForeignKey(User)
-	project = models.ForeignKey(Project)
+	project = models.ForeignKey(Project, related_name='contributors')
 	is_pm = models.BooleanField(default=False)
 	position = models.CharField(max_length=50)
