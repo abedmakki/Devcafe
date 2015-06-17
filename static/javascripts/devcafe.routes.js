@@ -63,7 +63,7 @@
     }).when('/projects/post/new', {
         controller: 'IdeasController',
         controllerAs: 'vm',
-        templateUrl: '/static/templates/ideas/ideas.html'
+        templateUrl: '/static/templates/projects/project-detailed-page.html'
     }).otherwise('/')
 }
 })();

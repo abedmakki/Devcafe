@@ -1,23 +1,23 @@
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/blog-post.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script> -->
 
 
 <!-- Page Content -->
 <div class="container">
-    <div class="row" ng-controller="HeaderController as headCtrl">
+    <div class="row">
         <div class="col-lg-8">
             <h1>{{headCtrl.item.name}}</h1>
             <p class="lead">
-                by <a href="#">{{headCtrl.item.pm}}</a>
+                by <a href="#">[[item PM]]</a>
             </p>
             <hr>
-            <p><span class="glyphicon glyphicon-time"></span> {{headCtrl.item.date|  orderBy : '-timestamp' | filter: search"}}</p>
+            <p><span class="glyphicon glyphicon-time"></span> [[item timestamp]]</p>
             <hr>
             <img class="img-responsive" ng-src="headCtrl.item.picture" alt="NO Picture">
             <hr>
-            <p class="lead">{{headCtrl.item.description}</p>
+            <p class="lead">[[item description]]</p>
             <hr>
         </div>
 
