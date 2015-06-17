@@ -23,6 +23,7 @@
       comment: comment,
       rate: rate,
       like: like
+      // realize: realize
     };
 
     return Ideas;
@@ -96,6 +97,14 @@
         window.location = '/ideas';
       });
     }
+
+
+    // function realize(id) {
+    //   //url here
+    //   return $http.get('/project/' + id + '/', {
+           
+    //   });
+    // }
 
   }
 })();

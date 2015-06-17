@@ -25,6 +25,8 @@
             var vm = this;
             vm.AddComment = AddComment;
             vm.LikeIdea = LikeIdea;
+            vm.Realize = Realize;
+            // vm.GetRealizeInfo = GetRealizeInfo;
             Ideas.all().success(function(data, status, headers, config) {
               $scope.ideas = data;
             })
@@ -58,5 +60,21 @@
         console.log(item);
         Ideas.like(idea);
     }
+
+
+    function Realize(item) {
+        var id = item;
+        // console.log(item);
+        // console.log(text);
+        // Ideas.realize(id);
+        $location.path('/project/' + id + '/');
+    }
+
+
+    // function GetRealizeInfo(id) {
+    //   //url here
+    //   $location.path('/ideas/' + id + '/realizeinfo');
+    //   // console.log(id);
+    // }
   }
 })();
