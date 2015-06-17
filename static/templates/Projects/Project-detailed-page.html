@@ -1,0 +1,84 @@
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/blog-post.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row" ng-controller="HeaderController as headCtrl">
+        <div class="col-lg-8">
+            <h1>{{headCtrl.item.name}}</h1>
+            <p class="lead">
+                by <a href="#">{{headCtrl.item.pm}}</a>
+            </p>
+            <hr>
+            <p><span class="glyphicon glyphicon-time"></span> {{headCtrl.item.date|  orderBy : '-timestamp' | filter: search"}}</p>
+            <hr>
+            <img class="img-responsive" ng-src="headCtrl.item.picture" alt="NO Picture">
+            <hr>
+            <p class="lead">{{headCtrl.item.description}</p>
+            <hr>
+        </div>
+
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- 
+            <div class="well">
+                <h4>Blog Search</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                    </span>
+                </div>
+            </div>
+            -->
+            <!-- Blog Categories Well -->
+            <div class="well">
+                <h4>Tasks</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Category Name</a>
+                            </li>
+                            <li><a href="#">Category Name</a>
+                            </li>
+                            <li><a href="#">Category Name</a>
+                            </li>
+                            <li><a href="#">Category Name</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li><a href="#">Category Name</a>
+                            </li>
+                            <li><a href="#">Category Name</a>
+                            </li>
+                            <li><a href="#">Category Name</a>
+                            </li>
+                            <li><a href="#">Category Name</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="well">
+                <div class="col-lg-6">
+                    <p class="lead">Category</p>
+                    <div class="list-group" ng-init="vm.filterName">
+                        <a href="#" ng-click="vm.filterName.name = undefined" class="list-group-item">All Tasks</a>
+                        <a href="#" ng-click="vm.filterName.name = tag.name" class="list-group-item" ng-repeat="tag in all_tags">{{tag.name}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+
