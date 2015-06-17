@@ -22,7 +22,8 @@
       get: get,
       comment: comment,
       rate: rate,
-      like: like
+      like: like,
+      realize: realize
     };
 
     return Ideas;
@@ -94,6 +95,23 @@
       return $http.post('/ideas/' + id + '/like/', {
       }).then(function() {
         window.location = '/ideas';
+      });
+    }
+
+
+    // function realize(id) {
+    //   //url here
+    //   return $http.get('/project/' + id + '/', {
+           
+    //   });
+    // }
+
+    function realize(title, description) {
+      //url here
+      console.log(title);
+      return $http.post('/projects/', {
+        title: title,
+        description: description        
       });
     }
 

@@ -60,6 +60,10 @@
         controller: 'ViewTransactionsController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/view-transactions.html'
+    }).when('/projects/post/new', {
+        controller: 'IdeasController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/ideas/ideas.html'
     }).otherwise('/')
 }
 })();

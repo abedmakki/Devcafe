@@ -23,8 +23,11 @@
   function IdeasController($http, $location, $scope, $rootScope, Ideas) {
             //var userid = Userapp.getAccId();      //we don't need it any more
             var vm = this;
+            var createdProjId = null;
             vm.AddComment = AddComment;
             vm.LikeIdea = LikeIdea;
+            vm.Realize = Realize;
+            // vm.GetRealizeInfo = GetRealizeInfo;
             Ideas.all().success(function(data, status, headers, config) {
               $scope.ideas = data;
             })
@@ -58,5 +61,25 @@
         console.log(item);
         Ideas.like(idea);
     }
+
+
+    // function Realize(item) {
+    //     var id = item;
+    //     // Ideas.realize(id);
+    //     // $location.path('/projects/' + id + '/');
+    //     }
+
+    function Realize(title, description) {
+      
+      Ideas.realize(title, description).success(function(data, status, headers, config) {
+        window.createdProjId = data.id;
+        console.log('Created project ID: ' + window.createdProjId);
+      });
+      
+    }
+    $location.path('/projects/post/new');
+    
+
+
   }
 })();

@@ -4,18 +4,18 @@
       
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title" required="true" ng-minlength="1" ng-focus data-content="Valid Title"> </input>
-      </div>
-      
-      <div class="form-group">
+    </div>
+    
+    <div class="form-group">
 
 
         <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description" required="true"></textarea>
-      </div>
-      <div class="form-group">
+    </div>
+    <div class="form-group">
         <button type="submit" class="btn btn-primary" style="margin:0px 270px; width: 100px; height: 30px;">Spread</button>
-      </div>
-    </form>
-  </div>
+    </div>
+</form>
+</div>
 </div>
 
 <div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | orderBy : '-timestamp' | filter: search">
@@ -28,25 +28,25 @@
     <div ng-init="rating = star.rating"></div>
     <div class="rating" star-rating rating-value="rating"
     data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
-  </div>      
-  <div width = "500">
+</div>      
+<div width = "500">
     <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
-  </div>
+</div>
 
-  <br/>
-  <p class="clearfix">{{item.description}}</p>
-  <br />
-  <a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?text=This is a test tweet&hashtags={{item.title}}, devcafe&url=/">
-  Tweet</a>
+<br/>
+<p class="clearfix">{{item.description}}</p>
+<br />
+<a class="twitter-share-button"
+href="https://twitter.com/intent/tweet?text=This is a test tweet&hashtags={{item.title}}, devcafe&url=/">
+Tweet</a>
 
-  <br />
-  <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
+<br />
+<button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
     {{liked}} {{item.likes}}
-  </button>
-  <!-- Start Comment Form -->
-  <div class="comments">
+</button>
+<!-- Start Comment Form -->
+<div class="comments">
     <!-- <h4>{{item.comments.length}} Comments</h4> -->
     <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
     <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
@@ -54,36 +54,42 @@
         <div class="panel-heading" style="background-color: rgba(149, 171, 161, 0.13);">
           <div class="pull-left">
             <img class="avatar" ng-src={{comment.owner.picture}} alt="" height="50" width="50" />
-          </div>
-          <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong>
-          <br>
-          <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
-          <p>{{comment.text}}</p>
         </div>
-
-      </div>
+        <strong>Posted by <a href="#">{{comment.owner.username}}</a></strong>
+        <br>
+        <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
+        <p>{{comment.text}}</p>
     </div>
-    <!-- Start Comment Form -->
-    <div class="comment-form">
-      <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
-      
-      <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)">
-        <div class="row-fluid">
-        </div>
 
-        <div class="form-group">
-          <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
-        </div>
-        
-        <ul>
-          <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button>  -->
-          <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-disabled="comment-form.$invalid">Comment</button>
-          <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Share</button>
-          <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Realize</button>
-        </ul>
-      </form>
+</div>
+</div>
+<!-- Start Comment Form -->
+<div class="comment-form">
+  <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
+  
+  <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)">
+    <div class="row-fluid">
     </div>
-    <!-- End Comment Form -->
-  </div>
+
+    <div class="form-group">
+        <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
+    </div>
+    
+    <ul>
+        <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button>  -->
+        <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-disabled="comment-form.$invalid">Comment</button>
+        <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Share</button>
+    </ul>
+</form>
+
+<div class="form-group">
+  <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
+
+</div>
+
+<button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-click="vm.Realize(item.title, item.description)">Realize</button>
+</div>
+<!-- End Comment Form -->
+</div>
 </div>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
