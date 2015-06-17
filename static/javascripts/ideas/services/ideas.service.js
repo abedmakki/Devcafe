@@ -22,8 +22,8 @@
       get: get,
       comment: comment,
       rate: rate,
-      like: like
-      // realize: realize
+      like: like,
+      realize: realize
     };
 
     return Ideas;
@@ -105,6 +105,15 @@
            
     //   });
     // }
+
+    function realize(title, description) {
+      //url here
+      console.log(title);
+      return $http.post('/projects/', {
+        title: title,
+        description: description        
+      });
+    }
 
   }
 })();

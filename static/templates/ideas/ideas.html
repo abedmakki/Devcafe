@@ -36,9 +36,9 @@
         <div class="rating" star-rating rating-value="rating"
          data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
     </div>      
-        <div width = "500">
+        <!-- <div width = "500">
           <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
-        </div>
+        </div> -->
 
     <!-- <h2 style="text-align:left;display:inline">{{item.title}}</h2> -->
     <br/>
@@ -104,6 +104,6 @@
         </div>
         <!-- End Comment Form -->
     </div>
-    
-        <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-click="vm.Realize(item.id)">Realize</button>
+
+        <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-click="vm.Realize(item.title, item.description)">Realize</button>
 </div>
