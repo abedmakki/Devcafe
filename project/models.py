@@ -29,6 +29,8 @@ class Post(models.Model):
 		return self.text
 
 
-class Contributer(models.Model):
+class Contributor(models.Model):
 	name = models.ForeignKey(User)
 	project = models.ForeignKey(Project)
+	is_pm = models.BooleanField(default=False)
+	position = models.CharField(max_length=50)
