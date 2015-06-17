@@ -35,8 +35,8 @@ class Contributor(models.Model):
     is_pm = models.BooleanField(default=False)
     position = models.CharField(max_length=50)
 
-    def __unicode__(self):
-        return self.name + ', Contributor to: ' + self.project.title
+    # def __unicode__(self):
+    #     return self.name + ', Contributor to: ' + self.project.title
 
 
 class Task(models.Model):
@@ -46,5 +46,13 @@ class Task(models.Model):
     project = models.ForeignKey(Project, related_name='project_tasks')
     is_done = models.BooleanField(default=False)
 
-    def __unicode__(self):
-        return self.name + ', Contributor to: ' + self.project.title + ', ' + self.is_done 
+    # def __unicode__(self):
+    #     return self.title + ', for: ' + str(self.project.title)i + ', ' + str(self.is_done) 
+
+
+class Job(models.Model):
+	name = models.CharField(max_length=100)
+	description = models.CharField(max_length=1000)
+	issued_to = models.ForeignKey(User, related_name='jobs')
+	project = models.ForeignKey(Project, related_name='project_jobs')
+	is_taken = models.BooleanField(default=False)
