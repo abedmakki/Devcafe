@@ -1,65 +1,49 @@
 <div id="w" xmlns="http://www.w3.org/1999/html">
-    <div id="content" class="clearfix">
-      <div id="userphoto" style="text-align: center;">
-          <img ng-src="{{user.picture}}" alt="No Image set" style="height: 100px;width: 100px;" class="profilepic">
-          </br>
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#profilePhotoModel">change photo</button>
-      </div>
-      <h1>{{user.username}}</h1>
+  <div id="content" class="clearfix">
+    <div id="userphoto" style="text-align: center;">
+      <img ng-src="{{user.picture}}" alt="No Image set" style="height: 100px;width: 100px;" class="profilepic">
+    </br>
+    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#profilePhotoModel">change photo</button>
+  </div>
+  <h1>{{user.username}}</h1>
 
-     <!-- <nav id="profiletabs">
-        <ul class="clearfix">
-          <li><a href="#settings">Profile</a></li>
-        </ul>
-      </nav> -->
-      
-      <section id="bio">
-        <p>Welcome to Our DevCafe.</p>
-        
-        </section>
-       
-      <!-- hidden l7d ma n3ml frnds asln -->
-      <section id="friends" class="hidden" >
-        <p>Friends list:</p>
-        
-        <ul id="friendslist" class="clearfix">
-          <li><a href="#"><img src="../../stylesheets/images/avatar.png" width="22" height="22"> Username</a></li>
-          <li><a href="#"><img src="../../stylesheets/images/avatar.png" width="22" height="22"> SomeGuy123</a></li>
-          <li><a href="#"><img src="../../stylesheets/images/avatar.png" width="22" height="22"> PurpleGiraffe</a></li>
-        </ul>
-      </section>
-      <!--
-       class="hidden" 
-      <section id="settings" ng-repeat="us in ProfileController.users">
-        <p>Edit your user settings:</p> -->
-        
-        <p class="setting"><span>UserName</span> {{user.username}}</p>
-        
-        <p class="setting"><span>E-mail</span> {{user.email}}</p>
-        
-        <p class="setting"><span>Full Name</span> {{user.first_name}} {{user.last_name}}</p>
-        
-        <p class="setting"><span>Birth Date</span> {{user.birth_date}}</p>
-        
-        <p class="setting"><span>Country</span> {{user.country}}</p>
+  <section id="bio">
+    <p>Welcome to Our DevCafe.</p>
 
-        <p class="setting"><span>Address</span> {{user.address}}</p>
+  </section>
 
-      </section>
-    </div><!-- @end #content -->
+  <!-- hidden l7d ma n3ml frnds asln -->
+  <section id="friends" class="hidden" >
+    <p>Friends list:</p>
 
-    <!-- hn3ml edit, almost zy el register bs hn3ml url + getaccid 
-check if nt authenticated
-handle success and error, concole.log & window.location = profile
-    -->
-    <div>
-      <a href="/editprofile" class="setting"><h2>Edit<img src="../../stylesheets/images/edit.png" alt="*Edit*"></h2></a>
-    </div>
+    <ul id="friendslist" class="clearfix">
+      <li><a href="#"><img src="../../stylesheets/images/avatar.png" width="22" height="22"> Username</a></li>
+      <li><a href="#"><img src="../../stylesheets/images/avatar.png" width="22" height="22"> SomeGuy123</a></li>
+      <li><a href="#"><img src="../../stylesheets/images/avatar.png" width="22" height="22"> PurpleGiraffe</a></li>
+    </ul>
+  </section>
+
+  <p class="setting"><span>UserName</span> {{user.username}}</p>
+
+  <p class="setting"><span>E-mail</span> {{user.email}}</p>
+
+  <p class="setting"><span>Full Name</span> {{user.first_name}} {{user.last_name}}</p>
+
+  <p class="setting"><span>Birth Date</span> {{user.birth_date}}</p>
+
+  <p class="setting"><span>Country</span> {{user.country}}</p>
+
+  <p class="setting"><span>Address</span> {{user.address}}</p>
+
+</section>
+</div><!-- @end #content -->
+
+<div>
+  <a href="/editprofile" class="setting"><h2>Edit<img src="../../stylesheets/images/edit.png" alt="*Edit*"></h2></a>
+</div>
 
 
-  </div><!-- @end #w -->
-
-
+</div><!-- @end #w -->
 
 <div ng-app="fileUpload" ng-controller="uploadCtrl" class="modal fade" id="profilePhotoModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -71,27 +55,25 @@ handle success and error, concole.log & window.location = profile
       <div class="modal-body">
 
         <button type="file" ngf-select="" ng-model="files" accept="image/*" class="btn-sm">Browse pictures</button>
-          </br>
-          <div>
-          <img ng-show="files[0] != null" ngf-thumbnail="files[0]" class="thumb" style="height: 100px;width: 110px;">
-          </div>
-
-          <div>
-              <span class="progress" ng-show="files.progress >= 0">
-			<div style="width:100%" ng-bind="files.progress + '%'" class="ng-binding">100%</div>
-		</span>
-              <span ng-show="files.result" class="">Upload Successful</span>
-          </div>
-
-
-          <div class="progress" ng-show="files.progress >= 0">
-  <div ng-bind="files.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ files.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ files.progress }}%;">
-    0%
-  </div>
-</div>
-
-
+      </br>
+      <div>
+        <img ng-show="files[0] != null" ng-thumbnail="files[0]" class="thumb" style="height: 100px;width: 110px;">
       </div>
+
+      <div>
+        <span class="progress" ng-show="files.progress >= 0">
+          <div style="width:100%" ng-bind="files.progress + '%'" class="ng-binding">100%</div>
+        </span>
+        <span ng-show="files.result" class="">Upload Successful</span>
+      </div>
+
+
+      <div class="progress" ng-show="files.progress >= 0">
+        <div ng-bind="files.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ files.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ files.progress }}%;">
+          0%
+        </div>
+      </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="files=null">Close</button>
         <button type="button" class="btn btn-primary sjqclass" ng-click="upload(files)">Save changes</button>
