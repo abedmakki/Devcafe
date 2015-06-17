@@ -9,7 +9,7 @@
     .module('devcafe.projects.controllers')
     .controller('ProjectsController', ProjectsController);
 
-  ProjectsController.$inject = ['$http', '$location','$scope', '$rootScope', 'Projects'];
+  ProjectsController.$inject = ['$http', '$location','$scope', '$rootScope', '$routeParams', 'Projects'];
 
   /**
   * @namespace ProjectsController
@@ -20,7 +20,7 @@
   //   vm.columns = [];
 
   //   activate();
-  function ProjectsController($http, $location, $scope, $rootScope, Projects) {
+  function ProjectsController($http, $location, $scope, $rootScope, $routeParams, Projects) {
             //var userid = Userapp.getAccId();      //we don't need it any more
             var vm = this;
             var createdProjId = null;
@@ -33,9 +33,24 @@
               $scope.search = $rootScope.searchQuery;
             });
 
-
-   
-
+          //   projects.get($routeParams.id).success(function(data, status, headers, config) {
+            
+          //   $scope.projId = data;
+                                   
+          // })
 
   }
+
+
+  function getProject(id) {
+    console.log(id);
+    Projects.get('projects/' + id + '/').success(function(data, status, headers, config) {
+      $scope.projId = data;
+      $location.url('projects/' + id);
+      console.log(id);
+    })
+    
+  }
+
+  
 })();
