@@ -13,21 +13,22 @@
 
   function MarketplaceController($http, $location, $scope, Upload, Market) {
             var vm = this;
-            // var appId = null;
             var createdAppId = null;
-            // vm.Like = Like;
             Market.all().success(function(data, status, headers, config) {
                 $scope.apps = data;
-                // $scope.$watch("rating", function(){
-                //   console.log($scope.rating);
-                // });
             })
+
+           $scope.$watch(function () {
+            return $location.path();
+            }, function(value) {
+                if ($location.path() === '/market/post/new/upload' && createdAppId === null) {
+                    $location.path('/market');
+                };
+
+            });
 
             Market.tags().success(function(data, status, headers, config) {
                 $scope.all_tags = data;
-                // $scope.$watch("rating", function(){
-                //   console.log($scope.rating);
-                // });
             })
 
             $scope.$watch('pics', function () {
@@ -45,7 +46,6 @@
     };
 
     $scope.Create = function(name, price, description, picture) {
-      // console.log('upload');
       Market.create(name, price, description, picture).success(function(data, status, headers, config) {
         window.createdAppId = data.id;
         console.log('Created app ID: ' + window.createdAppId);
