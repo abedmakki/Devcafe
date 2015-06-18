@@ -76,8 +76,8 @@
         console.log('Created project ID: ' + window.createdProjId);
       });
       
+      $location.path('/projects/post/new');
     }
-    $location.path('/projects/post/new');
     
 
 

@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>[0-9]+)/$', views.ProjectDetail.as_view(), name='project-detail'),
     url(r'^posts/$', views.PostList.as_view(), name='Post-list'),
     url(r'^posts/(?P<pk>[0-9]+)/$', views.PostDetail.as_view(), name='Post-detail'),
+    url(r'^tasks/(?P<pk>[0-9]+)/$', views.TaskDetail.as_view(), name='Task-detail'),
 )
 
 

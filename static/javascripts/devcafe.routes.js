@@ -60,10 +60,18 @@
         controller: 'ViewTransactionsController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/view-transactions.html'
+    }).when('/projects', {
+        controller: 'ProjectsController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/projects/projects-view.html'
+    }).when('/projects/:id', {
+        controller: 'ProjectsController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/projects/project-detailed-page.html'
     }).when('/projects/post/new', {
         controller: 'IdeasController',
         controllerAs: 'vm',
-        templateUrl: '/static/templates/ideas/ideas.html'
+        templateUrl: '/static/templates/projects/project-detailed-page.html'
     }).otherwise('/')
 }
 })();
