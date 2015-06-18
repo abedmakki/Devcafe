@@ -30,13 +30,13 @@ class Post(models.Model):
 
 
 class Contributor(models.Model):
-    name = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     project = models.ForeignKey(Project, related_name='contributors')
     is_pm = models.BooleanField(default=False)
-    position = models.CharField(max_length=50)
+    position = models.CharField(max_length=100, blank=True, null=True)
 
-    # def __unicode__(self):
-    #     return self.name + ', Contributor to: ' + self.project.title
+    def __unicode__(self):
+        return self.user.username + ', Contributor to: ' + self.project.title
 
 
 class Task(models.Model):
@@ -46,8 +46,8 @@ class Task(models.Model):
     project = models.ForeignKey(Project, related_name='project_tasks')
     is_done = models.BooleanField(default=False)
 
-    # def __unicode__(self):
-    #     return self.title + ', for: ' + str(self.project.title)i + ', ' + str(self.is_done) 
+    def __unicode__(self):
+        return self.title + ', for: ' + str(self.project.title) + ', ' + str(self.is_done) 
 
 
 class Job(models.Model):
