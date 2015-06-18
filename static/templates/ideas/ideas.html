@@ -6,10 +6,7 @@
         <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title" required="true" ng-minlength="1" ng-focus data-content="Valid Title"> </input>
       </div>
 
-      <div class="form-group">
-
-
-        <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description" required="true"></textarea>
+      <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" style="margin:0px 270px 10px 270px; padding-top: 10px; width: 57%; height: auto;" ng-model="postIdeaCtrl.description" required="true"></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary" style="margin:0px 270px; width: 100px; height: 30px;">Spread</button>
@@ -37,7 +34,7 @@
   <p class="clearfix">{{item.description}}</p>
   <br />
   <a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.title}}, devcafe&url=/">
+  href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.titles}}, devcafe&url=/">
   Tweet</a>
 
   <br />
