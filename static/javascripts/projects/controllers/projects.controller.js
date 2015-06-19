@@ -33,24 +33,22 @@
               $scope.search = $rootScope.searchQuery;
             });
 
-          //   projects.get($routeParams.id).success(function(data, status, headers, config) {
-            
-          //   $scope.projId = data;
-                                   
+          //   projects.get($routeParams.id).success(function(data, status, headers, config) {            
+          //   $scope.projId = data;                                  
           // })
 
   }
 
 
-  function getProject(id) {
-    console.log(id);
-    Projects.get('projects/' + id + '/').success(function(data, status, headers, config) {
-      $scope.projId = data;
-      $location.url('projects/' + id);
-      console.log(id);
-    })
+  // function getProjectId(id) {
+  //   console.log(id);
+  //   Projects.get('projects/' + id + '/').success(function(data, status, headers, config) {
+  //     $scope.projId = data;
+  //     $location.url('projects/' + id);
+  //     console.log(id);
+  //   })
     
-  }
+  // }
 
   
 })();
