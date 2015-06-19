@@ -65,11 +65,7 @@
         controllerAs: 'vm',
         templateUrl: '/static/templates/projects/projects-view.html'
     }).when('/projects/:id', {
-        controller: 'ProjectsController',
-        controllerAs: 'vm',
-        templateUrl: '/static/templates/projects/project-detailed-page.html'
-    }).when('/projects/post/new', {
-        controller: 'IdeasController',
+        controller: 'ProjectDetailedController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/projects/project-detailed-page.html'
     }).otherwise('/')
