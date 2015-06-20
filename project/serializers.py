@@ -43,7 +43,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     PM = UserSerializer(read_only=True)
     modelslug = serializers.SlugField(read_only=True, source='slug')
     posts = PostSerializer(many=True, read_only=True)
-    contributors = ContributorSerializer(many=True, read_only=True)
+    contributors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     project_tasks = TaskSerializer(many=True, read_only=True)
     jobs = JobSerializer(many=True, read_only=True)
 
@@ -57,3 +57,9 @@ class PostJobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = ('id', 'name', 'description')
+
+
+class PostTaskSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = Task
+        fields = ('id', 'title', 'description')
