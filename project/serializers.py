@@ -26,6 +26,7 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = ('id', 'name', 'description', 'issued_to', 'project', 'is_taken')
+        read_only_fields = ('project', 'issued_to')
 
 
 class ContributorSerializer(serializers.ModelSerializer):
@@ -34,15 +35,15 @@ class ContributorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contributor
-        fields = ('id', 'name', 'project', 'is_pm', 'position', 'tasks')
-        read_only_fields = ('project', 'name')
+        fields = ('id', 'user', 'project', 'is_pm', 'position', 'tasks')
+        read_only_fields = ('project', 'user')
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     PM = UserSerializer(read_only=True)
     modelslug = serializers.SlugField(read_only=True, source='slug')
     posts = PostSerializer(many=True, read_only=True)
-    contributors = ContributorSerializer(many=True, read_only=True)
+    contributors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     project_tasks = TaskSerializer(many=True, read_only=True)
     jobs = JobSerializer(many=True, read_only=True)
 
@@ -50,3 +51,15 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id', 'PM', 'title', 'description', 'plan', 'logo' , 'modelslug', 'posts', 'contributors', 'project_tasks', 'jobs')
         read_only_fields = ('PM', 'posts', 'contributors', 'jobs')
+
+
+class PostJobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Job
+        fields = ('id', 'name', 'description')
+
+
+class PostTaskSerializer(serializers.ModelSerializer): 
+    class Meta:
+        model = Task
+        fields = ('id', 'title', 'description')
