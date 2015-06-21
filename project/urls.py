@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^tasks/(?P<pk>[0-9]+)/$', views.TaskDetail.as_view(), name='Task-detail'),
     url(r'^(?P<pk>[0-9]+)/request_for_job/$', views.RequestForJob.as_view(), name='request-for-job'),
     url(r'^(?P<pk>[0-9]+)/assign_task/(?P<cont>[0-9]+)/$', views.AssignTask.as_view(), name='assign-task'),
+    url(r'^(?P<pk>[0-9]+)/(?P<jobID>[0-9]+)/$', views.ApplyForJob.as_view(), name='apply-for-job'),
 )
 
 
