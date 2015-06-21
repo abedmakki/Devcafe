@@ -13,9 +13,9 @@
                 by <a href="#">{{projId.PM.username}}</a>
             </p>
             <hr>
-            <p><span class="glyphicon glyphicon-time"></span> [[item timestamp]]</p>
+            <p><span class="glyphicon glyphicon-time"></span> {{projId.timestamp | date:'yyyy-MM-dd HH:mm'}}</p>
             <hr>
-            <img class="img-responsive" ng-src="headCtrl.item.picture" alt="NO Picture">
+            <img class="img-responsive" ng-src="{{projId.picture}}" alt="No Picture">
             <hr>
             <p class="lead">{{projId.description}}</p>
             <hr>
