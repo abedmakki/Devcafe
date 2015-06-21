@@ -56,7 +56,7 @@
         tags: []
       }).then(function() {
           window.location = '/ideas';
-        });
+      });
     }
 
     /**
@@ -73,8 +73,6 @@
     function comment(id, text) {
       return $http.post('/ideas/' + id + '/add_comment/', {
         text: text
-      }).then(function() {
-        window.location = '/ideas';
       });
     }
 
