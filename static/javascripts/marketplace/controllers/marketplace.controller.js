@@ -18,14 +18,14 @@
                 $scope.apps = data;
             })
 
-           $scope.$watch(function () {
-            return $location.path();
-            }, function(value) {
-                if ($location.path() === '/market/post/new/upload' && createdAppId === null) {
-                    $location.path('/market');
-                };
+           // $scope.$watch(function () {
+           //  return $location.path();
+           //  }, function(value) {
+           //      if ($location.path() === '/market/post/new/upload' && createdAppId === null) {
+           //          $location.path('/market');
+           //      };
 
-            });
+           //  });
 
             Market.tags().success(function(data, status, headers, config) {
                 $scope.all_tags = data;
