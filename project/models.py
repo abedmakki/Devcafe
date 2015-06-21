@@ -59,3 +59,11 @@ class Job(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Request(models.Model):
+    owner = models.ForeignKey(User)
+    job = models.ForeignKey(Job, related_name='requests')
+
+    def __unicode__(self):
+        return self.owner.username + ', Applied for: ' + self.job.name
