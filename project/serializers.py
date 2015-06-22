@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from userapp.serializers import UserSerializer
-from project.models import Project, Post, Contributor, Task, Job
+from project.models import Project, Post, Contributor, Task, Job, Request
 
 
 

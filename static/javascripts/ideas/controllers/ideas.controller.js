@@ -49,9 +49,20 @@
 
     function AddComment(item, text) {
         var idea = item;
-        console.log(item);
-        console.log(text);
-        Ideas.comment(idea, text);
+        // console.log(item);
+        // console.log(text);
+        Ideas.comment(idea, text).success(function(data, status, headers, config) {
+          for(var i = 0; i < $scope.ideas.length; i++) {
+            if ($scope.ideas[i].id === item) {
+              $scope.ideas[i].comments.push(data);
+              console.log($scope.ideas[i].comments);
+              $scope.ideas[i].name = "";
+            }
+          }
+        });
+        // document.getElementById('comment-form').reset();
+        // $scope.reset();
+        // $scope.item.name = "";
     }
 
     var hasLiked = false;

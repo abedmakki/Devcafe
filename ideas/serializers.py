@@ -17,9 +17,12 @@ class IdeaCommentSerializer(serializers.ModelSerializer):
 
 
 class PostIdeaCommentSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(read_only=True)
+
     class Meta:
         model = IdeaComment
-        fields = ('id', 'text')
+        fields = ('id', 'text', 'timestamp', 'owner')
+        read_only_fields = ('timestamp', 'owner')
 
 
 class IdeaRatingSerializer(serializers.ModelSerializer):
