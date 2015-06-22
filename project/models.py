@@ -59,7 +59,7 @@ class Job(models.Model):
     is_taken = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.name
+        return self.project.title + ', Announced For: ' + self.name
 
 
 class Request(models.Model):
