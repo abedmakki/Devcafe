@@ -148,3 +148,18 @@ class ResolveRequests(APIView):
         except Exception, e:
             # return Response(status=status.HTTP_404_NOT_FOUND)
             raise e
+
+
+class ViewMyTasks(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get(self, request, pk):
+        try:
+            project = Project.objects.get(id=pk)
+            contributor = Contributor.objects.get(user=request.user, project=project)
+            task = Task.objects.filter(project=project, issued_to=contributor)
+            serializer = TaskSerializer(task, many=True)
+            return Response(serializer.data)
+        except Contributor.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+            

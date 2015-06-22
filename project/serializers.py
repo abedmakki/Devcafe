@@ -15,8 +15,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = (
-            'id', 'title', 'description', 'issued_to', 'project', 'is_done')
+        fields = ('id', 'title', 'description', 'issued_to', 'project', 'is_done')
         read_only_fields = ('project', 'issued_to')
 
 
@@ -24,8 +23,7 @@ class JobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = (
-            'id', 'name', 'description', 'issued_to', 'project', 'is_taken')
+        fields = ('id', 'name', 'description', 'issued_to', 'project', 'is_taken')
         read_only_fields = ('project', 'issued_to')
 
 
