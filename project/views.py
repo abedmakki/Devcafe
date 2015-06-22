@@ -57,7 +57,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class RequestForJob(APIView):
+class CreateJob(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def post(self, request, pk):
@@ -116,3 +116,30 @@ class ViewRequests(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         except Exception, e:
             raise e
+
+
+class ResolveRequests(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def post(self, request, pk, ans):
+        # ans 0 means reject, 1 means accept. could use query params in the future.
+        try:
+            req = Request.objects.get(pk=pk)
+            if ans == '1':
+                job = Job.objects.get(request=req)
+                if not job.is_taken:
+                    # mark job as taken and create a new contributor object related to the project
+                    job.is_taken = True
+                    job.issued_to = request.user
+                    job.save()
+                    job.contributor.create(user=request.user, project=job.project, is_pm=False)
+                    return Response(status=status.HTTP_201_CREATED)
+                else:
+                    # job is already taken
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            elif ans == '0':
+                req.delete()
+                return Response(status=status.HTTP_200_OK)
+
+        except Exception, e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)

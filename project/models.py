@@ -27,7 +27,8 @@ class Contributor(models.Model):
     user = models.ForeignKey(User)
     project = models.ForeignKey(Project, related_name='contributors')
     is_pm = models.BooleanField(default=False)
-    position = models.CharField(max_length=100, blank=True, null=True)
+    # position = models.CharField(max_length=100, blank=True, null=True)
+    job = models.OneToOneField('Job', related_name='contributor', blank=True, null=True)
 
     def __unicode__(self):
         return self.user.username + ', Contributor to: ' + self.project.title
@@ -58,7 +59,7 @@ class Job(models.Model):
 
 class Request(models.Model):
     owner = models.ForeignKey(User)
-    job = models.ForeignKey(Job, related_name='requests')
+    job = models.OneToOneField(Job, related_name='request', blank=True, null=True)
 
     def __unicode__(self):
         return self.owner.username + ', Applied for: ' + self.job.name
