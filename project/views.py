@@ -27,8 +27,7 @@ class ProjectList(generics.ListCreateAPIView):
         Contributor.objects.create(
             user=self.request.user,
             project=project,
-            is_pm=True,
-            position="Project Manager")
+            is_pm=True)
         return Response(status=status.HTTP_201_CREATED)
 
 
