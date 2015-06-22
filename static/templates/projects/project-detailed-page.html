@@ -1,9 +1,8 @@
 <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/blog-post.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script> -->
-
-
+<script src="js/bootstrap.min.js"></script>
+ -->
 <!-- Page Content -->
 <div class="container">
     <div class="row">
@@ -20,6 +19,9 @@
             <p class="lead">{{projId.description}}</p>
             <hr>
         </div>
+
+
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel">Assign Task</button>
 
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
@@ -82,3 +84,45 @@
     <hr>
 </div>
 
+
+<!-- start popup here -->
+<div ng-app="fileUpload" ng-controller="uploadCtrl" class="modal fade" id="assignTaskModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Assign Task</h4>
+    </div>
+    <div class="modal-body">
+      <div style="margin:20px 270px;width:750px;height:500px;padding:10px;margin-bottom: 20px">
+        <!-- here tany -->
+<!-- 
+        <div class="well"> -->
+<!--             <form name="create-form" id="create-form" role="form" ng-submit="Create(vm.appname, vm.price, vm.description, vm.picture)">
+ -->
+ <!-- here el cintributor id -->
+              <div class="form-group">
+              <label for="create__applicationname">Contributor Name</label>
+                <input type="text" class="form-control" id="create__applicationname" ng-model="vm.contributor_id" required="true" ng-focus data-content="Valid Contributor Name required"/>
+            </div>
+            <div class="form-group">
+                <label for="create__price">Title</label>
+                <input type="text" class="form-control" id="create__description" min="1" ng-model="vm.title" required="true" ng-focus data-content="Valid Title required"/>
+            </div>
+
+            <div class="form-group">
+                <label for="create__description">Description: </label>
+                <input type="text" class="form-control" id="create__description" ng-model="vm.description" required="true" ng-focus data-content="Valid Description required"/>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-success" ng-disabled="create-form.$invalid" ng-click="vm.assignTask(vm.id, vm.contributor_id, vm.title, vm.description)">Done</button>
+          </div>
+
+      <!-- </form> -->
+  <!-- </div> -->
+
+  <!-- here tany -->
+
+</div></div></div>
+<!-- end popup here

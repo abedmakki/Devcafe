@@ -26,6 +26,7 @@
         * @memberOf devcafe.userapp.controllers.PostIdeaController
         */
         function PostIdea(title, description) {
+            console.log("ay 7aga");
             Ideas.create(vm.title , vm.description);
         }
     }

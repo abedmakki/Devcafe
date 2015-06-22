@@ -18,6 +18,7 @@
   function Projects($http) {
     var Projects = {
       all: all,
+      assign: assign,
       // create: create,
       get: get
       // comment: comment,
@@ -75,6 +76,14 @@
     //   });
     // }
 
+    function assign(id, contributor_id, title, description) {
+      return $http.post('/projects/' + id + '/assign_task/' + contributor_id, {
+        title: title,
+        description: description
+      }).then(function() {
+        window.location = '/projects/' + id;
+      });
+    }
 
 
   }

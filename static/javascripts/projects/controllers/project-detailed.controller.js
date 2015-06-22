@@ -10,6 +10,7 @@
 
   function ProjectDetailedController($http, $location, $scope, $routeParams, Projects) {
     var vm = this;
+    vm.assignTask = assignTask;
 
      // Projects.all().success(function(data, status, headers, config) {
      //          $scope.projects = data;
@@ -27,6 +28,11 @@
     //     $scope.user = data;
     //     // console.log($scope.user);
     //   })
+    function assignTask(id, contributor_id, title, description) {      
+      Projects.assign(id, contributor_id, title, description);
+        }
 
   }
+
+
 })();
