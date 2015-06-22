@@ -63,3 +63,11 @@ class PostTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ('id', 'title', 'description')
+
+class RequestSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(read_only=True)
+    project = ProjectSerializer(read_only=True)
+    class Meta:
+        model = Request
+        fields = ('id', 'owner', 'project')
+        read_only_fields = ('owner', 'project')

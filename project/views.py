@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
-from project.serializers import ProjectSerializer, PostSerializer, ContributorSerializer, TaskSerializer, JobSerializer, PostJobSerializer, PostTaskSerializer
+from project.serializers import ProjectSerializer, PostSerializer, ContributorSerializer, TaskSerializer, JobSerializer, PostJobSerializer, PostTaskSerializer, RequestSerializer
 from project.models import Project, Post, Contributor, Task, Job, Request
 from project.models import Project
 from rest_framework import generics
@@ -79,7 +79,7 @@ class AssignTask(APIView):
                     task.save(project=project, issued_to=contributor)
                     return Response(task.data, status=status.HTTP_201_CREATED)
                 return Response(task.error, status=status.HTTP_400_BAD_REQUEST)
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(status=statgus.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_404_NOT_FOUND)
 
         # if request.user == project.PM:
@@ -105,5 +105,19 @@ class ApplyForJob(APIView):
                 return Response(status=status.HTTP_200_OK)
             Request.objects.create(owner=request.user, job=job)
             return Response(status=status.HTTP_201_CREATED)
+        except Exception, e:
+            raise e
+
+
+class ViewRequests(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    def get(self, request, pk):
+        try:
+            project = Project.objects.get(id=pk)
+            if project.PM == request.user:
+                req = Request.objects.filter(job__project=project)
+                serializer = RequestSerializer(req, many=True)
+                return Response(serializer.data)
+            return Response(status=status.HTTP_404_NOT_FOUND)
         except Exception, e:
             raise e
