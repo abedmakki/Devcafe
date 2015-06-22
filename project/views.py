@@ -61,14 +61,14 @@ class CreateJob(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def post(self, request, pk):
-        project = Project.objects.get(id=pk)
+        project = Project.objects.get(pk=pk)
         if request.user == project.PM:
             job = PostJobSerializer(data=request.data)
             if job.is_valid():
                 job.save(project=project)
                 return Response(job.data, status=status.HTTP_201_CREATED)
             return Response(job.error, status=status.HTTP_400_BAD_REQUEST)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class AssignTask(APIView):
@@ -91,16 +91,20 @@ class AssignTask(APIView):
 class ApplyForJob(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-    def post(self, request, pk, jobID):
+    def post(self, request, pk):
         try:
-            job = Job.objects.get(id=jobID)
+            job = Job.objects.get(id=pk)
             job_request = Request.objects.filter(owner=request.user, job=job)
             if job_request.exists():
+                if job.is_taken:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
                 return Response(status=status.HTTP_200_OK)
-            Request.objects.create(owner=request.user, job=job)
-            return Response(status=status.HTTP_201_CREATED)
+            new_req = Request(owner=request.user, job=job)
+            new_req.save()
+            serializer = RequestSerializer(new_req)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         except Exception, e:
-            raise e
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class ViewRequests(APIView):
@@ -126,13 +130,13 @@ class ResolveRequests(APIView):
         try:
             req = Request.objects.get(pk=pk)
             if ans == '1':
-                job = Job.objects.get(request=req)
+                job = req.job
                 if not job.is_taken:
                     # mark job as taken and create a new contributor object related to the project
                     job.is_taken = True
-                    job.issued_to = request.user
+                    job.issued_to = req.owner
                     job.save()
-                    job.contributor.create(user=request.user, project=job.project, is_pm=False)
+                    Contributor.objects.create(job=job, user=req.owner, project=job.project, is_pm=False)
                     return Response(status=status.HTTP_201_CREATED)
                 else:
                     # job is already taken
@@ -142,4 +146,5 @@ class ResolveRequests(APIView):
                 return Response(status=status.HTTP_200_OK)
 
         except Exception, e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            # return Response(status=status.HTTP_404_NOT_FOUND)
+            raise e
