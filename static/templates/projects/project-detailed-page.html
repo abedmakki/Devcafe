@@ -21,7 +21,12 @@
         </div>
 
 
+        <!-- assign tasks part -->
+        <div ng-repeat="contributor in projId.contributors">
+        <strong>{{contributor.user}}</strong>
+
       <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel">Assign Task</button>
+      </div>
 
         <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
@@ -100,11 +105,11 @@
         <div class="well"> -->
 <!--             <form name="create-form" id="create-form" role="form" ng-submit="Create(vm.appname, vm.price, vm.description, vm.picture)">
  -->
- <!-- here el cintributor id -->
-              <div class="form-group">
+ <!-- here dun need this-->
+              <!-- <div class="form-group">
               <label for="create__applicationname">Contributor Name</label>
                 <input type="text" class="form-control" id="create__applicationname" ng-model="vm.contributor_id" required="true" ng-focus data-content="Valid Contributor Name required"/>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="create__price">Title</label>
                 <input type="text" class="form-control" id="create__description" min="1" ng-model="vm.title" required="true" ng-focus data-content="Valid Title required"/>
