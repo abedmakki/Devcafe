@@ -1,8 +1,5 @@
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-from time import strftime
-import datetime
 
 class Project(models.Model):
     PM = models.ForeignKey(User)
@@ -24,7 +21,7 @@ class Project(models.Model):
 
 class Post(models.Model):
     project = models.ForeignKey(Project, related_name='posts')
-    text = models.TextField(blank = True)
+    text = models.TextField(blank=True)
 
     def __unicode__(self):
         return self.text
