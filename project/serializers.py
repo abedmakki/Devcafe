@@ -1,8 +1,6 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
 from userapp.serializers import UserSerializer
 from project.models import Project, Post, Contributor, Task, Job, Request
-
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -14,10 +12,11 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Task
-        fields = ('id', 'title', 'description', 'issued_to', 'project', 'is_done')
+        fields = (
+            'id', 'title', 'description', 'issued_to', 'project', 'is_done')
         read_only_fields = ('project', 'issued_to')
 
 
@@ -25,7 +24,8 @@ class JobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ('id', 'name', 'description', 'issued_to', 'project', 'is_taken')
+        fields = (
+            'id', 'name', 'description', 'issued_to', 'project', 'is_taken')
         read_only_fields = ('project', 'issued_to')
 
 
@@ -43,30 +43,37 @@ class ProjectSerializer(serializers.ModelSerializer):
     PM = UserSerializer(read_only=True)
     modelslug = serializers.SlugField(read_only=True, source='slug')
     posts = PostSerializer(many=True, read_only=True)
-    contributors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    contributors = serializers.PrimaryKeyRelatedField(
+        many=True, read_only=True)
     project_tasks = TaskSerializer(many=True, read_only=True)
     jobs = JobSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project
-        fields = ('id', 'PM', 'title', 'description', 'plan', 'logo' , 'modelslug', 'posts', 'contributors', 'project_tasks', 'jobs')
+        fields = ('id', 'PM', 'title', 'description', 'plan', 'logo',
+                  'modelslug', 'posts', 'contributors', 'project_tasks',
+                  'jobs')
         read_only_fields = ('PM', 'posts', 'contributors', 'jobs')
 
 
 class PostJobSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Job
         fields = ('id', 'name', 'description')
 
 
-class PostTaskSerializer(serializers.ModelSerializer): 
+class PostTaskSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Task
         fields = ('id', 'title', 'description')
 
+
 class RequestSerializer(serializers.ModelSerializer):
     owner = UserSerializer(read_only=True)
     job = JobSerializer(read_only=True)
+
     class Meta:
         model = Request
         fields = ('id', 'owner', 'job')

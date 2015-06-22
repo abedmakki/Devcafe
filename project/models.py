@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Project(models.Model):
     PM = models.ForeignKey(User)
     title = models.CharField(max_length=50)
@@ -9,11 +10,6 @@ class Project(models.Model):
     logo = models.ImageField(upload_to='project_images', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     # slug = models.SlugField(unique=True)
-
-    def save(self, *args, **kwargs):
-        # self.slug = slugify(self.title + str(self.PM.pk) + strftime("%Y%m%d%S%M%H"))
-        # self.PM = request.user
-        super(Project, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.title
@@ -45,7 +41,8 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return self.title + ', for: ' + str(self.project.title) + ', ' + str(self.is_done) 
+        return self.title + ', for: ' + \
+            self.project.title + ', ' + str(self.is_done)
 
 
 class Job(models.Model):
