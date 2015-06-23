@@ -24,20 +24,32 @@
             //var userid = Userapp.getAccId();      //we don't need it any more
             var vm = this;
             var createdProjId = null;
+            // var applyForJob = applyForJob;
+            
             
             Projects.all().success(function(data, status, headers, config) {
               $scope.projects = data;
             })
 
-            $rootScope.$watch('searchQuery', function() {
-              $scope.search = $rootScope.searchQuery;
-            });
+            $scope.applyForJob = function(jobId){
+              // console.log(jobId);
+              Projects.applyForJob(jobId);
+            }
+
+            // $rootScope.$watch('searchQuery', function() {
+            //   $scope.search = $rootScope.searchQuery;
+            // });
 
           //   projects.get($routeParams.id).success(function(data, status, headers, config) {            
           //   $scope.projId = data;                                  
           // })
 
   }
+  
+  // function applyForJob(jobId){
+  //   console.log(jobId);
+  //   Projects.applyForJob(jobId);
+  // }
 
 
   // function getProjectId(id) {
