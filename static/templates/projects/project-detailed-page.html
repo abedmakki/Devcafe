@@ -22,7 +22,27 @@
 
 
         <!-- assign tasks part -->
-        <div ng-repeat="contributor in projId.contributors">
+        
+<!-- Blog Sidebar Widgets Column -->
+<div class="col-md-4">
+
+            <!-- Blog Categories Well -->
+            <div class="well">
+                <h2>My Tasks</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled" ng-repeat="task in mytasks">
+                            <li>Task Title: {{task.title}}, Task Description: {{task.description}}, Done: {{task.is_done}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <div class="col-md-4">
+        <div class="well">
+            <h2>Contributors</h2>
+            <div ng-repeat="contributor in projId.contributors">
             <strong>{{contributor.user}}</strong>
 
             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}">Assign Task</button>
@@ -38,15 +58,7 @@
                 <div class="modal-body">
                   <div style="margin:20px 270px;width:750px;height:500px;padding:10px;margin-bottom: 20px">
                     <!-- here tany -->
-<!-- 
-    <div class="well"> -->
-<!--             <form name="create-form" id="create-form" role="form" ng-submit="Create(vm.appname, vm.price, vm.description, vm.picture)">
--->
-<!-- here dun need this-->
-              <!-- <div class="form-group">
-              <label for="create__applicationname">Contributor Name</label>
-                <input type="text" class="form-control" id="create__applicationname" ng-model="vm.contributor_id" required="true" ng-focus data-content="Valid Contributor Name required"/>
-            </div> -->
+
             <div class="form-group">
                 <label for="create__price">Title</label>
                 <input type="text" class="form-control" id="create__description" min="1" ng-model="vm.title" required="true" ng-focus data-content="Valid Title required"/>
@@ -71,42 +83,7 @@
 <!-- end popup here -->
 </div>
 
-<!-- Blog Sidebar Widgets Column -->
-<div class="col-md-4">
-
-            <!-- 
-            <div class="well">
-                <h4>Blog Search</h4>
-                <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                    </span>
-                </div>
-            </div>
-            -->
-            <!-- Blog Categories Well -->
-            <div class="well">
-                <h4>Tasks</h4>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul class="list-unstyled" ng-repeat="task in mytasks">
-                            <li>Task Title: {{task.title}}, Task Description: {{task.description}}, Done: {{task.is_done}}</li>
-                        </ul>
-                    </div>
-            </div>
-            <!-- /.row -->
         </div>
-        <div class="well">
-            <div class="col-lg-6">
-                <p class="lead">Category</p>
-                <div class="list-group" ng-init="vm.filterName">
-                    <a href="#" ng-click="vm.filterName.name = undefined" class="list-group-item">All Tasks</a>
-                    <a href="#" ng-click="vm.filterName.name = tag.name" class="list-group-item" ng-repeat="tag in all_tags">{{tag.name}}</a>
-                </div>
-            </div>
         </div>
     </div>
 </div>
