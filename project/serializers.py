@@ -40,7 +40,6 @@ class ContributorSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     PM = UserSerializer(read_only=True)
-    modelslug = serializers.SlugField(read_only=True, source='slug')
     posts = PostSerializer(many=True, read_only=True)
     # contributors = serializers.PrimaryKeyRelatedField(
     #     many=True, read_only=True)
@@ -51,7 +50,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'PM', 'title', 'description', 'plan', 'logo',
-                  'modelslug', 'posts', 'contributors', 'project_tasks',
+                  'timestamp', 'posts', 'contributors', 'project_tasks',
                   'jobs')
         read_only_fields = ('PM', 'posts', 'contributors', 'jobs')
 

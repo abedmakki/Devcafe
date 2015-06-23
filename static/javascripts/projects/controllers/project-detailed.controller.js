@@ -22,6 +22,9 @@
       $scope.projId = data;
 
     })
+     Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
+              $scope.mytasks = data;
+            })
 
     function assignTask(id, contributor_id, title, description) {
 

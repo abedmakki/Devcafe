@@ -24,11 +24,12 @@ class ProjectList(generics.ListCreateAPIView):
                           description=request.data['description'],
                           plan=request.data.get('plan', ''), PM=request.user)
         project.save()
+        serializer = ProjectSerializer(project)
         Contributor.objects.create(
             user=self.request.user,
             project=project,
             is_pm=True)
-        return Response(status=status.HTTP_201_CREATED)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
 
 class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -92,8 +93,10 @@ class ApplyForJob(APIView):
 
     def post(self, request, pk):
         try:
-            job = Job.objects.get(id=pk)
             job_request = Request.objects.filter(owner=request.user, job=job)
+            job = Job.objects.get(id=pk)
+            if job.project.PM == request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
             if job_request.exists():
                 if job.is_taken:
                     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -102,7 +105,7 @@ class ApplyForJob(APIView):
             new_req.save()
             serializer = RequestSerializer(new_req)
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
-        except Exception, e:
+        except Exception:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
@@ -125,18 +128,19 @@ class ResolveRequests(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def post(self, request, pk, ans):
-        # ans 0 means reject, 1 means accept. could use query params in the future.
         try:
             req = Request.objects.get(pk=pk)
             if ans == '1':
                 job = req.job
                 if not job.is_taken:
-                    # mark job as taken and create a new contributor object related to the project
                     job.is_taken = True
                     job.issued_to = req.owner
                     job.save()
-                    Contributor.objects.create(job=job, user=req.owner, project=job.project, is_pm=False)
-                    return Response(status=status.HTTP_201_CREATED)
+                    contr = Contributor(job=job, user=req.owner, project=job.project, is_pm=False)
+                    # Contributor.objects.create(job=job, user=req.owner, project=job.project, is_pm=False)
+                    contr.save()
+                    serializer = ContributorSerializer(contr)
+                    return Response(data=serializer.data, status=status.HTTP_201_CREATED)
                 else:
                     # job is already taken
                     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -155,10 +159,10 @@ class ViewMyTasks(APIView):
     def get(self, request, pk):
         try:
             project = Project.objects.get(id=pk)
-            contributor = Contributor.objects.get(user=request.user, project=project)
+            contributor = Contributor.objects.get(user=request.user,
+                                                  project=project)
             task = Task.objects.filter(project=project, issued_to=contributor)
             serializer = TaskSerializer(task, many=True)
             return Response(serializer.data)
         except Contributor.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-            
