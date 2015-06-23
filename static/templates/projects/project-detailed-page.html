@@ -45,7 +45,7 @@
             <div ng-repeat="contributor in projId.contributors">
             <strong>{{contributor.user}}</strong>
 
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}">Assign Task</button>
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}" ng-if="projId.is_pm">Assign Task</button>
 
             <!-- start popup here -->
             <div class="modal fade" id="assignTaskModel{{contributor.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -86,6 +86,4 @@
         </div>
         </div>
     </div>
-</div>
-
 </div>

@@ -46,13 +46,20 @@ class ProjectSerializer(serializers.ModelSerializer):
     contributors = ContributorSerializer(many=True)
     project_tasks = TaskSerializer(many=True, read_only=True)
     jobs = JobSerializer(many=True, read_only=True)
+    is_pm = serializers.SerializerMethodField('get_pm_status')
+    
+    def get_pm_status(self, obj):
+        user = self.context['request'].user
+        if obj.PM == user:
+            return True
+        return False
 
     class Meta:
         model = Project
         fields = ('id', 'PM', 'title', 'description', 'plan', 'logo',
                   'timestamp', 'posts', 'contributors', 'project_tasks',
-                  'jobs')
-        read_only_fields = ('PM', 'posts', 'contributors', 'jobs')
+                  'jobs', 'is_pm')
+        read_only_fields = ('PM', 'posts', 'contributors', 'jobs', 'is_pm')
 
 
 class PostJobSerializer(serializers.ModelSerializer):
