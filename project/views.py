@@ -67,7 +67,7 @@ class CreateJob(APIView):
             if job.is_valid():
                 job.save(project=project)
                 return Response(job.data, status=status.HTTP_201_CREATED)
-            return Response(job.error, status=status.HTTP_400_BAD_REQUEST)
+            return Response(job.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -83,7 +83,7 @@ class AssignTask(APIView):
             if task.is_valid():
                 task.save(project=contributor.project, issued_to=contributor)
                 return Response(task.data, status=status.HTTP_201_CREATED)
-            return Response(task.error, status=status.HTTP_400_BAD_REQUEST)
+            return Response(task.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_404_NOT_FOUND)
         #return Response(status=status.HTTP_404_NOT_FOUND)
 

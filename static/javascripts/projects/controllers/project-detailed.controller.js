@@ -28,8 +28,22 @@
     //     $scope.user = data;
     //     // console.log($scope.user);
     //   })
-    function assignTask(id, contributor_id, title, description) {      
-      Projects.assign(id, contributor_id, title, description);
+    function assignTask(id, contributor_id, title, description) {
+    // console.log(id);
+    console.log(contributor_id);
+    // $scope.Projects.description = "";
+    // $scope.Projects.title = "";
+    Projects.assign(contributor_id, title, description)
+    // .success(function(data, status, headers, config) {
+    //       // for(var i = 0; i < $scope.ideas.length; i++) {
+    //         if ($scope.ideas[i].id === item) {
+    //           $scope.ideas[i].comments.push(data);
+    //           console.log($scope.ideas[i].comments);
+    //           $scope.ideas[i].name = "";
+    //         }
+    //       // }
+    //     });
+
         }
 
   }
