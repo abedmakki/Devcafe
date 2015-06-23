@@ -73,18 +73,18 @@ class CreateJob(APIView):
 class AssignTask(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-    def post(self, request, pk, cont):
-        project = Project.objects.get(id=pk)
-        contributor = Contributor.objects.get(id=cont)
-        if contributor.project == project:
-            if request.user == project.PM:
-                task = PostTaskSerializer(data=request.data)
-                if task.is_valid():
-                    task.save(project=project, issued_to=contributor)
-                    return Response(task.data, status=status.HTTP_201_CREATED)
-                return Response(task.error, status=status.HTTP_400_BAD_REQUEST)
-            return Response(status=status.HTTP_404_NOT_FOUND)
+    def post(self, request, pk):
+        #project = Project.objects.get(id=pk)
+        contributor = Contributor.objects.get(id=pk)
+        #if contributor.project == project:
+        if request.user == contributor.project.PM:
+            task = PostTaskSerializer(data=request.data)
+            if task.is_valid():
+                task.save(project=contributor.project, issued_to=contributor)
+                return Response(task.data, status=status.HTTP_201_CREATED)
+            return Response(task.error, status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_404_NOT_FOUND)
+        #return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class ApplyForJob(APIView):
