@@ -20,7 +20,8 @@
       all: all,
       assign: assign,
       // create: create,
-      get: get
+      get: get,
+      view_my_tasks: view_my_tasks
       // comment: comment,
       };
 
@@ -85,6 +86,9 @@
       });
     }
 
+    function view_my_tasks(id){
+      return $http.get('/projects/' + id + '/view_my_tasks/');
+    }
 
   }
 })();
