@@ -28,13 +28,12 @@
 
     function assignTask(id, contributor_id, title, description) {
 
-    console.log($scope.projId.contributors.length);
-
-
     Projects.assign(contributor_id, title, description).success(function(data, status, headers, config) {
           for(var i = 0; i < $scope.projId.contributors.length; i++) {
             if ($scope.projId.contributors[i].id === contributor_id) {
+              console.log($scope.projId.contributors[i].tasks);
               $scope.projId.contributors[i].tasks.push(data);
+              console.log($scope.projId.contributors[i].tasks);
               $scope.vm.description = "";
               $scope.vm.title = "";            
             }

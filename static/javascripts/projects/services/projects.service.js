@@ -21,7 +21,8 @@
       assign: assign,
       // create: create,
       get: get,
-      view_my_tasks: view_my_tasks
+      view_my_tasks: view_my_tasks,
+      applyForJob: applyForJob
       // comment: comment,
       };
 
@@ -89,6 +90,11 @@
 
     function view_my_tasks(id){
       return $http.get('/projects/' + id + '/view_my_tasks/');
+    }
+
+
+    function applyForJob(jobId){
+      return $http.post('/projects/jobs/' + jobId + '/');
     }
 
   }

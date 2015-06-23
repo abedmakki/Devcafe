@@ -20,7 +20,34 @@
             <a href="projects/{{project.id}}">{{project.title}}</a>
             <!-- <h4>{{project.category}}</h4> -->
             <p>{{project.description}}</p>
-            <a class="btn btn-primary" href="projects/{{project.id}}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <strong>Jobs</strong>
+            <div ng-repeat="job in project.jobs | filter:{is_taken:false}">
+            <p>{{job.name}}</p>
+            <p>{{job.description}}</p>            
+
+            <!-- start popup -->
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#applyModel">Apply</button>
+
+            <div class="modal fade" id="applyModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Apply for job {{job.name}}</h4>
+                </div>
+                <div class="modal-body">
+                <!-- call fn -->
+                    <button class="btn-sm" ng-click="applyForJob(job.id)" data-dismiss="modal">Ok</button>
+                    
+                    <button type="button" class="btn-sm" data-dismiss="modal" ng-click="files=null">Cancel</button>                    
+                </div>
+                </div>
+              </div>
+            </div>
+            <!-- end popup -->
+
+            </div>
+
+            <a class="btn btn-primary" href="projects/{{project.id}}">View Project<span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
     </div>
     <hr>
