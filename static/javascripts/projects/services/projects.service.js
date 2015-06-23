@@ -84,9 +84,7 @@
         // issued_to: contributor_id,
         // project: id,
         // is_taken: false
-      }).then(function() {
-        // window.location = '/projects/' + id;
-      });
+      })
     }
 
     function view_my_tasks(id){

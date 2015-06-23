@@ -93,8 +93,10 @@ class ApplyForJob(APIView):
 
     def post(self, request, pk):
         try:
-            job = Job.objects.get(id=pk)
             job_request = Request.objects.filter(owner=request.user, job=job)
+            job = Job.objects.get(id=pk)
+            if job.project.PM == request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
             if job_request.exists():
                 if job.is_taken:
                     return Response(status=status.HTTP_400_BAD_REQUEST)
