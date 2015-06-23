@@ -77,11 +77,14 @@
     // }
 
     function assign(id, contributor_id, title, description) {
-      return $http.post('/projects/' + id + '/assign_task/' + contributor_id, {
+      return $http.post('/projects/' + id + '/assign_task/' + contributor_id + '/', {
         title: title,
         description: description
+        // issued_to: contributor_id,
+        // project: id,
+        // is_taken: false
       }).then(function() {
-        window.location = '/projects/' + id;
+        // window.location = '/projects/' + id;
       });
     }
 
