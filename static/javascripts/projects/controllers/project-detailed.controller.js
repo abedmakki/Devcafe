@@ -33,7 +33,7 @@
     console.log(contributor_id);
     // $scope.Projects.description = "";
     // $scope.Projects.title = "";
-    Projects.assign(id, contributor_id, title, description)
+    Projects.assign(contributor_id, title, description)
     // .success(function(data, status, headers, config) {
     //       // for(var i = 0; i < $scope.ideas.length; i++) {
     //         if ($scope.ideas[i].id === item) {

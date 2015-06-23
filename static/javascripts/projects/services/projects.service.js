@@ -76,8 +76,8 @@
     //   });
     // }
 
-    function assign(id, contributor_id, title, description) {
-      return $http.post('/projects/' + id + '/assign_task/' + contributor_id + '/', {
+    function assign(contributor_id, title, description) {
+      return $http.post('/projects/assign_task/' + contributor_id + '/', {
         title: title,
         description: description
         // issued_to: contributor_id,
