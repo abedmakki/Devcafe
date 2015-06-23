@@ -27,8 +27,7 @@ class ProjectList(generics.ListCreateAPIView):
         Contributor.objects.create(
             user=self.request.user,
             project=project,
-            is_pm=True,
-            position="Project Manager")
+            is_pm=True)
         return Response(status=status.HTTP_201_CREATED)
 
 
@@ -74,18 +73,18 @@ class CreateJob(APIView):
 class AssignTask(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-    def post(self, request, pk, cont):
-        project = Project.objects.get(id=pk)
-        contributor = Contributor.objects.get(id=cont)
-        if contributor.project == project:
-            if request.user == project.PM:
-                task = PostTaskSerializer(data=request.data)
-                if task.is_valid():
-                    task.save(project=project, issued_to=contributor)
-                    return Response(task.data, status=status.HTTP_201_CREATED)
-                return Response(task.errors, status=status.HTTP_400_BAD_REQUEST)
-            return Response(status=status.HTTP_404_NOT_FOUND)
+    def post(self, request, pk):
+        #project = Project.objects.get(id=pk)
+        contributor = Contributor.objects.get(id=pk)
+        #if contributor.project == project:
+        if request.user == contributor.project.PM:
+            task = PostTaskSerializer(data=request.data)
+            if task.is_valid():
+                task.save(project=contributor.project, issued_to=contributor)
+                return Response(task.data, status=status.HTTP_201_CREATED)
+            return Response(task.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_404_NOT_FOUND)
+        #return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class ApplyForJob(APIView):
@@ -148,3 +147,18 @@ class ResolveRequests(APIView):
         except Exception, e:
             # return Response(status=status.HTTP_404_NOT_FOUND)
             raise e
+
+
+class ViewMyTasks(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get(self, request, pk):
+        try:
+            project = Project.objects.get(id=pk)
+            contributor = Contributor.objects.get(user=request.user, project=project)
+            task = Task.objects.filter(project=project, issued_to=contributor)
+            serializer = TaskSerializer(task, many=True)
+            return Response(serializer.data)
+        except Contributor.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+            
