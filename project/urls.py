@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>[0-9]+)/view_requests/$', views.ViewRequests.as_view(), name='view-requests'),
     url(r'^resolve/(?P<pk>[0-9]+)/(?P<ans>[0-1])/$', views.ResolveRequests.as_view(), name='resolve-requests'),
     url(r'^(?P<pk>[0-9]+)/view_my_tasks/$', views.ViewMyTasks.as_view(), name='view-my-tasks'),
+    url(r'^changelogo/$', views.UploadProjectLogo.as_view(), name='project-change-logo'),
 )
 
 

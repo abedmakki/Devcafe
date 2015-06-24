@@ -9,21 +9,22 @@
     .module('devcafe.projects.services')
     .factory('Projects', Projects);
 
-  Projects.$inject = ['$http'];
+  Projects.$inject = ['$http' , 'Upload'];
 
   /**
   * @namespace Projects
   * @returns {Factory}
   */
-  function Projects($http) {
+  function Projects($http , Upload) {
     var Projects = {
       all: all,
       assign: assign,
       // create: create,
       get: get,
       view_my_tasks: view_my_tasks,
-      applyForJob: applyForJob
+      applyForJob: applyForJob,
       // comment: comment,
+      changeLogo: changeLogo
       };
 
     return Projects;
@@ -96,6 +97,36 @@
     function applyForJob(jobId){
       return $http.post('/projects/jobs/' + jobId + '/');
     }
+
+
+    function changeLogo(files,$scope){
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                Upload.upload({
+                    url: '/projects/changelogo/',
+                    file: file,
+                    fields: {'projid': $scope.projId.id}
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                    $scope.logo.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                    $scope.logo.result = data;
+                    $( ".sjqclass").attr("disabled", 'disabled' )
+
+                    $('#logo').on('hide.bs.modal', function (e) {
+                        $( ".proj-logo").attr("ng-src", data.logo )
+                        $( ".proj-logo").attr("src", data.logo )
+                    })
+
+                });
+            }
+        }
+    }
+
+
 
   }
 })();
