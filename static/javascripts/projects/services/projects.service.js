@@ -24,7 +24,8 @@
       view_my_tasks: view_my_tasks,
       applyForJob: applyForJob,
       // comment: comment,
-      changeLogo: changeLogo
+      changeLogo: changeLogo,
+      viewRequest: viewRequest
       };
 
     return Projects;
@@ -126,6 +127,9 @@
         }
     }
 
+function viewRequest(id){
+      return $http.get('/projects/' + id + '/view_requests/');
+    }
 
 
   }
