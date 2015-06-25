@@ -1,6 +1,7 @@
+from rest_framework.parsers import FileUploadParser
 from project.serializers import ProjectSerializer, PostSerializer, \
     TaskSerializer, PostJobSerializer, \
-    PostTaskSerializer, RequestSerializer
+    PostTaskSerializer, RequestSerializer , LogoSerializer
 from project.models import Project, Post, Contributor, Task, Job, Request
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -166,3 +167,23 @@ class ViewMyTasks(APIView):
             return Response(serializer.data)
         except Contributor.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class UploadProjectLogo(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    parser_classes = (FileUploadParser,)
+
+    def post(self , request):
+        if not request.user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        logo = request.FILES['file']
+        id = request.DATA['projid']
+        if logo:
+            try:
+                proj = Project.objects.get(id=id)
+                proj.logo = logo
+                proj.save()
+                serializer = LogoSerializer(proj)
+            except proj.DoesNotExist:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response(data=serializer.data , status=status.HTTP_200_OK)

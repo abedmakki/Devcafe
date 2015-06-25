@@ -11,6 +11,7 @@
   function ProjectDetailedController($http, $location, $scope, $routeParams, Projects) {
     var vm = this;
     vm.assignTask = assignTask;
+    vm.changeLogo = changeLogo;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
@@ -37,6 +38,19 @@
       });
 
     }
+
+      /**** Change Logo ****/
+      $scope.$watch('logo', function () {
+          if($scope.logo==null || $scope.logo==undefined || $scope.logo==''){
+              $( ".sjqclass").attr("disabled", 'disabled' )
+          }
+          else{
+              $(".sjqclass").removeAttr( 'disabled' );
+          }
+      });
+      function changeLogo(logo){
+          Projects.changeLogo(logo , $scope)
+      }
 
   }
 

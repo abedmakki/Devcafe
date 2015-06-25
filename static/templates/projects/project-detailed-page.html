@@ -14,7 +14,7 @@
             <hr>
             <p><span class="glyphicon glyphicon-time"></span> {{projId.timestamp | date:'yyyy-MM-dd HH:mm'}}</p>
             <hr>
-            <img class="img-responsive" ng-src="{{projId.picture}}" alt="No Picture">
+            <img class="proj-logo img-responsive" ng-src="{{projId.logo}}" alt="No Picture" style="max-width: 150px;max-height: 150px">
             <hr>
             <p class="lead">{{projId.description}}</p>
             <hr>
@@ -46,6 +46,7 @@
             <strong>{{contributor.user}}</strong>
 
             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}" ng-if="projId.is_pm">Assign Task</button>
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#logo" ng-if="projId.is_pm">Change Logo</button>
 
             <!-- start popup here -->
             <div class="modal fade" id="assignTaskModel{{contributor.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -70,9 +71,8 @@
             </div>
 
             <!-- call fn -->
-            <!-- here moshkla fel contributor id, kolo byeegy 2, and validation msh sh8al -->
             <div class="form-group">
-                <button type="submit" class="btn btn-success" ng-click="vm.assignTask(projId.id, contributor.id, vm.title, vm.description)">Done</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.assignTask(contributor.id, vm.title, vm.description)">Done</button>
             </div>
             <!-- </form> -->
         </div>
@@ -87,3 +87,44 @@
         </div>
     </div>
 </div>
+
+
+<!--change logo modal -->
+<div class="modal fade" id="logo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Change Logo</h4>
+            </div>
+            <div class="modal-body">
+
+                <button type="file" ngf-select="" ng-model="logo" accept="image/*" class="btn-sm">Browse pictures</button>
+                </br>
+                <div>
+                    <img ng-show="logo[0] != null" ngf-thumbnail="logo[0]" class="thumb" style="height: 100px;width: 110px;">
+                </div>
+
+                <div>
+        <span class="progress" ng-show="logo.progress >= 0">
+          <div style="width:100%" ng-bind="logo.progress + '%'" class="ng-binding">100%</div>
+        </span>
+                    <span ng-show="logo.result" class="">Upload Successful</span>
+                </div>
+
+
+                <div class="progress" ng-show="logo.progress >= 0">
+                    <div ng-bind="logo.progress + '%'" class="progress-bar" role="progressbar" aria-valuenow="{{ logo.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ logo.progress }}%;">
+                        0%
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="logo=null">Close</button>
+                    <button type="button" class="btn btn-primary sjqclass" ng-click="vm.changeLogo(logo)" disabled="disabled">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End change logo modal -->

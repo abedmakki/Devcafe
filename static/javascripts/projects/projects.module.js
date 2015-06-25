@@ -8,7 +8,7 @@
     ]);
 
   angular
-    .module('devcafe.projects.controllers', []);
+    .module('devcafe.projects.controllers', ['ngFileUpload']);
 
   angular
     .module('devcafe.projects.services', []);

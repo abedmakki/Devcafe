@@ -84,3 +84,9 @@ class RequestSerializer(serializers.ModelSerializer):
         model = Request
         fields = ('id', 'owner', 'job')
         read_only_fields = ('owner', 'job')
+
+
+class LogoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ('logo','title')
