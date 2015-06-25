@@ -67,8 +67,8 @@
                             <li>
                             Job Title: {{request.job.name}}, Contributor applied: {{request.owner.username}}
                             </li>
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="" ng-if="projId.is_pm">Accept</button>
-                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="" ng-if="projId.is_pm">Reject</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,1)">Accept</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,0)">Reject</button>
                         </ul>
                     </div>
                 </div>

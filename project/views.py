@@ -1,7 +1,7 @@
 from rest_framework.parsers import FileUploadParser
 from project.serializers import ProjectSerializer, PostSerializer, \
     TaskSerializer, PostJobSerializer, \
-    PostTaskSerializer, RequestSerializer , LogoSerializer
+    PostTaskSerializer, RequestSerializer , LogoSerializer , ContributorSerializer
 from project.models import Project, Post, Contributor, Task, Job, Request
 from rest_framework import generics
 from rest_framework.views import APIView

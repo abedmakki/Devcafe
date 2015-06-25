@@ -13,6 +13,7 @@
     vm.assignTask = assignTask;
     vm.changeLogo = changeLogo;
     vm.createJob = createJob;
+    vm.resolveRequest = resolveRequest;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
@@ -71,6 +72,12 @@
                         $scope.jName=null;$scope.jDesc=null;
                         $('#job-name').focus()
                     })
+      /**********************/
+
+      /**** Resolve Job's request ****/
+      function resolveRequest(reqID,yn){
+              Projects.resolveRequest(reqID,yn).success(function(){})
+      }
       /**********************/
 
   }
