@@ -39,6 +39,11 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (
         IsOwnerOrReadOnly, permissions.IsAuthenticatedOrReadOnly)
 
+    def get(self, request, pk):
+        project = Project.objects.get(pk=pk)
+        serializer = ProjectSerializer(project, context={'request': request})
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
