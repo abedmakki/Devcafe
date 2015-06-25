@@ -12,7 +12,7 @@
     <div class="row" ng-repeat="project in projects">
         <div class="col-md-7">
             <a href="#">
-                <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                <img class="img-responsive" width="800px" height="300px" src="{{project.logo}}" alt="">
             </a>
         </div>
         <div class="col-md-5">
@@ -20,7 +20,7 @@
             <a href="projects/{{project.id}}" class="proj-title">{{project.title}}</a>
             <!-- <h4>{{project.category}}</h4> -->
             <p>{{project.description}}</p>
-            <div ng-repeat="job in project.jobs | filter:{is_taken:false}">
+            <div ng-repeat="job in project.jobs | filter:{is_taken:false}" ng-hide="project.is_pm">
             <p>{{job.name}}</p>
             <p>{{job.description}}</p>            
             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#applyModel">Apply</button>
