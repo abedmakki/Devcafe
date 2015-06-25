@@ -3,29 +3,26 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
  -->
-<div class="container">
+<div class="container content-size" >
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Projects <small>Climb the Mountain</small></h1>
+        <div class="col-lg-12" >
+            <h1  class="page-header pull-left proj-header">Projects <small>Climb the Mountain</small></h1>
         </div>
     </div>
     <div class="row" ng-repeat="project in projects">
         <div class="col-md-7">
             <a href="#">
-                <img class="img-responsive" ng-src="{{project.picture}}" alt="">
+                <img class="img-responsive" src="http://placehold.it/800x300" alt="">
             </a>
         </div>
         <div class="col-md-5">
         <!-- ng-click="vm.getProjectId(project.id)" -->
-            <a href="projects/{{project.id}}">{{project.title}}</a>
+            <a href="projects/{{project.id}}" class="proj-title">{{project.title}}</a>
             <!-- <h4>{{project.category}}</h4> -->
             <p>{{project.description}}</p>
-            <strong>Jobs</strong>
             <div ng-repeat="job in project.jobs | filter:{is_taken:false}">
             <p>{{job.name}}</p>
             <p>{{job.description}}</p>            
-
-            <!-- start popup -->
             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#applyModel">Apply</button>
 
             <div class="modal fade" id="applyModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
