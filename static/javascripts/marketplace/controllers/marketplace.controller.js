@@ -102,8 +102,12 @@
                 });
             }
         }
+    }
+    $scope.go = function(path)
+    {
+        //files=null;
+        $location.path(path);
     };
-
 
 
   }
