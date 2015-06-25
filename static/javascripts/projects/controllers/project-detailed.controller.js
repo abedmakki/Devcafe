@@ -57,12 +57,21 @@
       function changeLogo(logo){
           Projects.changeLogo(logo , $scope)
       }
-
+      /**********************/
 
       /**** Create Job ****/
       function createJob(){
-              Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc)
+              Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc).success(function(){
+                  $('#CreateJob').modal('hide')
+              })
       }
+
+      $('#CreateJob').on('hide.bs.modal', function (e) {
+                        $scope.creJob.$setPristine();
+                        $scope.jName=null;$scope.jDesc=null;
+                        $('#job-name').focus()
+                    })
+      /**********************/
 
   }
 
