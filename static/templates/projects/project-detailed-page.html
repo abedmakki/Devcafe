@@ -28,7 +28,7 @@
             <hr>
             <p><span class="glyphicon glyphicon-time"></span> {{projId.timestamp | date:'yyyy-MM-dd HH:mm'}}</p>
             <hr>
-            <img class="proj-logo img-responsive" ng-src="{{projId.logo}}" alt="No Picture" style="max-width: 150px;max-height: 150px">
+            <img class="proj-logo img-responsive" ng-src="{{projId.logo}}" alt="No Picture" style="width:800px; height:300px">
             <hr>
             <p class="lead">{{projId.description}}</p>
             <hr>
@@ -47,6 +47,7 @@
                     <div class="col-lg-12">
                         <ul class="list-unstyled" ng-repeat="task in mytasks">
                             <li>Task Title: {{task.title}}, Task Description: {{task.description}}, Done: {{task.is_done}}</li>
+                            <input type="checkbox" ng-model="task[$index]" ng-checked="{{task.is_done}}"/>
                         </ul>
                     </div>
                 </div>
@@ -190,7 +191,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary sjq1class" ng-disabled="creJob.$invalid" ng-click="vm.createJob()">Submit Job</button>
+        <button type="button" class="btn btn-primary sjq1class" ng-disabled="creJob.$invalid" data-dismiss="modal" ng-click="vm.createJob()">Submit Job</button>
       </div>
     </div>
   </div>
