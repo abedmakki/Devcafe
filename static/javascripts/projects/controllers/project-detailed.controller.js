@@ -22,6 +22,11 @@
       $scope.mytasks = data;
     })
 
+    Projects.viewRequest($routeParams.id).success(function(data, status, headers, config) {
+      $scope.requests = data;
+    })
+
+
     function assignTask(contributor_id, title, description) {
 
       console.log($scope.projId.contributors.length);

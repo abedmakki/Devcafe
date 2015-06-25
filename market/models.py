@@ -37,7 +37,7 @@ class AppRating(models.Model):
 class AppComment(Comment):
     app = models.ForeignKey(App, related_name='comments')
     def __unicode__(self):
-        return self.text[:20] + ' - by:' + self.owner  
+        return self.text[:20] + ' - by:' + self.owner.username  
 
 
 class AppTransaction(models.Model):

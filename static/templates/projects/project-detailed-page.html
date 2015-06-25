@@ -2,7 +2,7 @@
 <link href="css/blog-post.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
--->
+ -->
 <!-- Page Content -->
 <div class="container">
     <div class="row">
@@ -39,6 +39,30 @@
             </div>
             <!-- /.row -->
         </div>
+
+        <!-- view reques -->
+        <div class="col-md-4">
+
+            <!-- Blog Categories Well -->
+            <div class="well" ng-if="projId.is_pm">
+                <h2>View Requests</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled" ng-repeat="request in requests">
+                            <li>
+                            Job Title: {{request.job.name}}, Contributor applied: {{request.owner.username}}
+                            </li>
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="" ng-if="projId.is_pm">Accept</button>
+                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="" ng-if="projId.is_pm">Reject</button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+
+
+
         <div class="col-md-4">
         <div class="well">
             <h2>Contributors</h2>
@@ -127,4 +151,4 @@
         </div>
     </div>
 </div>
-<!--End change logo modal -->
+<!--End change logo modal
