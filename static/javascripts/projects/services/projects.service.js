@@ -24,7 +24,8 @@
       view_my_tasks: view_my_tasks,
       applyForJob: applyForJob,
       // comment: comment,
-      changeLogo: changeLogo
+      changeLogo: changeLogo,
+      createJob: createJob
       };
 
     return Projects;
@@ -126,6 +127,13 @@
         }
     }
 
+
+          function createJob(id , name, description) {
+      return $http.post('/projects/'+id+'/create_job/', {
+        name: name,
+        description: description
+      })
+    }
 
 
   }

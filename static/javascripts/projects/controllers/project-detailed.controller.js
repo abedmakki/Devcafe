@@ -12,6 +12,7 @@
     var vm = this;
     vm.assignTask = assignTask;
     vm.changeLogo = changeLogo;
+    vm.createJob = createJob;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
@@ -50,6 +51,12 @@
       });
       function changeLogo(logo){
           Projects.changeLogo(logo , $scope)
+      }
+
+
+      /**** Create Job ****/
+      function createJob(){
+              Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc)
       }
 
   }
