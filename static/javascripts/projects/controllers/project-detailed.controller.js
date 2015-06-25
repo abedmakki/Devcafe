@@ -22,7 +22,7 @@
       $scope.mytasks = data;
     })
 
-    function assignTask(id, contributor_id, title, description) {
+    function assignTask(contributor_id, title, description) {
 
       console.log($scope.projId.contributors.length);
 
