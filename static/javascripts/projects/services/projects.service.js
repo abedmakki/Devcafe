@@ -25,7 +25,8 @@
       applyForJob: applyForJob,
       // comment: comment,
       changeLogo: changeLogo,
-      createJob: createJob
+      createJob: createJob,
+      viewRequest: viewRequest
       };
 
     return Projects;
@@ -127,6 +128,9 @@
         }
     }
 
+function viewRequest(id){
+      return $http.get('/projects/' + id + '/view_requests/');
+    }
 
           function createJob(id , name, description) {
       return $http.post('/projects/'+id+'/create_job/', {
