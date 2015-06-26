@@ -25,7 +25,9 @@
       applyForJob: applyForJob,
       // comment: comment,
       changeLogo: changeLogo,
-      viewRequest: viewRequest
+      createJob: createJob,
+      viewRequest: viewRequest,
+      resolveRequest: resolveRequest
       };
 
     return Projects;
@@ -127,10 +129,24 @@
         }
     }
 
-function viewRequest(id){
-      return $http.get('/projects/' + id + '/view_requests/');
-    }
+      function viewRequest(id){
+          return $http.get('/projects/' + id + '/view_requests/');
+      }
 
+
+
+      function createJob(id , name, description) {
+          return $http.post('/projects/'+id+'/create_job/', {
+              name: name,
+              description: description
+          })
+      }
+
+
+      function resolveRequest(reqID,yn){
+          return $http.post('/projects/resolve/'+reqID+'/'+yn+'/', {
+          })
+      }
 
   }
 })();

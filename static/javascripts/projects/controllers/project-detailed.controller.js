@@ -13,6 +13,8 @@
     vm.assignTask = assignTask;
     vm.changeLogo = changeLogo;
     var progress_ratio = 0;
+    vm.createJob = createJob;
+    vm.resolveRequest = resolveRequest;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
@@ -31,7 +33,7 @@
 
     function assignTask(contributor_id, title, description) {
 
-      console.log($scope.projId.contributors.length);
+      // console.log($scope.projId.contributors.length);
 
 
       Projects.assign(contributor_id, title, description).success(function(data, status, headers, config) {
@@ -39,7 +41,7 @@
           if ($scope.projId.contributors[i].id === contributor_id) {
             $scope.projId.contributors[i].tasks.push(data);
             $scope.vm.description = "";
-            $scope.vm.title = "";            
+            $scope.vm.title = "";
           }
         }
       });
@@ -72,7 +74,34 @@
       });
       function changeLogo(logo){
           Projects.changeLogo(logo , $scope)
-      }
+        }
+
+    /**********************/
+
+    /**** Create Job ****/
+    function createJob(){
+      Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc).success(function(){
+        $('#CreateJob').modal('hide');
+        $.notify("Congratulation\nsuccess adding a new job",{ position:"bottom right" ,className:"success"});
+      })
+    }
+
+    $('#CreateJob').on('hide.bs.modal', function (e) {
+      $scope.creJob.$setPristine();
+      $scope.jName=null;$scope.jDesc=null;
+      $('#job-name').focus()
+    })
+    /**********************/
+
+    /**** Resolve Job's request ****/
+    function resolveRequest(reqID,yn){
+      Projects.resolveRequest(reqID,yn).success(function(){
+        $.notify("Congratulation\nsuccess accepting a new contributer for job",{ position:"bottom right" ,className:"success"});
+      }).error(function(){
+        $.notify("Sorry\nError in accepting a new contributer for job",{ position:"bottom right" });
+      })
+    }
+    /**********************/
 
 
   }
