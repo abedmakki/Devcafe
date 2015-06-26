@@ -6,18 +6,20 @@
   .module('devcafe.projects.controllers')
   .controller('ProjectDetailedController', ProjectDetailedController);
 
-  ProjectDetailedController.$inject = ['$http', '$location','$scope', '$routeParams', 'Projects'];
+  ProjectDetailedController.$inject = ['$http', '$location', '$scope', '$routeParams', 'Projects'];
 
   function ProjectDetailedController($http, $location, $scope, $routeParams, Projects) {
     var vm = this;
     vm.assignTask = assignTask;
     vm.changeLogo = changeLogo;
+    var progress_ratio = 0;
     vm.createJob = createJob;
     vm.resolveRequest = resolveRequest;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
       $scope.projId = data;
+      progress();
     })
 
     Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
@@ -45,6 +47,23 @@
       });
 
     }
+    /**** Compute Progress Ratio in the Project ****/
+    function progress(){
+      var tasks_num = $scope.projId.project_tasks.length;
+      var done_num = 0;
+      if (tasks_num === 0){
+        $scope.progress_ratio = 0;
+      }
+      else{
+        for (var i = 0; i < tasks_num; i++){
+          if ($scope.projId.project_tasks[i].is_done === true){
+            done_num++;
+          }
+        }
+        $scope.progress_ratio = Math.floor((done_num/tasks_num)*100);
+      }
+    }
+    /**********************/
 
     /**** Change Logo ****/
     $scope.$watch('logo', function () {
@@ -58,6 +77,7 @@
     function changeLogo(logo){
       Projects.changeLogo(logo , $scope)
     }
+
     /**********************/
 
     /**** Create Job ****/
@@ -84,6 +104,7 @@
       })
     }
     /**********************/
+
 
   }
 
