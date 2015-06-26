@@ -47,14 +47,14 @@
       });
 
     }
-
+    /**** Compute Progress Ratio in the Project ****/
     function progress(){
-        var tasks_num = $scope.projId.project_tasks.length;
-        var done_num = 0;
-        if (tasks_num === 0){
-          $scope.progress_ratio = 0;
-        }
-        else{
+      var tasks_num = $scope.projId.project_tasks.length;
+      var done_num = 0;
+      if (tasks_num === 0){
+        $scope.progress_ratio = 0;
+      }
+      else{
         for (var i = 0; i < tasks_num; i++){
           if ($scope.projId.project_tasks[i].is_done === true){
             done_num++;
@@ -63,18 +63,20 @@
         $scope.progress_ratio = Math.floor((done_num/tasks_num)*100);
       }
     }
-      /**** Change Logo ****/
-      $scope.$watch('logo', function () {
-          if($scope.logo==null || $scope.logo==undefined || $scope.logo==''){
-              $( ".sjqclass").attr("disabled", 'disabled' )
-          }
-          else{
-              $(".sjqclass").removeAttr( 'disabled' );
-          }
-      });
-      function changeLogo(logo){
-          Projects.changeLogo(logo , $scope)
-        }
+    /**********************/
+
+    /**** Change Logo ****/
+    $scope.$watch('logo', function () {
+      if($scope.logo==null || $scope.logo==undefined || $scope.logo==''){
+        $( ".sjqclass").attr("disabled", 'disabled' )
+      }
+      else{
+        $(".sjqclass").removeAttr( 'disabled' );
+      }
+    });
+    function changeLogo(logo){
+      Projects.changeLogo(logo , $scope)
+    }
 
     /**********************/
 
