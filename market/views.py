@@ -130,17 +130,19 @@ class UploadAppPicture(APIView):
         user = request.user
         if not user:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        photo = request.FILES['file']
+        photo = request.data['file']
         if photo:
             try:
                 app = App.objects.get(id=pk)
-                app.picture = photo
+                app.picture.save(photo.name, photo)
                 app.save()
+                print "object saved successfully\n" + app.picture.url
+                print "Photo size is: " + str(photo._size)
+                return Response(status=status.HTTP_200_OK)
                 # serializer = AppSerializer(data=request.data)
             except App.DoesNotExist:
-                return Response(status=status.HTTP_400_BAD_REQUEST)
-            # return Response(data=serializer.data , status=status.HTTP_200_OK)
-            return Response(status=status.HTTP_200_OK)
+                return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class UploadAppFile(APIView):
@@ -150,15 +152,14 @@ class UploadAppFile(APIView):
         user = request.user
         if not user:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        app_file = request.FILES['file']
+        app_file = request.data['file']
         if app_file:
             try:
                 app = App.objects.get(id=pk)
-                app.uploaded_file = app_file
+                app.uploaded_file.save(app_file.name, app_file)
                 app.save()
                 # serializer = AppSerializer(data=request.data)
             except App.DoesNotExist:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             # return Response(data=serializer.data , status=status.HTTP_200_OK)
             return Response(status=status.HTTP_200_OK)
-
