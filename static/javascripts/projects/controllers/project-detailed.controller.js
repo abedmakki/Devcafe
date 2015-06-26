@@ -64,6 +64,7 @@
       function createJob(){
               Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc).success(function(){
                   $('#CreateJob').modal('hide')
+                  $.notify("Congratulation\nsuccess adding a new job", "success");
               })
       }
 
@@ -76,7 +77,12 @@
 
       /**** Resolve Job's request ****/
       function resolveRequest(reqID,yn){
-              Projects.resolveRequest(reqID,yn).success(function(){})
+              Projects.resolveRequest(reqID,yn).success(function(){
+                $.notify("Congratulation\nsuccess accepting a new contributer for job", "success");
+              })
+                  .error(function(){
+                    $.notify("Sorry\nError in accepting a new contributer for job", "error");
+                  })
       }
       /**********************/
 
