@@ -31,7 +31,7 @@
 
     function assignTask(contributor_id, title, description) {
 
-      console.log($scope.projId.contributors.length);
+      // console.log($scope.projId.contributors.length);
 
 
       Projects.assign(contributor_id, title, description).success(function(data, status, headers, config) {
@@ -39,46 +39,46 @@
           if ($scope.projId.contributors[i].id === contributor_id) {
             $scope.projId.contributors[i].tasks.push(data);
             $scope.vm.description = "";
-            $scope.vm.title = "";            
+            $scope.vm.title = "";
           }
         }
       });
 
     }
 
-      /**** Change Logo ****/
-      $scope.$watch('logo', function () {
-          if($scope.logo==null || $scope.logo==undefined || $scope.logo==''){
-              $( ".sjqclass").attr("disabled", 'disabled' )
-          }
-          else{
-              $(".sjqclass").removeAttr( 'disabled' );
-          }
-      });
-      function changeLogo(logo){
-          Projects.changeLogo(logo , $scope)
+    /**** Change Logo ****/
+    $scope.$watch('logo', function () {
+      if($scope.logo==null || $scope.logo==undefined || $scope.logo==''){
+        $( ".sjqclass").attr("disabled", 'disabled' )
       }
-      /**********************/
-
-      /**** Create Job ****/
-      function createJob(){
-              Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc).success(function(){
-                  $('#CreateJob').modal('hide')
-              })
+      else{
+        $(".sjqclass").removeAttr( 'disabled' );
       }
+    });
+    function changeLogo(logo){
+      Projects.changeLogo(logo , $scope)
+    }
+    /**********************/
 
-      $('#CreateJob').on('hide.bs.modal', function (e) {
-                        $scope.creJob.$setPristine();
-                        $scope.jName=null;$scope.jDesc=null;
-                        $('#job-name').focus()
-                    })
-      /**********************/
+    /**** Create Job ****/
+    function createJob(){
+      Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc).success(function(){
+        $('#CreateJob').modal('hide')
+      })
+    }
 
-      /**** Resolve Job's request ****/
-      function resolveRequest(reqID,yn){
-              Projects.resolveRequest(reqID,yn).success(function(){})
-      }
-      /**********************/
+    $('#CreateJob').on('hide.bs.modal', function (e) {
+      $scope.creJob.$setPristine();
+      $scope.jName=null;$scope.jDesc=null;
+      $('#job-name').focus()
+    })
+    /**********************/
+
+    /**** Resolve Job's request ****/
+    function resolveRequest(reqID,yn){
+      Projects.resolveRequest(reqID,yn).success(function(){})
+    }
+    /**********************/
 
   }
 
