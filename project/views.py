@@ -25,7 +25,7 @@ class ProjectList(generics.ListCreateAPIView):
                           description=request.data['description'],
                           plan=request.data.get('plan', ''), PM=request.user)
         project.save()
-        serializer = ProjectSerializer(project)
+        serializer = ProjectSerializer(project,context={'request': request})
         Contributor.objects.create(
             user=self.request.user,
             project=project,

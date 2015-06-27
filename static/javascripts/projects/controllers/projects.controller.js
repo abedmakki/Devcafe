@@ -23,6 +23,7 @@
   function ProjectsController($http, $location, $scope, $rootScope, $routeParams, Projects) {
             //var userid = Userapp.getAccId();      //we don't need it any more
             var vm = this;
+            vm.startProject = startProject;
             var createdProjId = null;
             // var applyForJob = applyForJob;
             
@@ -36,6 +37,13 @@
               Projects.applyForJob(jobId);
             }
 
+
+            function startProject(){
+                Projects.startProject($scope.ptitle,$scope.pDesc).success(function(data){
+                    var createdProjId = data.id;
+                    $location.path('/projects/'+createdProjId+'/');
+                })
+            }
             // $rootScope.$watch('searchQuery', function() {
             //   $scope.search = $rootScope.searchQuery;
             // });

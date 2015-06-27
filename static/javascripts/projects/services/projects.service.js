@@ -28,7 +28,8 @@
       createJob: createJob,
       viewRequest: viewRequest,
       resolveRequest: resolveRequest,
-      markTaskDone: markTaskDone
+      markTaskDone: markTaskDone,
+      startProject: startProject
       };
 
     return Projects;
@@ -152,6 +153,13 @@
       function markTaskDone(taskId){
           return $http.post('/projects/make_tasks_done/'+taskId+'/', {
           })
+      }
+
+      function startProject(title, description) {
+        return $http.post('/projects/', {
+            title: title,
+            description: description
+        });
       }
 
   }
