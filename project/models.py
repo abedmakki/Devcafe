@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Project(models.Model):
     PM = models.ForeignKey(User)
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=1500)
     plan = models.TextField(blank=True, null=True)
     logo = models.ImageField(upload_to='project_images', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
