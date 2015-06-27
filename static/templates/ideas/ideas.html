@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | orderBy : '-likes' | filter: search">
+<div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | filter: search">
   <h2 style="display:inline">{{item.title}}</h2> by <a href="/profile"> {{item.owner}} </a>
   <br/>
   <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
@@ -40,9 +40,9 @@
   Tweet</a>
 
   <br />
-  <button ng-click="vm.LikeIdea(item.id)" ng-init="liked='Like'" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
-    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-    {{liked}} {{item.likes}}
+  <button ng-click="vm.LikeIdea(item.id)" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
+    {{item.likes}}&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+    {{item.is_liked ? 'unlike ':'like'}} &nbsp;
   </button>
   <!-- Start Comment Form -->
   <div class="comments">
