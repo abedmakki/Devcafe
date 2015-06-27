@@ -39,7 +39,7 @@
                                 <div class="row">
                                     <!-- <h4>{{appId.comments.length}} Comments</h4> -->
                                     <h4><ng-pluralize count="appId.comments.length" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
-                                    <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in appId.comments | orderBy : 'timestamp'">
+                                    <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in comments | orderBy : 'timestamp'">
                                         <div class="comment media">
                                             <div class="panel-heading">
                                                 <div class="pull-left">

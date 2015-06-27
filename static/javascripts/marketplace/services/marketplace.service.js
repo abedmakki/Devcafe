@@ -44,9 +44,7 @@
     function comment(id, text) {
       return $http.post('/market/' + id + '/add_comment/', {
         text: text
-      }).then(function() {
-        window.location = '/market/'+ id;
-      });
+      })
     }
 
     function rate(id, value) {

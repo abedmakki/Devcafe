@@ -79,7 +79,9 @@ class AddComment(APIView):
         comment = PostAppCommentSerializer(data=request.data)
         if comment.is_valid():
             comment.save(app=app, owner=request.user)
-            return Response(comment.data, status=status.HTTP_201_CREATED)
+            comments = AppComment.objects.filter(app_id=pk)
+            serializer = AppCommentSerializer(comments , many=True)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         return Response(comment.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
