@@ -22,6 +22,12 @@
         $scope.$watch('search', function() {
             $rootScope.searchQuery = $scope.search;
         });
+
+        $rootScope.$on("$locationChangeStart", function(event, next, current) { 
+            $('.searchInput').val('');
+            $rootScope.searchQuery = "";
+        });
+
         /**
         * @name logout
         * @desc Log the user out
