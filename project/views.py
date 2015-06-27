@@ -146,6 +146,7 @@ class ResolveRequests(APIView):
                     # Contributor.objects.create(job=job, user=req.owner, project=job.project, is_pm=False)
                     contr.save()
                     serializer = ContributorSerializer(contr)
+                    req.delete()
                     return Response(data=serializer.data, status=status.HTTP_201_CREATED)
                 else:
                     # job is already taken
