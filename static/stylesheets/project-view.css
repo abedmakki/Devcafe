@@ -29,3 +29,14 @@ footer {
 	background-color:cadetblue;
 	border-radius: 5px;
 }
+
+.projects-splitter{
+	margin-bottom:20px;
+}
+
+.proj-image{
+	max-width:438px;
+	max-height:144px;
+	overflow:hidden;
+	border-radius:3px
+}
