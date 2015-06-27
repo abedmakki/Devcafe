@@ -47,7 +47,7 @@
                     <div class="col-lg-12">
                         <ul class="list-unstyled" ng-repeat="task in mytasks">
                             <li>Task Title: {{task.title}}, Task Description: {{task.description}}</li>
-                            <button ng-click="vm.markAsDone(task.id)" class="taskDone{{ task.id }} btn btn-xs" ng-class="{true: 'btn-success', false: 'btn-danger'}[task.is_done]"><span class="taskDoneIco{{ task.id }} glyphicon" ng-class="{true: 'glyphicon-ok', false: 'glyphicon-remove'}[task.is_done]" ng-click="vm.markAsDone(task.id)"></span></button>
+                            <button ng-click="vm.markAsDone(task.id)" class="taskDone{{ task.id }} btn btn-xs" ng-class="{true: 'btn-success', false: 'btn-danger'}[task.is_done]"><span class="taskDoneIco{{ task.id }} glyphicon" ng-class="{true: 'glyphicon-ok', false: 'glyphicon-remove'}[task.is_done]"></span></button>
                         </ul>
                     </div>
                 </div>
