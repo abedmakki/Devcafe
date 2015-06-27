@@ -22,7 +22,9 @@
                             <li ng-class="{ active:tab.isSet(2) }">
                                 <a href="" ng-click="tab.setTab(2)">Reviews</a>
                             </li>
+                            <button type="submit" class="btn btn-success pull-right" ng-click="vm.ChoosePaymentMethod(appId.id)">Buy</button>
                         </ul>
+                        <br/>
                         <div ng-show="tab.isSet(1)">
                             <blockquote>{{appId.description}}</blockquote>
                         </div>
@@ -80,7 +82,6 @@
                        -->
                     </section>
                 </div>
-                <button type="submit" class="btn btn-success" style="margin-top: 1%" ng-click="vm.ChoosePaymentMethod(appId.id)">Buy</button>
             </div>
         </div>
     </div>
