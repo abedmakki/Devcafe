@@ -23,6 +23,7 @@
       // console.log(data);
       $scope.appId = data;
       $scope.appIdRating = data.avg_rating;
+      $scope.comments =$scope.appId.comments;
       // console.log($scope.appId.avg_rating);
       // $scope.$watch("rating", function(){
       //   console.log($scope.rating);
@@ -49,7 +50,9 @@
       var id = item;
       // console.log(item);
       // console.log(text);
-      Market.comment(id, text);
+      Market.comment(id, text).success(function(data, status, headers, config){
+          $scope.comments = data
+      })
     }
 
     function ChoosePaymentMethod(id) {

@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     # begin django-allauth apps
     # The Django sites framework is required
     'django.contrib.sites',
+    'django_extensions',
 
     'allauth',
     'allauth.account',

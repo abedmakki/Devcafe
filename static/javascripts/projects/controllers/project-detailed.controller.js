@@ -6,18 +6,21 @@
   .module('devcafe.projects.controllers')
   .controller('ProjectDetailedController', ProjectDetailedController);
 
-  ProjectDetailedController.$inject = ['$http', '$location','$scope', '$routeParams', 'Projects'];
+  ProjectDetailedController.$inject = ['$http', '$location', '$scope', '$routeParams', 'Projects'];
 
   function ProjectDetailedController($http, $location, $scope, $routeParams, Projects) {
     var vm = this;
     vm.assignTask = assignTask;
     vm.changeLogo = changeLogo;
+    var progress_ratio = 0;
     vm.createJob = createJob;
     vm.resolveRequest = resolveRequest;
+    vm.markAsDone = markAsDone;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
       $scope.projId = data;
+      progress();
     })
 
     Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
@@ -45,6 +48,23 @@
       });
 
     }
+    /**** Compute Progress Ratio in the Project ****/
+    function progress(){
+      var tasks_num = $scope.projId.project_tasks.length;
+      var done_num = 0;
+      if (tasks_num === 0){
+        $scope.progress_ratio = 0;
+      }
+      else{
+        for (var i = 0; i < tasks_num; i++){
+          if ($scope.projId.project_tasks[i].is_done === true){
+            done_num++;
+          }
+        }
+        $scope.progress_ratio = Math.floor((done_num/tasks_num)*100);
+      }
+    }
+    /**********************/
 
     /**** Change Logo ****/
     $scope.$watch('logo', function () {
@@ -58,6 +78,7 @@
     function changeLogo(logo){
       Projects.changeLogo(logo , $scope)
     }
+
     /**********************/
 
     /**** Create Job ****/
@@ -84,6 +105,36 @@
       })
     }
     /**********************/
+
+    /**** make task Done ****/
+    function markAsDone(taskId){
+        var index = function(tid) {
+            for (var i = 0, len = $scope.projId.project_tasks.length; i < len; i++)
+                if ($scope.projId.project_tasks[i].id === tid)
+                    return i;}
+      var taskbtn = $('.taskDone'+taskId);var taskicon = $('.taskDoneIco'+taskId);
+      taskicon.removeClass('glyphicon-ok').removeClass('glyphicon-remove').addClass('glyphicon-refresh');
+      if(taskbtn.hasClass('btn-success'))$('.taskDone'+taskId).switchClass('btn-success','btn-danger')
+      else taskbtn.switchClass('btn-danger','btn-success')
+      Projects.markTaskDone(taskId).success(function(data, status, headers, config){
+        if(data.is_done){
+          $.notify("Congratulation\nsuccess updating task as done",{ position:"bottom right" ,className:"success"});
+          taskbtn.switchClass('btn-danger','btn-success');
+          taskicon.switchClass('glyphicon-refresh','glyphicon-ok');
+        }
+        else{
+          $.notify("Congratulation\nsuccess updating task as Un-done",{ position:"bottom right" ,className:"success"});
+          taskbtn.switchClass('btn-success','btn-danger');
+          taskicon.switchClass('glyphicon-refresh','glyphicon-remove');
+        }
+        $scope.projId.project_tasks[index(taskId)].is_done=data.is_done;
+        progress();
+      }).error(function(){
+        $.notify("Sorry\nError in updating task as done",{ position:"bottom right" });
+      })
+    }
+    /**********************/
+
 
   }
 

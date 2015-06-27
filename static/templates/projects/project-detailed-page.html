@@ -46,8 +46,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <ul class="list-unstyled" ng-repeat="task in mytasks">
-                            <li>Task Title: {{task.title}}, Task Description: {{task.description}}, Done: {{task.is_done}}</li>
-                            <input type="checkbox" ng-model="task[$index]" ng-checked="{{task.is_done}}"/>
+                            <li>Task Title: {{task.title}}, Task Description: {{task.description}}</li>
+                            <button ng-click="vm.markAsDone(task.id)" class="taskDone{{ task.id }} btn btn-xs" ng-class="{true: 'btn-success', false: 'btn-danger'}[task.is_done]"><span class="taskDoneIco{{ task.id }} glyphicon" ng-class="{true: 'glyphicon-ok', false: 'glyphicon-remove'}[task.is_done]"></span></button>
                         </ul>
                     </div>
                 </div>
@@ -70,6 +70,21 @@
                             <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,1)">Accept</button>
                             <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,0)">Reject</button>
                         </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+
+        <div class="col-md-4">
+
+            <!-- Blog Categories Well -->
+            <div class="well">
+                <h2>Progress</h2>
+                <div class="row">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="progress_ratio" aria-valuemin="0" aria-valuemax="100" style="width:{{progress_ratio}}%">{{progress_ratio}}% Complete
+                        </div>
                     </div>
                 </div>
             </div>

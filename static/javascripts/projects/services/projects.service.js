@@ -27,7 +27,8 @@
       changeLogo: changeLogo,
       createJob: createJob,
       viewRequest: viewRequest,
-      resolveRequest: resolveRequest
+      resolveRequest: resolveRequest,
+      markTaskDone: markTaskDone
       };
 
     return Projects;
@@ -145,6 +146,11 @@
 
       function resolveRequest(reqID,yn){
           return $http.post('/projects/resolve/'+reqID+'/'+yn+'/', {
+          })
+      }
+
+      function markTaskDone(taskId){
+          return $http.post('/projects/make_tasks_done/'+taskId+'/', {
           })
       }
 

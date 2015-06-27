@@ -165,12 +165,32 @@ class ViewMyTasks(APIView):
     def get(self, request, pk):
         try:
             project = Project.objects.get(id=pk)
-            contributor = Contributor.objects.get(user=request.user,
+            if request.user == project.PM:
+                task = Task.objects.filter(project=project)
+            else:
+                contributor = Contributor.objects.get(user=request.user,
                                                   project=project)
-            task = Task.objects.filter(project=project, issued_to=contributor)
+                task = Task.objects.filter(project=project, issued_to=contributor)
             serializer = TaskSerializer(task, many=True)
             return Response(serializer.data)
         except Contributor.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+class MakeTaskDone(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def post(self , request , pk):
+        try:
+            task = Task.objects.get(id=pk)
+            proj = Project.objects.get(id=task.project_id)
+            if request.user == proj.PM or request.user == task.issued_to.user:
+                task.is_done=not task.is_done
+                task.save()
+                serializer = TaskSerializer(task)
+                return Response(data=serializer.data,status=status.HTTP_200_OK)
+            else:
+                return Response(status=status.HTTP_401_UNAUTHORIZED)
+        except Task.DoesNotExist or Project.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
