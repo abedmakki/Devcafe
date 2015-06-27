@@ -32,7 +32,7 @@
                             <div class="well">
                                 <form class="form-group" ng-submit="vm.AddComment(appId.id, text)">
                                     <div class="text-right">
-                                        <input type="text" class="form-control" ng-model="text" required="true" ng-minlength="1" ng-focus data-content="Valid Comment"></input>
+                                        <input id="addcomment" type="text" class="form-control" ng-model="text" required="true" ng-minlength="1" ng-focus data-content="Valid Comment"></input>
                                         <button type="submit" class="btn btn-success" style="margin-top: 1%">Leave a Review</button>
                                     </div>
                                     <div ng-init="star.rating = appIdRating"></div>
@@ -41,7 +41,7 @@
                                 </form>
                                 <div class="row">
                                     <!-- <h4>{{appId.comments.length}} Comments</h4> -->
-                                    <h4><ng-pluralize count="appId.comments.length" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
+                                    <h4><ng-pluralize count="comments.length" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
                                     <div style="height:auto" class="comments-list panel panel-default" ng-repeat="comment in comments | orderBy : 'timestamp'">
                                         <div class="comment media">
                                             <div class="panel-heading">
