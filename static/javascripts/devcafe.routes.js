@@ -25,9 +25,9 @@
         controllerAs: 'vm',
         templateUrl: '/static/templates/userapp/login.html'
     }).when('/', {
-        controller: 'IndexController',
+        controller: 'IdeasController',
         controllerAs: 'vm',
-        templateUrl: '/static/templates/layout/index.html'
+        templateUrl: '/static/templates/ideas/ideas.html'
     }).when('/ideas', {
         controller: 'IdeasController',
         controllerAs: 'vm',
@@ -68,7 +68,7 @@
         controller: 'ProjectDetailedController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/projects/project-detailed-page.html'
-    }).otherwise('/')
+    }).otherwise('/ideas')
 }
 })();
 
