@@ -26,7 +26,7 @@
             vm.startProject = startProject;
             var createdProjId = null;
             // var applyForJob = applyForJob;
-            
+            $scope.islogged = $rootScope.login
             
             Projects.all().success(function(data, status, headers, config) {
               $scope.projects = data;

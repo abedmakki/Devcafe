@@ -51,7 +51,8 @@
       // console.log(item);
       // console.log(text);
       Market.comment(id, text).success(function(data, status, headers, config){
-          $scope.comments = data
+          $scope.comments = data;
+          $('#addcomment').val('');
       })
     }
 

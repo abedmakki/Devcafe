@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from ideas.serializers import IdeaSerializer, IdeaCommentSerializer, PostIdeaCommentSerializer, RateIdeaSerializer
 from ideas.models import Idea, IdeaComment, IdeaRating, IdeaLike
-from rest_framework import generics
+from rest_framework import generics , filters
 from rest_framework import permissions
 from rest_framework.views import APIView
 from ideas.permissions import IsOwnerOrReadOnly
@@ -13,6 +13,8 @@ from django.db.models import Avg
 class IdeaList(generics.ListCreateAPIView):
     queryset = Idea.objects.all()
     serializer_class = IdeaSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering = ('-likes',)
     permission_classes = (IsOwnerOrReadOnly, permissions.IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
@@ -111,9 +113,11 @@ class Like(APIView):
             own_like = IdeaLike.objects.filter(owner=request.user, idea=idea)
             for like in own_like:
                 like.delete()
-                return Response(status=status.HTTP_200_OK)
+                idea = Idea.objects.get(id=pk)
+                return Response(data={"op": False , "count":idea.likes},status=status.HTTP_200_OK)
             IdeaLike.objects.create(owner=request.user, idea=idea)
-            return Response(status=status.HTTP_200_OK)
+            idea = Idea.objects.get(id=pk)
+            return Response(data={"op": True , "count":idea.likes},status=status.HTTP_200_OK)
             # else:
         except Exception, e:
             raise e
