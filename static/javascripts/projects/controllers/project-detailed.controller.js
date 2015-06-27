@@ -15,6 +15,7 @@
     var progress_ratio = 0;
     vm.createJob = createJob;
     vm.resolveRequest = resolveRequest;
+    vm.markAsDone = markAsDone;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
@@ -101,6 +102,35 @@
         $.notify("Congratulation\nsuccess accepting a new contributer for job",{ position:"bottom right" ,className:"success"});
       }).error(function(){
         $.notify("Sorry\nError in accepting a new contributer for job",{ position:"bottom right" });
+      })
+    }
+    /**********************/
+
+    /**** make task Done ****/
+    function markAsDone(taskId){
+        var index = function(tid) {
+            for (var i = 0, len = $scope.projId.project_tasks.length; i < len; i++)
+                if ($scope.projId.project_tasks[i].id === tid)
+                    return i;}
+      var taskbtn = $('.taskDone'+taskId);var taskicon = $('.taskDoneIco'+taskId);
+      taskicon.removeClass('glyphicon-ok').removeClass('glyphicon-remove').addClass('glyphicon-refresh');
+      if(taskbtn.hasClass('btn-success'))$('.taskDone'+taskId).switchClass('btn-success','btn-danger')
+      else taskbtn.switchClass('btn-danger','btn-success')
+      Projects.markTaskDone(taskId).success(function(data, status, headers, config){
+        if(data.is_done){
+          $.notify("Congratulation\nsuccess updating task as done",{ position:"bottom right" ,className:"success"});
+          taskbtn.switchClass('btn-danger','btn-success');
+          taskicon.switchClass('glyphicon-refresh','glyphicon-ok');
+        }
+        else{
+          $.notify("Congratulation\nsuccess updating task as Un-done",{ position:"bottom right" ,className:"success"});
+          taskbtn.switchClass('btn-success','btn-danger');
+          taskicon.switchClass('glyphicon-refresh','glyphicon-remove');
+        }
+        $scope.projId.project_tasks[index(taskId)].is_done=data.is_done;
+        progress();
+      }).error(function(){
+        $.notify("Sorry\nError in updating task as done",{ position:"bottom right" });
       })
     }
     /**********************/
