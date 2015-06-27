@@ -8,7 +8,7 @@ from general.models import Comment, Tag
 class Idea(models.Model):
     owner = models.ForeignKey(User)
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=1500)
+    description = models.CharField(max_length=5000)
     timestamp = models.DateTimeField(auto_now=True)
     likes = models.PositiveSmallIntegerField(default=0)
     avg_rating = models.FloatField(default=0)

@@ -9,7 +9,7 @@ class App(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(max_length=50)
     picture = models.ImageField(upload_to='market_images', blank=True, null=True)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=5000)
     avg_rating = models.FloatField(default=0)
     slug = models.SlugField(unique=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagged_apps')
