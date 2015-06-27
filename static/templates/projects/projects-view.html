@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12" >
             <h1  class="page-header pull-left proj-header">Projects <small>Climb the Mountain</small></h1>
-            <button data-toggle="modal" data-target="#StartProj" class="btn btn-primary page-header" style="margin-left: 2px;float: right" ng-click="">Start Project</button>
+            <button data-toggle="modal" data-target="#StartProj" class="btn btn-primary page-header" style="margin-left: 2px;float: right" ng-show="islogged">Start Project</button>
         </div>
     </div>
     <div class="row projects-splitter" ng-repeat="project in projects">
@@ -92,7 +92,7 @@
     <!-- /.row -->
 </div>
 
-<!--Add job modal -->
+<!--Add project modal -->
 <div class="modal fade" id="StartProj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -119,5 +119,5 @@
     </div>
   </div>
 </div>
-<!--End  Add job modal -->
+<!--End  Add project modal -->
 
