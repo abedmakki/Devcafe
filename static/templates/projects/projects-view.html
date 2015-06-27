@@ -32,11 +32,17 @@
             <p>{{job.description}}</p>            
             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#applyModel">Apply</button> 
 
-            <div class="modal fade" id="applyModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div ng-repeat="job in project.jobs | filter:{is_taken:false}" ng-hide="project.is_pm">
+            <p>{{job.name}}</p>
+            <p>{{job.description}}</p>            
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#applyModel{{job.id}}">Apply</button>
+
+
+            <div class="modal fade" id="applyModel{{job.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel{{job.id}}" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Apply for job {{job.name}}</h4>
+                    <h4 class="modal-title" id="myModalLabel{{job.id}}">Apply for job {{job.name}}</h4>
                 </div>
                 <div class="modal-body">
                 /*call fn*/ 

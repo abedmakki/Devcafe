@@ -2,19 +2,33 @@
 <link href="css/blog-post.css" rel="stylesheet">
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
--->
+ -->
 <!-- Page Content -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 ">
             <h1>{{projId.title}}</h1>
+            <div>
             <p class="lead">
                 by <a href="#">{{projId.PM.username}}</a>
             </p>
+            <!--project options drop menu  -->
+            <div class="dropdown" ng-if="projId.is_pm">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Options
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#" data-toggle="modal" data-target="#logo" ng-if="projId.is_pm">Change Logo</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#CreateJob" ng-if="projId.is_pm">Create Job</a></li>
+                </ul>
+            </div>
+            <!--End   project options drop menu  -->
+            </div>
             <hr>
             <p><span class="glyphicon glyphicon-time"></span> {{projId.timestamp | date:'yyyy-MM-dd HH:mm'}}</p>
             <hr>
-            <img class="proj-logo img-responsive" ng-src="{{projId.logo}}" alt="No Picture" style="max-width: 150px;max-height: 150px">
+            <img class="proj-logo img-responsive" ng-src="{{projId.logo}}" alt="No Picture" style="width:800px; height:300px">
             <hr>
             <p class="lead">{{projId.description}}</p>
             <hr>
@@ -33,12 +47,37 @@
                     <div class="col-lg-12">
                         <ul class="list-unstyled" ng-repeat="task in mytasks">
                             <li>Task Title: {{task.title}}, Task Description: {{task.description}}, Done: {{task.is_done}}</li>
+                            <input type="checkbox" ng-model="task[$index]" ng-checked="{{task.is_done}}"/>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- /.row -->
         </div>
+
+        <!-- view reques -->
+        <div class="col-md-4">
+
+            <!-- Blog Categories Well -->
+            <div class="well" ng-if="projId.is_pm">
+                <h2>View Requests</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-unstyled" ng-repeat="request in requests">
+                            <li>
+                            Job Title: {{request.job.name}}, Contributor applied: {{request.owner.username}}
+                            </li>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,1)">Accept</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,0)">Reject</button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+
+
+
         <div class="col-md-4">
         <div class="well">
             <h2>Contributors</h2>
@@ -46,7 +85,6 @@
             <strong>{{contributor.user}}</strong>
 
             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}" ng-if="projId.is_pm">Assign Task</button>
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#logo" ng-if="projId.is_pm">Change Logo</button>
 
             <!-- start popup here -->
             <div class="modal fade" id="assignTaskModel{{contributor.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -100,7 +138,7 @@
             <div class="modal-body">
 
                 <button type="file" ngf-select="" ng-model="logo" accept="image/*" class="btn-sm">Browse pictures</button>
-                </br>
+                <br>
                 <div>
                     <img ng-show="logo[0] != null" ngf-thumbnail="logo[0]" class="thumb" style="height: 100px;width: 110px;">
                 </div>
@@ -127,4 +165,36 @@
         </div>
     </div>
 </div>
+
 <!--End change logo modal -->
+
+
+<!--Add job modal -->
+<div class="modal fade" id="CreateJob" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Create New Job</h4>
+      </div>
+      <div class="modal-body">
+        <form name="creJob">
+          <div class="form-group">
+            <label for="job-name" class="control-label">Name:</label>
+            <input type="text" class="form-control" id="job-name" ng-model="jName" required="true" ng-focus data-content="Valid job name required">
+          </div>
+          <div class="form-group">
+            <label for="Description" class="control-label">Description:</label>
+            <textarea class="form-control" id="Description" ng-model="jDesc" required="true" ng-focus data-content="Valid job description required"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary sjq1class" ng-disabled="creJob.$invalid" data-dismiss="modal" ng-click="vm.createJob()">Submit Job</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End  Add job modal -->
+
