@@ -12,14 +12,22 @@
   * @desc Define valid application routes
   */
   function config($routeProvider) {
-    $routeProvider.when('/profile', {    //na2es/profile/number . ":num" de s7.. eslam
+    $routeProvider.when('/profile', {
         controller: 'ProfileController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/userapp/profile.html'
+    }).when('/users/:id', {
+        controller: 'ViewAnotherProfileController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/userapp/profile.html'
     }).when('/register', {
         controller: 'RegisterController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/userapp/register.html'
+    }).when('/editprofile', {
+        controller: 'ProfileController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/userapp/edit.html'
     }).when('/login', {
         controller: 'LoginController',
         controllerAs: 'vm',

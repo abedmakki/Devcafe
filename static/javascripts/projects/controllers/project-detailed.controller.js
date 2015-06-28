@@ -6,9 +6,9 @@
   .module('devcafe.projects.controllers')
   .controller('ProjectDetailedController', ProjectDetailedController);
 
-  ProjectDetailedController.$inject = ['$http', '$location', '$scope', '$routeParams', 'Projects'];
+  ProjectDetailedController.$inject = ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Projects'];
 
-  function ProjectDetailedController($http, $location, $scope, $routeParams, Projects) {
+  function ProjectDetailedController($http, $location, $scope, $routeParams, $timeout, Projects) {
     var vm = this;
     vm.assignTask = assignTask;
     vm.changeLogo = changeLogo;
@@ -26,8 +26,7 @@
       vm.isPm = data.is_pm;
       progress();
 
-
-
+      $timeout(function() {
       if (vm.isContributor) {
         Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
           $scope.mytasks = data;
@@ -35,7 +34,9 @@
           vm.isContributor = false;
         })
       };
+    });
 
+    $timeout(function() {
       if (vm.isPm) {
         Projects.viewRequest($routeParams.id).success(function(data, status, headers, config) {
           $scope.requests = data;
@@ -43,7 +44,7 @@
           vm.isPm = false;
         })
       };
-
+    });
     })
 
 

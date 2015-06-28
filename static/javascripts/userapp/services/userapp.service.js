@@ -20,6 +20,7 @@
         var Userapp = {
             login: login,
             register: register,
+            edit: edit,
             getAuthenticatedAccount: getAuthenticatedAccount,
             isAuthenticated: isAuthenticated,
             setAuthenticatedAccount: setAuthenticatedAccount,
@@ -47,6 +48,25 @@
                 window.location = '/login';
             });
         }
+
+        
+        function edit(id, username, first_name, last_name, birth_date, password, country, email, address) {
+            // console.log("services");
+            return $http.patch('/users/' + id + '/', {
+                username: username,
+                first_name: first_name,
+                last_name: last_name,
+                birth_date: birth_date,
+                password: password,
+                country: country,
+                email: email,
+                address: address,
+                picture: null
+            }).then(function() {
+                window.location = '/profile';
+            });
+        }
+        //end here
 
 
         function login(username, password , remember , scp) {
