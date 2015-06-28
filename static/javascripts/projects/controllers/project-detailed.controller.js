@@ -45,6 +45,10 @@
         })
       };
     });
+    }).error(function(data, status, headers, config) {
+      if (status === 404) {
+        $location.path('/projects');
+      };
     })
 
 

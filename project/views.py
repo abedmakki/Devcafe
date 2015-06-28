@@ -40,9 +40,12 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
         IsOwnerOrReadOnly, permissions.IsAuthenticatedOrReadOnly)
 
     def get(self, request, pk):
-        project = Project.objects.get(pk=pk)
-        serializer = ProjectSerializer(project, context={'request': request})
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        try:
+            project = Project.objects.get(pk=pk)
+            serializer = ProjectSerializer(project, context={'request': request})
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except Exception:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
