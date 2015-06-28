@@ -1,10 +1,5 @@
-<!-- <link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/blog-post.css" rel="stylesheet">
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
- -->
 <!-- Page Content -->
-<div class="container">
+<div class="container" style="margin-top: 10px">
     <div class="row">
         <div class="col-lg-8 ">
             <h1>{{projId.title}}</h1>
@@ -13,14 +8,14 @@
                 by <a href="#">{{projId.PM.username}}</a>
             </p>
             <!--project options drop menu  -->
-            <div class="dropdown" ng-if="projId.is_pm">
+            <div class="dropdown" ng-if="vm.isPm">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Options
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#" data-toggle="modal" data-target="#logo" ng-if="projId.is_pm">Change Logo</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#CreateJob" ng-if="projId.is_pm">Create Job</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#logo" ng-if="vm.isPm">Change Logo</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#CreateJob" ng-if="vm.isPm">Create Job</a></li>
                 </ul>
             </div>
             <!--End   project options drop menu  -->
@@ -38,7 +33,7 @@
         <!-- assign tasks part -->
         
 <!-- Blog Sidebar Widgets Column -->
-<div class="col-md-4">
+<div class="col-md-4" ng-if="isContributor">
 
             <!-- Blog Categories Well -->
             <div class="well">
@@ -59,7 +54,7 @@
         <div class="col-md-4">
 
             <!-- Blog Categories Well -->
-            <div class="well" ng-if="projId.is_pm">
+            <div class="well" ng-if="vm.isPm">
                 <h2>View Requests</h2>
                 <div class="row">
                     <div class="col-lg-12">
@@ -67,8 +62,8 @@
                             <li>
                             Job Title: {{request.job.name}}, Contributor applied: {{request.owner.username}}
                             </li>
-                            <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,1)">Accept</button>
-                            <button type="button" class="btn btn-primary btn-xs" ng-if="projId.is_pm" ng-click="vm.resolveRequest(request.id,0)">Reject</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,1)">Accept</button>
+                            <button type="button" class="btn btn-primary btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,0)">Reject</button>
                         </ul>
                     </div>
                 </div>
@@ -99,7 +94,7 @@
             <div ng-repeat="contributor in projId.contributors">
             <strong>{{contributor.user}}</strong>
 
-            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}" ng-if="projId.is_pm">Assign Task</button>
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}" ng-if="vm.isPm">Assign Task</button>
 
             <!-- start popup here -->
             <div class="modal fade" id="assignTaskModel{{contributor.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

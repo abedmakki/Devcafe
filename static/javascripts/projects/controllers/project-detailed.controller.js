@@ -16,20 +16,39 @@
     vm.createJob = createJob;
     vm.resolveRequest = resolveRequest;
     vm.markAsDone = markAsDone;
+    var isContributor = false;
+    var isPm = false;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
       $scope.projId = data;
+      window.isContributor = data.is_contributor;
+      window.isPm = data.is_pm;
       progress();
     })
 
-    Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
-      $scope.mytasks = data;
-    })
 
-    Projects.viewRequest($routeParams.id).success(function(data, status, headers, config) {
-      $scope.requests = data;
-    })
+    // $scope.$watch('isContributor', function() {
+      if (window.isContributor) {
+        Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
+          $scope.mytasks = data;
+        }).error(function(data, status, headers, config) {
+          window.isContributor = false;
+        })
+      };
+    // })
+
+    // $scope.$watch('isPm', function() {
+      if (window.isPm) {
+        Projects.viewRequest($routeParams.id).success(function(data, status, headers, config) {
+          $scope.requests = data;
+        }).error(function(data, status, headers, config) {
+          window.isPm = false;
+        })
+      };
+    // })
+
+    
 
 
     function assignTask(contributor_id, title, description) {
