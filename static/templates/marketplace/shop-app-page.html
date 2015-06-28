@@ -22,18 +22,18 @@
                             <li ng-class="{ active:tab.isSet(2) }">
                                 <a href="" ng-click="tab.setTab(2)">Reviews</a>
                             </li>
-                            <button type="submit" class="btn btn-success pull-right" ng-click="vm.ChoosePaymentMethod(appId.id)">Buy</button>
+                            <button type="submit" class="btn btn-success pull-right" ng-click="vm.ChoosePaymentMethod(appId.id)" ng-show="login">Buy</button>
                         </ul>
                         <br/>
                         <div ng-show="tab.isSet(1)">
-                            <blockquote>{{appId.description}}</blockquote>
+                            <p style="font-size:15px">{{appId.description}}</p>
                         </div>
                         <div ng-show="tab.isSet(2)">
                             <div class="well">
                                 <form class="form-group" ng-submit="vm.AddComment(appId.id, text)">
                                     <div class="text-right">
-                                        <input id="addcomment" type="text" class="form-control" ng-model="text" required="true" ng-minlength="1" ng-focus data-content="Valid Comment"></input>
-                                        <button type="submit" class="btn btn-success" style="margin-top: 1%">Leave a Review</button>
+                                        <input id="addcomment" type="text" class="form-control" ng-model="text" required="true" ng-minlength="1" ng-focus data-content="Valid Comment" ng-disabled="!login"></input>
+                                        <button type="submit" class="btn btn-success" style="margin-top: 1%" ng-disabled="!login">Leave a Review</button>
                                     </div>
                                     <div ng-init="star.rating = appIdRating"></div>
                                     <div ng-init="rating = star.rating + 1"></div>
