@@ -1,6 +1,6 @@
 <div class="idea-body">
   <div ng-controller="PostIdeaController as postIdeaCtrl">
-    <form ng-submit="postIdeaCtrl.PostIdea()">
+    <form ng-submit="postIdeaCtrl.PostIdea()" ng-show="login">
 
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Enter your title here" style="margin:20px 270px 0px 270px; width: 57%; height: 30px;" ng-model="postIdeaCtrl.title" required="true" ng-minlength="1" ng-focus data-content="Valid Title"> </input>
@@ -40,7 +40,7 @@
   Tweet</a>
 
   <br />
-  <button ng-click="vm.LikeIdea(item.id)" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px">
+  <button ng-click="vm.LikeIdea(item.id)" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px" ng-show="login">
     {{item.likes}}&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
     {{item.is_liked ? 'unlike ':'like'}} &nbsp;
   </button>
@@ -65,7 +65,7 @@
     <!-- Start Comment Form -->
     <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
 
-    <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)">
+    <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)" ng-show="login">
 
       <div class="form-group">
         <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
@@ -78,7 +78,7 @@
       </ul>
     </form>
 
-    <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-click="vm.Realize(item.title, item.description)">Realize</button>
+    <button type="submit" class="btn btn-success" style="width:80px; height:30px;" ng-click="vm.Realize(item.title, item.description)" ng-show="login">Realize</button>
   </div>
   <!-- End Comment Form -->
 </div>
