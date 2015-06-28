@@ -1,54 +1,61 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <h1>Edit</h1>
+    <h1>Edit Profile</h1>
 
     <div class="well">
-      <form role="form" ng-submit="vm.edit()">
+    <!-- ng-submit="vm.edit(vm.email, vm.username, vm.password, vm.firstname, vm.lastname, vm.birthdate, vm.country, vm.address)" -->
+      <form name="registerForm" role="form" >
+
         <div class="form-group">
           <label for="register__email">Email</label>
-          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="ex. john@devcafe.com" />
+          <input type="email" class="form-control" id="register__email" name="register__email" ng-model="vm.email" placeholder="ex. john@devcafe.com" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" data-content="Valid Email address required" ng-focus/>
         </div>
 
         <div class="form-group">
           <label for="register__username">Username</label>
-          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="ex. john" />
+          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="ex. john" ng-minlength="3" ng-focus data-content="Valid Username required min (3)chars">
+        </div>
+
+        <div class="form-group">
+          <label for="register__password">Password</label>
+          <input type="password" class="form-control" id="register__password" ng-model="vm.password" placeholder="ex. thisisnotgoogleplus" ng-minlength="6" ng-focus data-content="Valid Password required min (6)chars"/>
         </div>
 
         <div class="form-group">
           <label for="register__firstname">Firstname</label>
-          <input type="text" class="form-control" id="register__firstname" ng-model="vm.firstname" placeholder="ex. Mina" />
+          <input type="text" class="form-control" id="register__firstname" ng-model="vm.firstname" placeholder="ex. Mina" ng-focus data-content="Valid first name required"/>
         </div>
 
         <div class="form-group">
           <label for="register__lastname">lastname</label>
-          <input type="text" class="form-control" id="register__lastname" ng-model="vm.lastname" placeholder="ex. courdova" />
+          <input type="text" class="form-control" id="register__lastname" ng-model="vm.lastname" placeholder="ex. courdova" ng-focus data-content="Valid Last name required"/>
         </div>
 
 
         <div class="form-group">
           <label for="register__birthdate">Birthdate</label>
-          <input type="text" class="form-control" id="register__birthdate" ng-model="vm.birthdate" placeholder="ex. 1992-10-20" />
+          <input type="text" class="form-control" id="register__birthdate" ng-model="vm.birthdate" placeholder="ex. 1992-10-20" jqdatepicker ng-pattern='/^((\d{4})-(\d{2})-(\d{2}))$/' ng-focus data-content="Valid Date required yyyy-mm-dd"/>
         </div>
 
         <div class="form-group">
           <label for="register__country">country</label>
-          <input type="text" class="form-control" id="register__country" ng-model="vm.country" placeholder="ex. Egypt" />
+          <country-select id="register__country" class="form-control" ng-model="vm.country"></country-select>
         </div>
 
         <div class="form-group">
           <label for="register__address">address</label>
-          <input type="text" class="form-control" id="register__firstname" ng-model="vm.address" placeholder="ex. adam" />
-        </div>
-
-
-        <div class="form-group">
-          <label for="register__password">Password</label>
-          <input type="password" class="form-control" id="register__password" ng-model="vm.password" placeholder="ex. thisisnotgoogleplus" />
+          <input type="text" class="form-control" id="register__firstname" ng-model="vm.address" placeholder="ex. st.adress, cairo" ng-focus data-content="Valid Address required"/>
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>
+         <!-- ng-disabled="registerForm.$invalid" -->
+          <button type="submit" class="btn btn-primary" ng-click="vm.edit(vm.email, vm.username, vm.password, vm.firstname, vm.lastname, vm.birthdate, vm.country, vm.address)">Submit</button>
+          <a href="profile"><button type="button" class="btn btn-default">Cancel</button></a>
         </div>
+
+<!-- here
+        na2es, placeholders bel mwgood asln -->
+
       </form>
     </div>
   </div>
