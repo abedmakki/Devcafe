@@ -24,6 +24,10 @@
         controller: 'RegisterController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/userapp/register.html'
+    }).when('/editprofile', {
+        controller: 'ProfileController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/userapp/edit.html'
     }).when('/login', {
         controller: 'LoginController',
         controllerAs: 'vm',
