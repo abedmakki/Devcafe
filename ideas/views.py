@@ -43,37 +43,23 @@ class IdeaCommentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class AddComment(APIView):
-    # authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def post(self, request, pk):
         idea = Idea.objects.get(id=pk)
         comment = PostIdeaCommentSerializer(data=request.data)
         if comment.is_valid():
-            # comment.object.idea = idea
-            # comment.object.owner = request.user
             comment.save(idea=idea, owner=request.user)
             return Response(comment.data, status=status.HTTP_201_CREATED)
         return Response(comment.errors, status=status.HTTP_400_BAD_REQUEST)
-        # comment = IdeaComment.objects.create(text=request.data, owner=request.user, idea=idea)
-        # comment.save()
-
-        # return Response(IdeaCommentSerializer(comment), status=status.HTTP_201_CREATED)
+ 
 
 class Rate(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def post(self, request, pk):
-        idea = Idea.objects.get(id=pk)
-        # rating = RateIdeaSerializer(data=request.data)
-        # if rating.is_valid():
-        #     rating.save(idea=idea, owner=request.user)
-        #     total_rating = idea.ratings.all().aggregate(Avg('value'))
-        #     idea.avg_rating = total_rating['value__avg']
-        #     idea.save()
-        #     return Response(rating.data, status=status.HTTP_201_CREATED)
-        # return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
         try:
+            idea = Idea.objects.get(id=pk)
             own_rating = IdeaRating.objects.filter(owner=request.user, idea=idea)
             for rate in own_rating:
                 rate.delete()
@@ -83,7 +69,7 @@ class Rate(APIView):
                     total_rating = idea.ratings.all().aggregate(Avg('value'))
                     idea.avg_rating = total_rating['value__avg']
                     idea.save()
-                    return Response(rating.data, status=status.HTTP_201_CREATED)
+                    return Response(rating.data, status=status.HTTP_200_OK)
                 return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
             rating = RateIdeaSerializer(data=request.data)
             if rating.is_valid():
@@ -93,8 +79,8 @@ class Rate(APIView):
                 idea.save()
                 return Response(rating.data, status=status.HTTP_201_CREATED)
             return Response(rating.errors, status=status.HTTP_400_BAD_REQUEST)
-        except Exception, e:
-            raise e
+        except Exception:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 
@@ -102,14 +88,8 @@ class Like(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def post(self, request, pk):
-        idea = Idea.objects.get(id=pk)
-        # if (own_like = IdeaLike.objects.get(owner=request.user, idea=idea).exists()):
-        #     own_like.delete()
-        #     return Response(status=status.HTTP_200_SUCCESS)
-        # else:
-        #     IdeaLike.objects.create(owner=request.user, idea=idea)
-        #     return Response(status=status.HTTP_200_SUCCESS)
         try:
+            idea = Idea.objects.get(id=pk)
             own_like = IdeaLike.objects.filter(owner=request.user, idea=idea)
             for like in own_like:
                 like.delete()
@@ -119,7 +99,5 @@ class Like(APIView):
             idea = Idea.objects.get(id=pk)
             return Response(data={"op": True , "count":idea.likes},status=status.HTTP_200_OK)
             # else:
-        except Exception, e:
-            raise e
-            # IdeaLike.objects.create(owner=request.user, idea=idea)
-            # return Response(status=status.HTTP_200_OK)
+        except Exception:
+            return Response(status=status.HTTP_404_NOT_FOUND)
