@@ -9,10 +9,13 @@
 
     angular.module('devcafe').run(run);
 
-    run.$inject = ['$http'];
+    run.$inject = ['$http','$rootScope','$cookies'];
 
-    function run($http) {
+    function run($http , $rootScope , $cookies) {
         $http.defaults.xsrfHeaderName = 'X-CSRFToken';
         $http.defaults.xsrfCookieName = 'csrftoken';
+        if(!!$cookies.authenticatedAccount){
+            $rootScope.login=true;
+        }else{$rootScope.login=false;}
     }
 }) ();

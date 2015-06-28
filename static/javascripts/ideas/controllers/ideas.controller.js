@@ -68,9 +68,14 @@
     var hasLiked = false;
 
     function LikeIdea(item) {
-        var idea = item;
-        console.log(item);
-        Ideas.like(idea);
+        Ideas.like(item).success(function(data){
+        var index = function(tid) {
+            for (var i = 0, len = $scope.ideas.length; i < len; i++)
+                if ($scope.ideas[i].id === tid)
+                    return i;}
+        $scope.ideas[index(item)].is_liked = data.op;
+        $scope.ideas[index(item)].likes = data.count;
+        })
     }
 
 

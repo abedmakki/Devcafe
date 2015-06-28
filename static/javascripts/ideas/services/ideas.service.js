@@ -91,9 +91,7 @@
 
     function like(id) {
       return $http.post('/ideas/' + id + '/like/', {
-      }).then(function() {
-        window.location = '/ideas';
-      });
+      })
     }
 
 

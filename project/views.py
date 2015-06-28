@@ -173,9 +173,10 @@ class ViewMyTasks(APIView):
                                                   project=project)
                 task = Task.objects.filter(project=project, issued_to=contributor)
             serializer = TaskSerializer(task, many=True)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Contributor.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 class MakeTaskDone(APIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)

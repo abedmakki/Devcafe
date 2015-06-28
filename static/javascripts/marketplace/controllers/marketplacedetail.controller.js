@@ -9,9 +9,9 @@
     .module('devcafe.marketplace.controllers')
     .controller('MarketplaceDetailController', MarketplaceDetailController);
 
-  MarketplaceDetailController.$inject = ['$http', '$location','$scope', '$routeParams', 'Market'];
+  MarketplaceDetailController.$inject = ['$http', '$location','$scope', '$routeParams', '$rootScope', 'Market'];
 
-  function MarketplaceDetailController($http, $location, $scope, $routeParams, Market) {
+  function MarketplaceDetailController($http, $location, $scope, $routeParams, $rootScope, Market) {
     var vm = this;
     vm.AddComment = AddComment;
     vm.ChoosePaymentMethod = ChoosePaymentMethod;
@@ -37,10 +37,13 @@
     })
 
     //get the current user
-    $http.get('/users/profile/').success(function(data, status, headers, config) {
-        $scope.user = data;
-        // console.log($scope.user);
+    if ($rootScope.login) {
+      $http.get('/users/profile/').success(function(data, status, headers, config) {
+          $scope.user = data;
       })
+    } else {
+      $scope.user = null;
+    }
 
     $scope.rateFunction = function(id, value) {
       Market.rate(id, value);
@@ -51,7 +54,8 @@
       // console.log(item);
       // console.log(text);
       Market.comment(id, text).success(function(data, status, headers, config){
-          $scope.comments = data
+          $scope.comments = data;
+          $('#addcomment').val('');
       })
     }
 

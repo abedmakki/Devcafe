@@ -16,26 +16,38 @@
     vm.createJob = createJob;
     vm.resolveRequest = resolveRequest;
     vm.markAsDone = markAsDone;
+    vm.isContributor = false;
+    vm.isPm = false;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
       $scope.projId = data;
+      vm.isContributor = data.is_contributor;
+      vm.isPm = data.is_pm;
       progress();
     })
 
-    Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
-      $scope.mytasks = data;
-    })
 
-    Projects.viewRequest($routeParams.id).success(function(data, status, headers, config) {
-      $scope.requests = data;
-    })
+      if (vm.isContributor) {
+        Projects.view_my_tasks($routeParams.id).success(function(data, status, headers, config) {
+          $scope.mytasks = data;
+        }).error(function(data, status, headers, config) {
+          vm.isContributor = false;
+        })
+      };
+
+      if (vm.isPm) {
+        Projects.viewRequest($routeParams.id).success(function(data, status, headers, config) {
+          $scope.requests = data;
+        }).error(function(data, status, headers, config) {
+          vm.isPm = false;
+        })
+      };
+
+    
 
 
     function assignTask(contributor_id, title, description) {
-
-      // console.log($scope.projId.contributors.length);
-
 
       Projects.assign(contributor_id, title, description).success(function(data, status, headers, config) {
         for(var i = 0; i < $scope.projId.contributors.length; i++) {
@@ -78,8 +90,8 @@
     function changeLogo(logo){
       Projects.changeLogo(logo , $scope)
     }
-
     /**********************/
+
 
     /**** Create Job ****/
     function createJob(){

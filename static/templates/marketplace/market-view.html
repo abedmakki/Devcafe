@@ -17,7 +17,7 @@
         <div class="col-md-12">
           <div id="carousel-generic" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
               <li data-target="#carousel-generic" data-slide-to="1"></li>
               <li data-target="#carousel-generic" data-slide-to="2"></li>
             </ol>
@@ -43,7 +43,7 @@
 
       </div>
 
-      <a class="btn btn-success" style="margin-bottom:10px" href="/market/post/new">Post New Item</a>
+      <a class="btn btn-success" style="margin-bottom:10px" href="/market/post/new" ng-disabled="!login">Post New Item</a>
 
       <div class="row">
         <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="product in apps | filter:{tags: vm.filterName.name||undefined}">

@@ -26,11 +26,15 @@
             vm.startProject = startProject;
             var createdProjId = null;
             // var applyForJob = applyForJob;
-            
+            $scope.islogged = $rootScope.login
             
             Projects.all().success(function(data, status, headers, config) {
               $scope.projects = data;
             })
+
+            $rootScope.$watch('searchQuery', function() {
+              $scope.search = $rootScope.searchQuery;
+            });
 
             $scope.applyForJob = function(jobId){
               // console.log(jobId);
