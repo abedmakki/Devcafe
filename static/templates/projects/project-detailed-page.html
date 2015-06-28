@@ -8,7 +8,7 @@
                 by <a href="/users/{{projId.PM.id}}">{{projId.PM.username}}</a>
             </p>
             <!--project options drop menu  -->
-            <div class="dropdown" ng-if="vm.isPm">
+            <div style="float: right;" class="dropdown" ng-if="vm.isPm">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Options
                     <span class="caret"></span>
@@ -19,8 +19,9 @@
                 </ul>
             </div>
             <!--End   project options drop menu  -->
-            </div>
             <hr>
+            </div>
+
             <p><span class="glyphicon glyphicon-time"></span> {{projId.timestamp | date:'yyyy-MM-dd HH:mm'}}</p>
             <hr>
             <img class="proj-logo img-responsive" ng-src="{{projId.logo}}" alt="No Picture" style="width:800px; height:300px">
@@ -88,7 +89,7 @@
 
 
 
-        <div class="col-md-4">
+        <div class="col-md-4 pull-right">
         <div class="well">
             <h2>Contributors</h2>
             <div ng-repeat="contributor in projId.contributors">
