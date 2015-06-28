@@ -41,7 +41,7 @@ class IdeaSerializer(serializers.ModelSerializer):
     comments = IdeaCommentSerializer(many=True, read_only=True)
     # tags = TagSerializer(many=True, read_only=True)
     tags = serializers.StringRelatedField(many=True)
-    owner = serializers.StringRelatedField()
+    owner = UserSerializer(read_only=True)
     is_liked = serializers.SerializerMethodField('get_like_status')
 
     def get_like_status(self, obj):

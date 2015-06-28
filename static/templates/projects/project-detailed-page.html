@@ -5,7 +5,7 @@
             <h1>{{projId.title}}</h1>
             <div>
             <p class="lead">
-                by <a href="#">{{projId.PM.username}}</a>
+                by <a href="/users/{{projId.PM.id}}">{{projId.PM.username}}</a>
             </p>
             <!--project options drop menu  -->
             <div class="dropdown" ng-if="vm.isPm">
@@ -33,7 +33,7 @@
         <!-- assign tasks part -->
         
 <!-- Blog Sidebar Widgets Column -->
-<div class="col-md-4" ng-if="isContributor">
+<div class="col-md-4" ng-if="vm.isContributor">
 
             <!-- Blog Categories Well -->
             <div class="well">
@@ -60,7 +60,7 @@
                     <div class="col-lg-12">
                         <ul class="list-unstyled" ng-repeat="request in requests">
                             <li>
-                            Job Title: {{request.job.name}}, Contributor applied: {{request.owner.username}}
+                            Job Title: {{request.job.name}}, Applicant: <a href="/users/{{request.owner.id}}">{{request.owner.username}}</a>
                             </li>
                             <button type="button" class="btn btn-primary btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,1)">Accept</button>
                             <button type="button" class="btn btn-primary btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,0)">Reject</button>

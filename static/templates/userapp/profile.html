@@ -3,12 +3,12 @@
     <div id="userphoto" style="text-align: center;">
       <img ng-src="{{user.picture}}" alt="No Image set" style="height: 100px;width: 100px;" class="profilepic">
     </br>
-    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#profilePhotoModel">change photo</button>
+    <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#profilePhotoModel" ng-hide="otherProfile">change photo</button>
   </div>
   <h1>{{user.username}}</h1>
 
   <section id="bio">
-    <p>Welcome to Our DevCafe.</p>
+    <p>Welcome to DevCafe.</p>
 
   </section>
 
@@ -38,7 +38,7 @@
 </section>
 </div><!-- @end #content -->
 
-<div>
+<div ng-hide="otherProfile">
   <a href="/editprofile" class="setting"><h2>Edit<img src="../../stylesheets/images/edit.png" alt="*Edit*"></h2></a>
 </div>
 
