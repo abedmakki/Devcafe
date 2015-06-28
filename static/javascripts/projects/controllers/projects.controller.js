@@ -32,6 +32,10 @@
               $scope.projects = data;
             })
 
+            $rootScope.$watch('searchQuery', function() {
+              $scope.search = $rootScope.searchQuery;
+            });
+
             $scope.applyForJob = function(jobId){
               // console.log(jobId);
               Projects.applyForJob(jobId);

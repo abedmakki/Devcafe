@@ -10,7 +10,7 @@
             <button data-toggle="modal" data-target="#StartProj" class="btn btn-primary page-header" style="margin-left: 2px;float: right" ng-show="islogged">Start Project</button>
         </div>
     </div>
-    <div class="row projects-splitter" ng-repeat="project in projects">
+    <div class="row projects-splitter" ng-repeat="project in projects | filter: search">
         <div class="col-md-7">
             <a href="#">
                 <div class="proj-image">
