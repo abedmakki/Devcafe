@@ -25,7 +25,7 @@
       vm.isContributor = data.is_contributor;
       vm.isPm = data.is_pm;
       progress();
-    })
+
 
 
       if (vm.isContributor) {
@@ -44,7 +44,7 @@
         })
       };
 
-    
+    })
 
 
     function assignTask(contributor_id, title, description) {
