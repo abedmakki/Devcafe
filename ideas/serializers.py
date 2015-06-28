@@ -38,24 +38,24 @@ class RateIdeaSerializer(serializers.ModelSerializer):
 
 
 class IdeaSerializer(serializers.ModelSerializer):
-    modelslug = serializers.SlugField(read_only=True, source='slug')
     comments = IdeaCommentSerializer(many=True, read_only=True)
     # tags = TagSerializer(many=True, read_only=True)
     tags = serializers.StringRelatedField(many=True)
     owner = serializers.StringRelatedField()
-    is_liked = serializers.SerializerMethodField('get_pm_status')
-    # rating = serializers.StringRelatedField(many=True)
-    # ratings = IdeaRatingSerializer(many=True, read_only=True)
-    def get_pm_status(self, obj):
+    is_liked = serializers.SerializerMethodField('get_like_status')
+
+    def get_like_status(self, obj):
         user = self.context['request'].user
         try:
-            idealiked = IdeaLike.objects.get(owner=user, idea=obj)
-            if idealiked:
+            if user.is_authenticated():
+                idealiked = IdeaLike.objects.get(owner=user, idea=obj)
                 return True
+            return False
         except IdeaLike.DoesNotExist:
             return False
+    
     class Meta:
         model = Idea
-        fields = ('id', 'owner', 'title', 'description', 'timestamp', 'likes', 'modelslug', 'comments', 'tags', 'avg_rating','is_liked')
+        fields = ('id', 'owner', 'title', 'description', 'timestamp', 'likes', 'comments', 'tags', 'avg_rating', 'is_liked')
         read_only_fields = ('owner','is_liked',)
 
