@@ -16,6 +16,7 @@
     vm.createJob = createJob;
     vm.resolveRequest = resolveRequest;
     vm.markAsDone = markAsDone;
+    vm.release = release;
     vm.isContributor = false;
     vm.isPm = false;
 
@@ -152,8 +153,13 @@
         $.notify("Sorry\nError in updating task as done",{ position:"bottom right" });
       })
     }
-    /**********************/
+    /*************************/
 
+    /**** release project ****/
+    function release(title , desc){
+        $location.path('/market/post/new/release/'+title+'/'+desc);
+    }
+    /*************************/
 
   }
 

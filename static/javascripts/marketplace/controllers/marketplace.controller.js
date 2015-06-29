@@ -9,11 +9,23 @@
   .module('devcafe.marketplace.controllers')
   .controller('MarketplaceController', MarketplaceController);
 
-  MarketplaceController.$inject = ['$http', '$location','$scope', 'Upload', 'Market'];
+  MarketplaceController.$inject = ['$http', '$location','$scope', 'Upload', 'Market' , '$routeParams'];
 
-  function MarketplaceController($http, $location, $scope, Upload, Market) {
+  function MarketplaceController($http, $location, $scope, Upload, Market , $routeParams) {
     var vm = this;
     var createdAppId = null;
+
+    /******* release from project **************/
+    var projTitle =$routeParams.title;
+    var projDesc =$routeParams.desc;
+    if(projTitle!=null && projTitle!='' && projTitle!=undefined){
+        if(projDesc!=null && projDesc!='' && projDesc!=undefined){
+            vm.appname = projTitle;
+            vm.description = projDesc;
+        }
+    }
+    /*****************************************/
+
     Market.all().success(function(data, status, headers, config) {
       $scope.apps = data;
     })
@@ -41,8 +53,9 @@
       Market.create(name, price, description, picture).success(function(data, status, headers, config) {
         window.createdAppId = data.id;
         console.log('Created app ID: ' + window.createdAppId);
+        $location.path('/market/post/new/upload');
       });
-      $location.path('/market/post/new/upload');
+
     }
 
     $scope.upload = function (pics, files) {
