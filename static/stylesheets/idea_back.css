@@ -29,3 +29,27 @@
 
 
 body { padding: 100px; }
+
+@media screen and (min-width: 1200px){
+  .content-size{
+    width:100%;
+  }
+}
+
+@media screen and (max-width: 959px){
+  .content-size{
+    width:100%;
+  }
+}
+
+@media screen and (max-width: 640px){
+  .content-size{
+    width:100%;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .content-size{
+    width:100%;
+  }
+}
