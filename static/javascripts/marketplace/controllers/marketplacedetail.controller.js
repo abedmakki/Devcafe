@@ -17,6 +17,11 @@
     vm.ChoosePaymentMethod = ChoosePaymentMethod;
     vm.GetDeliveryInfo = GetDeliveryInfo;
     vm.Buy = Buy;
+
+    var xtdate = new Date();
+    xtdate.setHours(xtdate.getHours()+4);
+
+
     // var appId = null;
     // vm.Like = Like;
     Market.get($routeParams.id).success(function(data, status, headers, config) {
@@ -81,7 +86,7 @@
 	oneLine: true,
 	timeFormat: 'hh:mm TT',
     dateFormat: "dd/mm/yy",
-    minDate: new Date()
+    minDate: xtdate
 });
 
       function datetime(date){
