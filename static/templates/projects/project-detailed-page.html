@@ -80,7 +80,7 @@
 
             <!-- Blog Categories Well -->
             <div class="well" ng-if="vm.isContributor">
-                <h2>Progress</h2>
+                <h2>Progress <i class="fa fa-tasks"></i></h2>
                 <div class="row">
                     <div class="progress" style="background-color: #ffffff;border: 1px inset;">
                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="progress_ratio" aria-valuemin="0" aria-valuemax="100" style="width:{{progress_ratio}}%;color: #000;">{{progress_ratio}}% Complete
@@ -97,7 +97,7 @@
         <div class="well" ng-if="vm.isContributor">
             <h2>Contributors</h2>
             <div ng-repeat="contributor in projId.contributors">
-            <strong>{{contributor.user}}</strong>
+            <strong><i class="fa fa-user"></i> {{contributor.user}}</strong>
 
             <button type="button" class="btn btn-primary pull-right btn-xs" data-toggle="modal" data-target="#assignTaskModel{{contributor.id}}" ng-if="vm.isPm">Assign Task</button>
             <hr/>
