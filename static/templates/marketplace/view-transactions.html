@@ -2,7 +2,7 @@
   <div class="placeholder">
     <div class="panel panel-success">
       <div class="panel-heading">
-        <h3 class="panel-title text-center">Paid Transactions</h3>
+        <h3 class="panel-title text-center">Paid Transactions <i class="fa fa-check"></i></h3>
       </div>
     </div>
     <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:true}">
@@ -16,7 +16,7 @@
   <div class="placeholder">
     <div class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title text-center">Unpaid Transactions</h3>
+        <h3 class="panel-title text-center">Unpaid Transactions <i class="fa fa-times"></i></h3>
       </div>
     </div>
     <ul class="list-group" ng-repeat="transaction in transactions | filter:{paid:false}">
@@ -30,12 +30,12 @@
   <div class="placeholder">
     <div class="panel panel-info">
       <div class="panel-heading">
-        <h3 class="panel-title text-center">My Apps</h3>
+        <h3 class="panel-title text-center">My Apps <i class="fa fa-th"></i></h3>
       </div>
     </div>
     <ul class="list-group" >
       <li type="submit" ng-repeat="app in my_apps" class="list-group-item" style="padding-left: 1%" class="page-header">
-        <h2>App Name: <small>{{app.name}}</small> , Your Profit: <small>{{app.price*app.transactions}}</small></h2>
+        <h2>App Name: <small>{{app.name}}</small> , Price: <small>{{app.price}}</small> , No of transactions: <small>{{app.transactions}}</small> , Total Profit: <small>{{app.price*app.transactions}}</small> , Your Profit after 5% discount per transaction: <small>{{(app.price-.05*app.price)*app.transactions}}</small></h2>
       </li>
     </ul>
   </div>
