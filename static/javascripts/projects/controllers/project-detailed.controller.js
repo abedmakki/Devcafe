@@ -18,6 +18,7 @@
     vm.markAsDone = markAsDone;
     vm.isContributor = false;
     vm.isPm = false;
+    vm.quit = quit;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
@@ -157,6 +158,11 @@
     }
     /**********************/
 
+    function quit(id){
+      // console.log(id);
+      Projects.quit(id);
+      $location.path('/projects');
+    }
 
   }
 

@@ -19,6 +19,8 @@
                 </ul>
             </div>
             <!--End   project options drop menu  -->
+
+             <button type="button" class="btn btn-success pull-right btn-xs" ng-if="vm.isContributor" ng-hide="vm.isPm" ng-click="vm.quit(projId.id)">Quit Project</button>
             <hr>
             </div>
 
@@ -38,7 +40,7 @@
 
             <!-- Blog Categories Well -->
             <div class="well">
-                <h2>My Tasks</h2>
+                <h2>Tasks</h2>
                 <div class="row">
                     <div class="col-lg-12">
                         <ul class="list-unstyled" ng-repeat="task in mytasks">
@@ -120,6 +122,7 @@
                 <label for="create__description">Description: </label>
                 <input type="text" class="form-control" id="create__description" ng-model="vm.description" required="true" data-content="Valid Description required"/>
             </div>
+
 
             <!-- call fn -->
             <div class="form-group">
