@@ -57,9 +57,11 @@
         for(var i = 0; i < $scope.projId.contributors.length; i++) {
           if ($scope.projId.contributors[i].id === contributor_id) {
             $scope.projId.contributors[i].tasks.push(data);
+            $scope.projId.project_tasks=data
             $scope.mytasks = data
             $scope.vm.description = "";
             $scope.vm.title = "";
+            progress()
           }
         }
 
