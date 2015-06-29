@@ -14,12 +14,6 @@
   /**
   * @namespace ideasController
   */
-  // function ideasController($scope) {
-  //   var vm = this;
-
-  //   vm.columns = [];
-
-  //   activate();
   function IdeasController($http, $location, $scope, $rootScope, $routeParams, Ideas) {
             //var userid = Userapp.getAccId();      //we don't need it any more
             var vm = this;
