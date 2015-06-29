@@ -58,11 +58,7 @@
         home_no: hphone,
         phone_no: mobile,
         delivery_address: address,
-        delivery_time: ddate,
-        // home_no: "123456",
-        // phone_no: "654321",
-        // delivery_address: "sjfhfkfjk",
-        // delivery_time: "2015-07-20TZ12:50",
+        delivery_time: ddate
       });
     }
 
