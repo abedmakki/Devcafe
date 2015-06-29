@@ -41,7 +41,7 @@
       {{item.is_liked ? 'unlike ':'like'}} &nbsp;
     </button>
     <div style="float: right">
-    <div class="fb-share-button" data-href="/" data-layout="button" style="position: relative; top: 50%; transform: translateY(-10%);"></div>
+    <div class="fb-share-button" data-href="/ideas/{{item.id}}" data-layout="button_count" style="position: relative; top: 50%; transform: translateY(-10%);"></div>
     <a class="twitter-share-button" data-size="medium"
       href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.title}},DevCafe&url=/">
       Tweet</a>
