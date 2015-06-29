@@ -29,7 +29,8 @@
       viewRequest: viewRequest,
       resolveRequest: resolveRequest,
       markTaskDone: markTaskDone,
-      startProject: startProject
+      startProject: startProject,
+      quit: quit
       };
 
     return Projects;
@@ -161,6 +162,11 @@
             description: description
         });
       }
+
+
+    function quit(id){
+      return $http.post('/projects/' + id + '/quit/');
+    }
 
   }
 })();

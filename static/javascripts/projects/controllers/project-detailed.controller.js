@@ -19,6 +19,7 @@
     vm.release = release;
     vm.isContributor = false;
     vm.isPm = false;
+    vm.quit = quit;
 
 
     Projects.get($routeParams.id).success(function(data, status, headers, config) {
@@ -71,7 +72,12 @@
 
     /**** Compute Progress Ratio in the Project ****/
     function progress(){
-      var tasks_num = $scope.projId.project_tasks.length;
+      var tasks_num = 0;
+      if($scope.projId.project_tasks)
+        var tasks_num = $scope.projId.project_tasks.length;
+      // else
+      //   var tasks_num = 0;
+
       var done_num = 0;
       if (tasks_num === 0){
         $scope.progress_ratio = 0;
@@ -154,6 +160,16 @@
       })
     }
     /*************************/
+
+
+    /**** quit project ****/
+    function quit(id){
+      // console.log(id);
+      Projects.quit(id);
+      $location.path('/projects');
+    }
+    /*************************/
+
 
     /**** release project ****/
     function release(title , desc){

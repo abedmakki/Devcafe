@@ -71,6 +71,16 @@ class ProjectSerializer(serializers.ModelSerializer):
         read_only_fields = ('PM', 'posts', 'contributors', 'jobs', 'is_pm', 'is_contributor')
 
 
+class ProjectSerializerForNoncontibutor(serializers.ModelSerializer):
+    PM = UserSerializer(read_only=True)
+    jobs = JobSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Project
+        fields = ('id', 'PM', 'title', 'description', 'logo', 'timestamp', 'jobs')
+        read_only_fields = ('PM', 'jobs')
+
+
 class PostJobSerializer(serializers.ModelSerializer):
 
     class Meta:

@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>[0-9]+)/view_my_tasks/$', views.ViewMyTasks.as_view(), name='view-my-tasks'),
     url(r'^make_tasks_done/(?P<pk>[0-9]+)/$', views.MakeTaskDone.as_view(), name='update-task-done'),
     url(r'^changelogo/$', views.UploadProjectLogo.as_view(), name='project-change-logo'),
+    url(r'^(?P<pk>[0-9]+)/quit/$', views.Quit.as_view(), name='quit'),
 )
 
 
