@@ -1,0 +1,78 @@
+<div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;">
+  <h2 style="display:inline">{{item.title}}</h2> by <a href="/users/{{item.owner.id}}"> {{item.owner.username}} </a>
+  <br/>
+  <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
+
+  <div ng-controller="RatingIdeasController as RatingCtrl">
+    <div ng-init="star.rating = item.avg_rating == 0.0 ? 3 : item.avg_rating"></div>
+    <div ng-init="rating = star.rating"></div>
+    <div class="rating" star-rating rating-value="rating"
+    data-max="5" on-rating-selected="rateFunction(item.id, rating)"></div>
+  </div>      
+  <!-- <div width = "500">
+    <iframe width="500" height="281" src="https://www.youtube.com/embed/dpX5fq4kMnA" frameborder="0" allowfullscreen></iframe>
+  </div> -->
+
+  <br/>
+  <p class="clearfix">{{item.description}}</p>
+  <br />
+  <div style=" margin-bottom:5px">
+    <button ng-click="vm.LikeIdea(item.id)" class="btn btn-primary" style="width:100px; height:30px" ng-show="login">
+      {{item.likes}}&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+      {{item.is_liked ? 'unlike ':'like'}} &nbsp;
+    </button>
+    <a class="twitter-share-button" data-size="large"
+      href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.titles}}, devcafe&url=/">
+      Tweet</a>
+  </div>
+  <!-- Start Comment Form -->
+  <div class="comments">
+    <!-- <h4>{{item.comments.length}} Comments</h4> -->
+    <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
+    <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
+      <div class="comment media">
+        <div class="panel-heading" style="background-color: rgba(149, 171, 161, 0.13);">
+          <div class="pull-left">
+            <img class="avatar" ng-src={{comment.owner.picture}} alt="" height="50" width="50" />
+          </div>
+          <strong>Posted by <a href="/users/{{comment.owner.id}}">{{comment.owner.username}}</a></strong>
+          <br>
+          <small><span class="glyphicon glyphicon-calendar"></span>{{comment.timestamp | date:'yyyy-MM-dd HH:mm'}}</small>
+          <p>{{comment.text}}</p>
+        </div>
+
+      </div>
+    </div>
+    <!-- Start Comment Form -->
+    <!-- <p class="muted">Make sure you enter the (*) required information where indicated. HTML code is not allowed.</p>  -->
+
+    <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)" ng-show="login">
+
+      <div class="form-group">
+        <textarea rows="2" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
+      </div>
+
+      <ul>
+        <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button>  -->
+        <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-disabled="comment-form.$invalid">Comment</button>
+        <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Share</button>
+        <button type="submit" class="btn btn-success btnrel" style="width:95px; height:30px;float:right;border-radius:24px;letter-spacing:1px;font-weight:700;" ng-click="vm.Realize(item.title, item.description)" ng-show="login">REALIZE</button>
+          <style>
+              .btnrel {
+                  -webkit-box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
+                  -moz-box-shadow:    0px 3px 0px rgba(0, 0, 0, 0.3);
+                  box-shadow:         0px 3px 0px rgba(0, 0, 0, 0.3);
+              }
+              .btnrel:active {
+                  margin-top: 3px;
+                  margin-bottom: -3px;
+              }
+          </style>
+      </ul>
+    </form>
+
+
+  </div>
+  <!-- End Comment Form -->
+<!-- </div> -->
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

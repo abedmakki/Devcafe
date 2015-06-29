@@ -40,6 +40,10 @@
         controller: 'IdeasController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/ideas/ideas.html'
+    }).when('/ideas/:id', {
+        controller: 'IdeasController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/ideas/idea-detail.html'
     }).when('/market', {
         controller: 'MarketplaceController',
         controllerAs: 'vm',
