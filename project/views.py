@@ -221,3 +221,19 @@ class UploadProjectLogo(APIView):
             except proj.DoesNotExist:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
             return Response(data=serializer.data , status=status.HTTP_200_OK)
+
+
+class Quit(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def post(self, request, pk):
+        try:
+            project = Project.objects.get(id=pk)
+            contributor = Contributor.objects.get(user=request.user, project=project)
+            if project.PM == request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+            contributor.delete()
+            project.save()
+            return Response(status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
