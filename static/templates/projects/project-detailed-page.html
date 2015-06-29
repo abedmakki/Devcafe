@@ -1,7 +1,7 @@
 <!-- Page Content -->
 <div class="container" style="margin-top: 10px">
     <div class="row">
-        <div class="col-lg-8 ">
+        <div class="col-lg-8 content-size">
             <h1>{{projId.title}}</h1>
             <div>
             <p class="lead">
@@ -16,6 +16,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="#" data-toggle="modal" data-target="#logo" ng-if="vm.isPm">Change Logo</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#CreateJob" ng-if="vm.isPm">Create Job</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="" ng-if="vm.isPm" ng-click="vm.release(projId.title ,projId.description )">Release Product</a></li>
                 </ul>
             </div>
             <!--End   project options drop menu  -->
@@ -110,12 +111,12 @@
                     <h4 class="modal-title" id="myModalLabel">Assign Task</h4>
                 </div>
                 <div class="modal-body">
-                  <div style="margin:20px 270px;width:750px;height:500px;padding:10px;margin-bottom: 20px">
-                    <!-- here tany -->
 
+                    <!-- here tany -->
+<form name="assTask">
             <div class="form-group">
                 <label for="create__price">Title</label>
-                <input type="text" class="form-control" id="create__description" min="1" ng-model="vm.title" required="true" ng-focus data-content="Valid Title required"/>
+                <input type="text" class="form-control" id="create__title" min="1" ng-model="vm.title" required="true" ng-focus data-content="Valid Title required"/>
             </div>
 
             <div class="form-group">
@@ -126,10 +127,10 @@
 
             <!-- call fn -->
             <div class="form-group">
-                <button type="submit" class="btn btn-success" ng-click="vm.assignTask(contributor.id, vm.title, vm.description)">Done</button>
+                <button type="submit" ng-disabled="assTask.$invalid" class="btn btn-success" data-dismiss="modal" ng-click="vm.assignTask(contributor.id, vm.title, vm.description)">Done</button>
             </div>
             <!-- </form> -->
-        </div>
+</form>
     </div>
 </div>
 </div>
@@ -153,7 +154,7 @@
             </div>
             <div class="modal-body">
 
-                <button type="file" ngf-select="" ng-model="logo" accept="image/*" class="btn-sm">Browse pictures</button>
+                <button type="file" ngf-select="" ng-model="logo" accept="image/*" class="btn btn-success">Browse pictures</button>
                 <br>
                 <div>
                     <img ng-show="logo[0] != null" ngf-thumbnail="logo[0]" class="thumb" style="height: 100px;width: 110px;">

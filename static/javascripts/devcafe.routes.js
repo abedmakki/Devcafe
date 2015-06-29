@@ -60,6 +60,10 @@
         controller: 'MarketplaceController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/upload-page-info.html'
+    }).when('/market/post/new/release/:title/:desc', {
+        controller: 'MarketplaceController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/marketplace/upload-page-info.html'
     }).when('/market/post/new/upload', {
         controller: 'MarketplaceController',
         controllerAs: 'vm',

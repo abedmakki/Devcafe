@@ -95,7 +95,9 @@ class AssignTask(APIView):
             task = PostTaskSerializer(data=request.data)
             if task.is_valid():
                 task.save(project=contributor.project, issued_to=contributor)
-                return Response(task.data, status=status.HTTP_201_CREATED)
+                tasks = Task.objects.filter(project=contributor.project)
+                tasksser = TaskSerializer(tasks , many=True)
+                return Response(tasksser.data, status=status.HTTP_201_CREATED)
             return Response(task.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_404_NOT_FOUND)
         #return Response(status=status.HTTP_404_NOT_FOUND)
