@@ -35,20 +35,22 @@
   <br/>
   <p class="clearfix">{{item.description}}</p>
   <br />
-  <a class="twitter-share-button"
-  href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.titles}}, devcafe&url=/">
-  Tweet</a>
-
-  <br />
-  <button ng-click="vm.LikeIdea(item.id)" class="btn btn-primary" style="width:80px; height:30px; margin-bottom:5px" ng-show="login">
-    {{item.likes}}&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-    {{item.is_liked ? 'unlike ':'like'}} &nbsp;
-  </button>
+  <div style=" margin-bottom:5px">
+    <button ng-click="vm.LikeIdea(item.id)" class="btn btn-primary" style="width:100px; height:30px" ng-show="login">
+      {{item.likes}}&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+      {{item.is_liked ? 'unlike ':'like'}} &nbsp;
+    </button>
+    <a class="twitter-share-button" data-size="large"
+      href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.titles}}, devcafe&url=/">
+      Tweet</a>
+  </div>
   <!-- Start Comment Form -->
   <div class="comments">
     <!-- <h4>{{item.comments.length}} Comments</h4> -->
+    <div ng-init="showComments = false"></div>
     <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
-    <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
+    <a href="#" ng-click="showComments = !showComments">Show</a>
+    <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-show="showComments" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
       <div class="comment media">
         <div class="panel-heading" style="background-color: rgba(149, 171, 161, 0.13);">
           <div class="pull-left">
@@ -68,7 +70,7 @@
     <form name="comment-form" id="comment-form" class="form-group" ng-submit="vm.AddComment(item.id, item.name)" ng-show="login">
 
       <div class="form-group">
-        <textarea rows="3" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
+        <textarea rows="2" name="message" id="message" class="form-control" placeholder="Comment here ..." ng-model="item.name" required="true" ng-minlength="1" ng-focus data-content="Empty Comment"></textarea>
       </div>
 
       <ul>
@@ -93,5 +95,5 @@
 
   </div>
   <!-- End Comment Form -->
-</div>
+<!-- </div> -->
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
