@@ -48,8 +48,7 @@
   <div class="comments">
     <!-- <h4>{{item.comments.length}} Comments</h4> -->
     <div ng-init="showComments = false"></div>
-    <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
-    <a href="#" ng-click="showComments = !showComments">Show</a>
+    <a href="#" ng-click="showComments = !showComments"><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></a>
     <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-show="showComments" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
       <div class="comment media">
         <div class="panel-heading" style="background-color: rgba(149, 171, 161, 0.13);">
