@@ -67,7 +67,12 @@
     }
     /**** Compute Progress Ratio in the Project ****/
     function progress(){
-      var tasks_num = $scope.projId.project_tasks.length;
+      var tasks_num = 0;
+      if($scope.projId.project_tasks)
+        var tasks_num = $scope.projId.project_tasks.length;
+      // else
+      //   var tasks_num = 0;
+
       var done_num = 0;
       if (tasks_num === 0){
         $scope.progress_ratio = 0;

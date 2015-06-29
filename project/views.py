@@ -1,7 +1,7 @@
 from rest_framework.parsers import FileUploadParser
 from project.serializers import ProjectSerializer, PostSerializer, \
     TaskSerializer, PostJobSerializer, \
-    PostTaskSerializer, RequestSerializer , LogoSerializer , ContributorSerializer
+    PostTaskSerializer, RequestSerializer , LogoSerializer , ContributorSerializer, ProjectSerializerForNoncontibutor
 from project.models import Project, Post, Contributor, Task, Job, Request
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -43,7 +43,11 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
         try:
             project = Project.objects.get(pk=pk)
             serializer = ProjectSerializer(project, context={'request': request})
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
+            serializerForNonContributor = ProjectSerializerForNoncontibutor(project)
+            for contributor in project.contributors.all():
+                if request.user == contributor.user:
+                    return Response(data=serializer.data, status=status.HTTP_200_OK)
+            return Response(data=serializerForNonContributor.data, status=status.HTTP_200_OK)
         except Exception:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
