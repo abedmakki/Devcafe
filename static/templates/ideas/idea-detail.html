@@ -1,23 +1,4 @@
-<div class="idea-body content-size">
-  <div ng-controller="PostIdeaController as postIdeaCtrl">
-    <form ng-submit="postIdeaCtrl.PostIdea()" ng-show="login">
-
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Enter your title here" ng-model="postIdeaCtrl.title" required="true" ng-minlength="1" ng-focus data-content="Valid Title"> </input>
-      </div>
-
-      <div class="form-group">
-        <textarea class="form-group input-lg col-md-12" placeholder="Enter Description" ng-model="postIdeaCtrl.description" ng-focus ng-minlength="1"></textarea>
-      </div>
-      
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Spread</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div  class="content-size"style="margin:auto ;width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | filter: search">
+<div style="margin:20px 270px; width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;">
   <h2 style="display:inline">{{item.title}}</h2> by <a href="/users/{{item.owner.id}}"> {{item.owner.username}} </a>
   <br/>
   <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
@@ -47,9 +28,8 @@
   <!-- Start Comment Form -->
   <div class="comments">
     <!-- <h4>{{item.comments.length}} Comments</h4> -->
-    <div ng-init="showComments = false"></div>
-    <a href="#" ng-click="showComments = !showComments"><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></a>
-    <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-show="showComments" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
+    <h4><ng-pluralize count="{{item.comments.length}}" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize></h4>
+    <div style="height:auto ; width:auto" class="comments-list panel panel-default" ng-repeat="comment in item.comments | orderBy : 'timestamp'">
       <div class="comment media">
         <div class="panel-heading" style="background-color: rgba(149, 171, 161, 0.13);">
           <div class="pull-left">
@@ -96,4 +76,3 @@
   <!-- End Comment Form -->
 <!-- </div> -->
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-<style>.twitter-share-button{float: right;}</style>
