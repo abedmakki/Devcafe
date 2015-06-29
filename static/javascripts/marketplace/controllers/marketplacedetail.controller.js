@@ -17,6 +17,11 @@
     vm.ChoosePaymentMethod = ChoosePaymentMethod;
     vm.GetDeliveryInfo = GetDeliveryInfo;
     vm.Buy = Buy;
+
+    var xtdate = new Date();
+    xtdate.setHours(xtdate.getHours()+4);
+
+
     // var appId = null;
     // vm.Like = Like;
     Market.get($routeParams.id).success(function(data, status, headers, config) {
@@ -70,13 +75,26 @@
     }
 
     function Buy(id) {
-      // console.log(item);
-      // console.log(text);
       Market.buy(id, vm.firstname,
-       vm.lastname, vm.email, vm.address, vm.ddate, vm.mobile, vm.hphone).success(function(){
+       vm.lastname, vm.email, vm.address, datetime(vm.ddate), vm.mobile, vm.hphone).success(function(){
         $location.url('/market');
        });
     }
+
+   $('#delivery__deliverydate').datetimepicker({
+	controlType: 'select',
+	oneLine: true,
+	timeFormat: 'hh:mm TT',
+    dateFormat: "dd/mm/yy",
+    minDate: xtdate
+});
+
+      function datetime(date){
+           var vtime = $.datepicker.parseTime('hh:mm TT', date.slice(11), {})
+           var vdate = $.datepicker.parseDate('dd/mm/yy', date.slice(0, 10), {})
+           var findate = new Date(vdate.getFullYear(),vdate.getMonth(),vdate.getDate() , vtime.hour , vtime.minute)
+           return findate.toJSON()
+       }
 
   }
 })();
