@@ -20,7 +20,7 @@
 <div  class="content-size"style="margin:auto ;width:750px; height:auto; padding:10px; margin-bottom:20px; background-color:#fefefe; border:1px solid #fefefe; border-radius:4px;" ng-repeat="item in ideas | filter: search">
   <h2 style="display:inline">{{item.title}}</h2> by <a href="/users/{{item.owner.id}}"> {{item.owner.username}} </a>
   <br/>
-  <h5> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</h5>
+  <a href="/ideas/{{item.id}}"> <span class="glyphicon glyphicon-time"></span> {{item.timestamp | date:'yyyy-MM-dd HH:mm'}}</a>
 
   <div ng-controller="RatingIdeasController as RatingCtrl">
     <div ng-init="star.rating = item.avg_rating == 0.0 ? 3 : item.avg_rating"></div>
@@ -41,7 +41,7 @@
       {{item.is_liked ? 'unlike ':'like'}} &nbsp;
     </button>
     <div style="float: right">
-    <div class="fb-share-button" data-href="/ideas/{{item.id}}" data-layout="button" style="position: relative; top: 50%; transform: translateY(-10%);"></div>
+    <div class="fb-share-button" data-href="/" data-layout="button" style="position: relative; top: 50%; transform: translateY(-10%);"></div>
     <a class="twitter-share-button" data-size="medium"
       href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.title}},DevCafe&url=/">
       Tweet</a>
