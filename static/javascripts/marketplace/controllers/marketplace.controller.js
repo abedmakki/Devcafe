@@ -18,12 +18,13 @@
     /******* release from project **************/
     var projTitle =$routeParams.title;
     var projDesc =$routeParams.desc;
-    if(projTitle!=null && projTitle!='' && projTitle!=undefined){
-        if(projDesc!=null && projDesc!='' && projDesc!=undefined){
+    if(projTitle!=null && projTitle.replace(/\s+/g, '')!='' && projTitle!=undefined){
+        if(projDesc!=null && projDesc.replace(/\s+/g, '')!='' && projDesc!=undefined){
             vm.appname = projTitle;
             vm.description = projDesc;
         }
     }
+    else{$location.path('/market')}
     /*****************************************/
 
     Market.all().success(function(data, status, headers, config) {
