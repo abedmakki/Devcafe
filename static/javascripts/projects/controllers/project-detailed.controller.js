@@ -53,18 +53,21 @@
 
 
     function assignTask(contributor_id, title, description) {
-
       Projects.assign(contributor_id, title, description).success(function(data, status, headers, config) {
         for(var i = 0; i < $scope.projId.contributors.length; i++) {
           if ($scope.projId.contributors[i].id === contributor_id) {
             $scope.projId.contributors[i].tasks.push(data);
+            $scope.projId.project_tasks=data
+            $scope.mytasks = data
             $scope.vm.description = "";
             $scope.vm.title = "";
+            progress()
           }
         }
-      });
 
+      });
     }
+
     /**** Compute Progress Ratio in the Project ****/
     function progress(){
       var tasks_num = $scope.projId.project_tasks.length;
@@ -101,7 +104,6 @@
     /**** Create Job ****/
     function createJob(){
       Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc).success(function(){
-        $('#CreateJob').modal('hide');
         $.notify("Congratulation\nsuccess adding a new job",{ position:"bottom right" ,className:"success"});
       })
     }
