@@ -65,8 +65,8 @@
                         <ul class="list-unstyled" ng-repeat="request in requests">
                             <li>
                             Job Title: {{request.job.name}}, Applicant: <a href="/users/{{request.owner.id}}">{{request.owner.username}}</a>
-                            <button type="button" class="btn btn-success pull-right btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,1)">Accept</button>
-                            <button type="button" class="btn btn-danger pull-right btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,0)">Reject</button>
+                            <button type="button" class="btn btn-success pull-right btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,1)">Accept <i class="fa fa-user-plus"></i></button>
+                            <button type="button" class="btn btn-danger pull-right btn-xs" ng-if="vm.isPm" ng-click="vm.resolveRequest(request.id,0)">Reject <i class="fa fa-user-times"></i></button>
                             <hr/>
                             </li>
                         </ul>
