@@ -33,16 +33,19 @@
   </div> -->
 
   <br/>
-  <p class="clearfix">{{item.description}}</p>
+  <p style="word-wrap: break-word">{{item.description}}</p>
   <br />
   <div style=" margin-bottom:5px">
     <button ng-click="vm.LikeIdea(item.id)" class="btn btn-primary" style="width:100px; height:30px" ng-show="login">
       {{item.likes}}&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
       {{item.is_liked ? 'unlike ':'like'}} &nbsp;
     </button>
-    <a class="twitter-share-button" data-size="large"
-      href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.titles}}, devcafe&url=/">
+    <div style="float: right">
+    <div class="fb-share-button" data-href="/ideas/{{item.id}}" data-layout="button" style="position: relative; top: 50%; transform: translateY(-10%);"></div>
+    <a class="twitter-share-button" data-size="medium"
+      href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.title}},DevCafe&url=/">
       Tweet</a>
+    </div>
   </div>
   <!-- Start Comment Form -->
   <div class="comments">
@@ -95,5 +98,5 @@
   </div>
   <!-- End Comment Form -->
 <!-- </div> -->
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-<style>.twitter-share-button{float: right;}</style>
+<!-- <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<style>.twitter-share-button</style> -->
