@@ -22,13 +22,8 @@
       {{item.is_liked ? 'unlike ':'like'}} &nbsp;
     </button>
     <div style="float: right">
-    <meta property="og:title" content="{{item.title}}" /> 
-    <!-- <meta property="og:image" content="http://fbwerks.com:8000/zhen/cookie.jpg" />  -->
-    <meta property="og:description" content="{{item.description}}" /> 
-    <meta property="og:url" content="/ideas/{{item.id}}">
-    <div class="fb-share-button" data-href="/ideas/{{item.id}}" data-layout="button" style="position: relative; top: 50%; transform: translateY(-10%);"></div>
-    <a class="twitter-share-button" data-size="medium"
-      href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.title}},DevCafe&url=/">
+      <div class="fb-share-button" data-href="/ideas/{{item.id}}" data-layout="button_count" style="position: relative; top: 50%; transform: translateY(-10%);"></div>
+      <a class="twitter-share-button" data-size="medium" href="https://twitter.com/intent/tweet?text={{item.description | limitTo: 100}}&hashtags={{item.title}},DevCafe&url=/">
       Tweet</a>
     </div>
   </div>
@@ -60,10 +55,8 @@
       </div>
 
       <ul>
-        <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Like</button>  -->
         <button type="submit" class="btn btn-primary" style="width:80px; height:30px;" ng-disabled="comment-form.$invalid">Comment</button>
-        <!-- <button type="submit" class="btn btn-primary" style="width:80px; height:30px;">Share</button> -->
-        <button type="submit" class="btn btn-success btnrel" style="width:95px; height:30px;float:right;border-radius:24px;letter-spacing:1px;font-weight:700;" ng-click="vm.Realize(item.title, item.description)" ng-show="login">REALIZE</button>
+        <button type="button" class="btn btn-success btnrel" style="width:95px; height:30px;float:right;border-radius:24px;letter-spacing:1px;font-weight:700;" ng-click="vm.Realize(item.title, item.description)" ng-show="login">REALIZE</button>
           <style>
               .btnrel {
                   -webkit-box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.3);
