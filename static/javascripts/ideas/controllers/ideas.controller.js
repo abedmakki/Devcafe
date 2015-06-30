@@ -90,9 +90,10 @@
       Ideas.realize(title, description).success(function(data, status, headers, config) {
         window.createdProjId = data.id;
         console.log('Created project ID: ' + window.createdProjId);
+        $location.path('projects/' + window.createdProjId);
       });
       
-      $location.path('/projects/post/new');
+      // $location.path('/projects/post/new');
     }
     
 
