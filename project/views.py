@@ -1,7 +1,7 @@
 from rest_framework.parsers import FileUploadParser
 from project.serializers import ProjectSerializer, PostSerializer, \
     TaskSerializer, PostJobSerializer, \
-    PostTaskSerializer, RequestSerializer , LogoSerializer , ContributorSerializer, ProjectSerializerForNoncontibutor
+    PostTaskSerializer, RequestSerializer , LogoSerializer , ContributorSerializer, ProjectSerializerForNoncontibutor,JobSerializer
 from project.models import Project, Post, Contributor, Task, Job, Request
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -238,4 +238,16 @@ class Quit(APIView):
             project.save()
             return Response(status=status.HTTP_200_OK)
         except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class ViewJobs(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get(self , request):
+        try:
+            jobs = Job.objects.filter(is_taken=False).order_by('-time_posted')
+            serliaizer = JobSerializer(jobs , many=True)
+            return Response(data=serliaizer.data,status=status.HTTP_200_OK)
+        except Job.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

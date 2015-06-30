@@ -20,10 +20,15 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class JobSerializer(serializers.ModelSerializer):
-
+    proj_Logo = serializers.SerializerMethodField('get_proj_logo')
+    def get_proj_logo(self,obj):
+        try:
+            logo = Project.objects.get(id=obj.project_id)
+            return logo.logo.thumbnail.url
+        except:return None
     class Meta:
         model = Job
-        fields = ('id', 'name', 'description', 'issued_to', 'project', 'is_taken')
+        fields = ('id','name', 'description', 'issued_to', 'project', 'is_taken', 'time_posted', 'location', 'job_type','profit','profit_value','proj_Logo')
         read_only_fields = ('project', 'issued_to')
 
 
@@ -85,7 +90,7 @@ class PostJobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ('id', 'name', 'description')
+        fields = ('id', 'name', 'description','location','job_type','profit','profit_value')
 
 
 class PostTaskSerializer(serializers.ModelSerializer):

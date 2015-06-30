@@ -1,0 +1,75 @@
+		<!--Stylesheet -->
+		<link href="static/stylesheets/styleJobs.css" rel="stylesheet">
+
+		<!-- ============ JOBS START ============ -->
+
+		<section id="jobs">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8">
+						<h2>Recent Jobs</h2>
+
+						<div class="jobs">
+							
+							<!-- Job offer -->
+							<a href="#" ng-repeat="job in jobs">
+								<div class="featured"></div>
+								<img src="{{ job.proj_Logo }}" alt="" class="img-circle jobImg" />
+								<div class="title">
+									<h5>{{ job.name }}</h5>
+									<p>Amazon Inc.</p>
+								</div>
+								<div class="data">
+									<span class="city"><i class="fa fa-map-marker"></i>{{ job.location }}</span>
+									<span class="type {{ job.job_type=='parttime' ? 'part-time':job.job_type=='fulltime' ?'full-time':'freelance' }}"><i class="fa fa-clock-o"></i>{{ job.job_type }}</span>
+									<span class="sallary"><i class="fa fa-dollar"></i>{{ job.profit=='free'? 'free':job.profit=='percentage'?job.profit_value+' %': job.profit_value}}</span>
+								</div>
+							</a>
+						</div>
+
+					<!--	<nav>
+							<ul class="pagination">
+								<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+                    -->
+					</div>
+
+
+                    <div class="col-sm-4" id="sidebar">
+
+						<!-- Featured Jobs Start -->
+						<div class="sidebar-widget">
+							<h2>Job Details</h2>
+							<a href="#">
+								<img src="images/featured-job.jpg" alt="Featured Job" class="img-responsive" />
+								<div class="featured-job">
+									<img src="images/job1.jpg" alt="" class="img-circle pull-left" />
+									<div class="title">
+										<h5>{{ jobDet.name }}</h5>
+										<p>Amazon</p>
+									</div>
+									<div class="data">
+										<span class="city"><i class="fa fa-map-marker"></i>{{ jobDet.location }}</span>
+										<span class="type {{ jobDet.job_type=='parttime' ? 'part-time':jobDet.job_type=='fulltime' ?'full-time':'freelance' }}"><i class="fa fa-clock-o"></i>{{ jobDet.job_type }}</span>
+										<span class="sallary"><i class="fa fa-dollar"></i>{{ jobDet.profit=='free'? 'free':jobDet.profit=='percentage'?jobDet.profit_value+' %': jobDet.profit_value}}</span>
+									</div>
+									<div class="description">{{ jobDet.description }}</div>
+								</div>
+							</a>
+						</div>
+						<!-- Featured Jobs End -->
+					</div>
+
+
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ JOBS END ============ -->

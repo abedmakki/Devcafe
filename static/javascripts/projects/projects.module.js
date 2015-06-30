@@ -4,7 +4,8 @@
   angular
     .module('devcafe.projects', [
       'devcafe.projects.controllers',
-      'devcafe.projects.services'
+      'devcafe.projects.services',
+      'devcafe.projects.jobs'
     ]);
 
   angular
@@ -12,4 +13,7 @@
 
   angular
     .module('devcafe.projects.services', []);
+
+  angular
+    .module('devcafe.projects.jobs', []);
 })();

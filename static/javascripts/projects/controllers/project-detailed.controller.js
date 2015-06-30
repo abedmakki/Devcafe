@@ -110,16 +110,24 @@
 
     /**** Create Job ****/
     function createJob(){
-      Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc).success(function(){
+      Projects.createJob($routeParams.id , $scope.jName , $scope.jDesc , $scope.jType,$scope.jLocation,$scope.jPType,$scope.jPValue).success(function(){
         $.notify("Congratulation\nsuccess adding a new job",{ position:"bottom right" ,className:"success"});
       })
     }
 
     $('#CreateJob').on('hide.bs.modal', function (e) {
       $scope.creJob.$setPristine();
-      $scope.jName=null;$scope.jDesc=null;
+      $scope.jName=null;$scope.jDesc=null;$scope.jType=null;$scope.jLocation=null;$scope.jPType=null;$scope.jPValue=0;
       $('#job-name').focus()
     })
+     $scope.$watch('jType', function () {
+      if($scope.jType=='volunteer'){$scope.jPType='free';$( ".jPType").attr("disabled", 'disabled' )}
+      else{$(".jPType").removeAttr( 'disabled' );}
+    });
+     $scope.$watch('jPType', function () {
+      if($scope.jPType=='free'){$scope.jPValue=0;$( ".jPValue").attr("disabled", 'disabled' )}
+      else{$(".jPValue").removeAttr( 'disabled' );}
+    });
     /**********************/
 
     /**** Resolve Job's request ****/

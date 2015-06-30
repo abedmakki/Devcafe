@@ -196,14 +196,41 @@
       </div>
       <div class="modal-body">
         <form name="creJob">
+
           <div class="form-group">
             <label for="job-name" class="control-label">Name:</label>
             <input type="text" class="form-control" id="job-name" ng-model="jName" required="true" ng-focus data-content="Valid job name required">
           </div>
-          <div class="form-group">
+           <div class="form-group">
+            <label for="job-type" class="control-label">Job Type:</label>
+            <select id="job-type" class="form-control" name="job-type" ng-model="jType" required="true">
+                <option value="freelancer" selected="selected">freelancer</option>
+                <option value="fulltime">full-time</option>
+                <option value="parttime">part-time</option>
+                <option value="volunteer">volunteer</option>
+            </select>
+          </div>
+            <div class="form-group">
+                <label for="job-location" class="control-label">Location:</label>
+                <input type="text" class="form-control" id="job-location" ng-model="jLocation">
+            </div>
+            <div class="form-group">
+                <label for="job-ptype" class="control-label">Profit Type:</label>
+                <select id="job-ptype" class="form-control jPType" name="job-ptype" ng-model="jPType" required="true">
+                    <option value="free" selected="selected">free</option>
+                    <option value="fixed">fixed</option>
+                    <option value="percentage">percentage</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="job-pvalue" class="control-label">Profit Value:</label>
+                <input type="number" class="form-control jPValue" id="job-pvalue" ng-model="jPValue" min="0" required="true" ng-focus data-content="Valid profit required">
+            </div>
+            <div class="form-group">
             <label for="Description" class="control-label">Description:</label>
             <textarea class="form-control" id="Description" ng-model="jDesc" required="true" ng-focus data-content="Valid job description required"></textarea>
           </div>
+
         </form>
       </div>
       <div class="modal-footer">

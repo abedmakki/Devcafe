@@ -138,10 +138,14 @@
 
 
 
-      function createJob(id , name, description) {
+      function createJob(id , name, description,type,location,prfType,proVal) {
           return $http.post('/projects/'+id+'/create_job/', {
               name: name,
-              description: description
+              description: description,
+              location:location,
+              job_type:type,
+              profit:prfType,
+              profit_value:proVal
           })
       }
 

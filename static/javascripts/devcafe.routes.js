@@ -64,6 +64,10 @@
         controller: 'MarketplaceController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/marketplace/upload-page-info.html'
+    }).when('/jobs', {
+        controller: 'JobsController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/projects/jobs/jobs.html'
     }).when('/market/post/new/release/:title/:desc', {
         controller: 'MarketplaceController',
         controllerAs: 'vm',

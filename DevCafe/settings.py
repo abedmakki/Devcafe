@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     # end django-allauth apps
     'rest_auth',
     'rest_auth.registration',
+    'stdimage',
     'userapp',
     'ideas',
     'general',

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from stdimage import StdImageField
 
 
 class Project(models.Model):
@@ -7,7 +8,8 @@ class Project(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=1500)
     plan = models.TextField(blank=True, null=True)
-    logo = models.ImageField(upload_to='project_images', blank=True, null=True)
+    #logo = models.ImageField(upload_to='project_images', blank=True, null=True)
+    logo = StdImageField(upload_to='project_images', blank=True, variations={'thumbnail': (100, 75)})
     timestamp = models.DateTimeField(auto_now_add=True)
     # slug = models.SlugField(unique=True)
 
@@ -52,6 +54,19 @@ class Job(models.Model):
     issued_to = models.ForeignKey(User, null=True, blank=True)
     project = models.ForeignKey(Project, related_name='jobs')
     is_taken = models.BooleanField(default=False)
+    time_posted = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=100)
+
+    freelancer = 'freelancer';fulltime = 'fulltime';parttime = 'parttime';volunteer = 'volunteer'
+    typeChoices = ((freelancer, 'freelancer'),(fulltime, 'fulltime'),(parttime, 'parttime'),(volunteer, 'volunteer'))
+
+    job_type = models.CharField(choices=typeChoices , default=freelancer , max_length=10)
+
+    fixed = 'fixed'; percentage = 'percentage'; free='free'
+    profit_choices = ((fixed, 'fixed'),(percentage, 'percentage'),(free, 'free'))
+
+    profit = models.CharField(choices=profit_choices , default=free ,max_length=10)
+    profit_value = models.DecimalField(max_digits=4 , decimal_places=0 ,default=0)
 
     def __unicode__(self):
         return self.project.title + ', Announced For: ' + self.name
