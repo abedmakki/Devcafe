@@ -22,7 +22,6 @@
         /***** get all jobs ****************/
         $http.get('/projects/jobs/').success(function(data){
             $scope.jobs = data
-            console.log($scope.jobs)
         })
         /**********************************/
 
