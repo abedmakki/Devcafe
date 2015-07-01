@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='job',
             name='location',
-            field=models.CharField(default=b'cairo', max_length=100),
+            field=models.CharField(default=b'cairo', max_length=100, null=True),
         ),
     ]

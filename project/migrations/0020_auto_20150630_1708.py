@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='job',
             name='profit',
-            field=models.CharField(default=b'free', max_length=10, choices=[(b'fixed', b'fixed'), (b'percentage', b'percentage'), (b'free', b'free')]),
+            field=models.CharField(default=b'free', null=True, max_length=10, choices=[(b'fixed', b'fixed'), (b'percentage', b'percentage'), (b'free', b'free')]),
         ),
     ]
