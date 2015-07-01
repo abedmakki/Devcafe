@@ -20,10 +20,21 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class JobSerializer(serializers.ModelSerializer):
+    proj_fields = serializers.SerializerMethodField('get_proj_status')
+
+    def get_proj_status(self, obj):
+        user = self.context['request'].user
+        proj = Project.objects.get(id=obj.project_id)
+        logo = proj.logo.thumbnail.url
+        isPM = False
+        pmid=proj.PM.id;pmname = proj.PM.username
+        if proj.PM == user:
+            isPM= True
+        return {'proj_Logo':logo , 'is_pm':isPM , 'pm_id':pmid , 'pm_name':pmname }
 
     class Meta:
         model = Job
-        fields = ('id', 'name', 'description', 'issued_to', 'project', 'is_taken')
+        fields = ('id','name', 'description', 'issued_to', 'project', 'is_taken', 'time_posted', 'location', 'job_type','profit','profit_value','proj_fields')
         read_only_fields = ('project', 'issued_to')
 
 
@@ -85,7 +96,7 @@ class PostJobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ('id', 'name', 'description')
+        fields = ('id', 'name', 'description','location','job_type','profit','profit_value')
 
 
 class PostTaskSerializer(serializers.ModelSerializer):
