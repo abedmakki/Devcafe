@@ -25,7 +25,12 @@
             if ($routeParams.id) {
               Ideas.get($routeParams.id).success(function(data, status, headers, config) {
                 $scope.item = data;
+              }).error(function(data, status, headers, config) {
+                if (status === 404) {
+                  $location.path('/');
+                };
               })
+
             } else {
               Ideas.all().success(function(data, status, headers, config) {
                 $scope.ideas = data;

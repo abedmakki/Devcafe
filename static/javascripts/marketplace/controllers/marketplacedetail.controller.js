@@ -6,8 +6,8 @@
   'use strict';
 
   angular
-    .module('devcafe.marketplace.controllers')
-    .controller('MarketplaceDetailController', MarketplaceDetailController);
+  .module('devcafe.marketplace.controllers')
+  .controller('MarketplaceDetailController', MarketplaceDetailController);
 
   MarketplaceDetailController.$inject = ['$http', '$location','$scope', '$routeParams', '$rootScope', 'Market'];
 
@@ -33,18 +33,22 @@
       // $scope.$watch("rating", function(){
       //   console.log($scope.rating);
       // });
-      if (data.avg_rating === 0) {
-        $scope.rating = 3;
-      }
-      else {
-        $scope.rating = data.avg_rating;
-      }
-    })
+    if (data.avg_rating === 0) {
+      $scope.rating = 3;
+    }
+    else {
+      $scope.rating = data.avg_rating;
+    }
+  }).error(function(data, status, headers, config) {
+    if (status === 404) {
+      $location.path('/market');
+    };
+  })
 
     //get the current user
     if ($rootScope.login) {
       $http.get('/users/profile/').success(function(data, status, headers, config) {
-          $scope.user = data;
+        $scope.user = data;
       })
     } else {
       $scope.user = null;
@@ -59,8 +63,8 @@
       // console.log(item);
       // console.log(text);
       Market.comment(id, text).success(function(data, status, headers, config){
-          $scope.comments = data;
-          $('#addcomment').val('');
+        $scope.comments = data;
+        $('#addcomment').val('');
       })
     }
 
@@ -78,23 +82,23 @@
       Market.buy(id, vm.firstname,
        vm.lastname, vm.email, vm.address, datetime(vm.ddate), vm.mobile, vm.hphone).success(function(){
         $location.url('/market');
-       });
-    }
+      });
+     }
 
-   $('#delivery__deliverydate').datetimepicker({
-	controlType: 'select',
-	oneLine: true,
-	timeFormat: 'hh:mm TT',
-    dateFormat: "dd/mm/yy",
-    minDate: xtdate
-});
+     $('#delivery__deliverydate').datetimepicker({
+       controlType: 'select',
+       oneLine: true,
+       timeFormat: 'hh:mm TT',
+       dateFormat: "dd/mm/yy",
+       minDate: xtdate
+     });
 
-      function datetime(date){
-           var vtime = $.datepicker.parseTime('hh:mm TT', date.slice(11), {})
-           var vdate = $.datepicker.parseDate('dd/mm/yy', date.slice(0, 10), {})
-           var findate = new Date(vdate.getFullYear(),vdate.getMonth(),vdate.getDate() , vtime.hour , vtime.minute)
-           return findate.toJSON()
-       }
+     function datetime(date){
+       var vtime = $.datepicker.parseTime('hh:mm TT', date.slice(11), {})
+       var vdate = $.datepicker.parseDate('dd/mm/yy', date.slice(0, 10), {})
+       var findate = new Date(vdate.getFullYear(),vdate.getMonth(),vdate.getDate() , vtime.hour , vtime.minute)
+       return findate.toJSON()
+     }
 
-  }
-})();
+   }
+ })();
