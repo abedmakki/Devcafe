@@ -24,7 +24,7 @@
             vm.description = projDesc;
         }
     }
-    else{$location.path('/market')}
+    //else{$location.path('/market')}
     /*****************************************/
 
     Market.all().success(function(data, status, headers, config) {
