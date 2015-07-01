@@ -43,7 +43,7 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
         try:
             project = Project.objects.get(pk=pk)
             serializer = ProjectSerializer(project, context={'request': request})
-            serializerForNonContributor = ProjectSerializerForNoncontibutor(project)
+            serializerForNonContributor = ProjectSerializerForNoncontibutor(project,context={'request': request})
             for contributor in project.contributors.all():
                 if request.user == contributor.user:
                     return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -118,7 +118,7 @@ class ApplyForJob(APIView):
                 return Response(status=status.HTTP_200_OK)
             new_req = Request(owner=request.user, job=job)
             new_req.save()
-            serializer = RequestSerializer(new_req)
+            serializer = RequestSerializer(new_req,context={'request': request})
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         except Exception:
             return Response(status=status.HTTP_404_NOT_FOUND)
@@ -132,7 +132,7 @@ class ViewRequests(APIView):
             project = Project.objects.get(id=pk)
             if project.PM == request.user:
                 req = Request.objects.filter(job__project=project)
-                serializer = RequestSerializer(req, many=True)
+                serializer = RequestSerializer(req, many=True ,context={'request': request})
                 return Response(serializer.data)
             return Response(status=status.HTTP_404_NOT_FOUND)
         except Exception, e:
@@ -247,7 +247,7 @@ class ViewJobs(APIView):
     def get(self , request):
         try:
             jobs = Job.objects.filter(is_taken=False).order_by('-time_posted')
-            serliaizer = JobSerializer(jobs , many=True)
+            serliaizer = JobSerializer(jobs , many=True ,context={'request': request})
             return Response(data=serliaizer.data,status=status.HTTP_200_OK)
         except Job.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

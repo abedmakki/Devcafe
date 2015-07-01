@@ -4,7 +4,7 @@
 		<!-- ============ JOBS START ============ -->
 
 		<section id="jobs">
-			<div class="container">
+			<div class=".container-fluid">
 				<div class="row">
 					<div class="col-sm-8">
 						<h2>Recent Jobs</h2>
@@ -12,17 +12,18 @@
 						<div class="jobs">
 							
 							<!-- Job offer -->
-							<a href="#" ng-repeat="job in jobs">
+							<a ng-click="vm.details(job.id)" ng-repeat="job in jobs">
 								<div class="featured"></div>
-								<img src="{{ job.proj_Logo }}" alt="" class="img-circle jobImg" />
+								<img src="{{ job.proj_fields.proj_Logo }}" alt="" class="img-circle jobImg" />
 								<div class="title">
 									<h5>{{ job.name }}</h5>
-									<p>Amazon Inc.</p>
+									<p><span class="fa fa-user">&nbsp;</span> <strong>{{ job.proj_fields.pm_name }}</strong></p>
 								</div>
 								<div class="data">
 									<span class="city"><i class="fa fa-map-marker"></i>{{ job.location }}</span>
 									<span class="type {{ job.job_type=='parttime' ? 'part-time':job.job_type=='fulltime' ?'full-time':'freelance' }}"><i class="fa fa-clock-o"></i>{{ job.job_type }}</span>
 									<span class="sallary"><i class="fa fa-dollar"></i>{{ job.profit=='free'? 'free':job.profit=='percentage'?job.profit_value+' %': job.profit_value}}</span>
+                                    <span class="city"><i class="fa fa-calendar"></i><time-ago from-time='{{ job.time_posted }}'></time-ago></span>
 								</div>
 							</a>
 						</div>
@@ -45,15 +46,16 @@
                     <div class="col-sm-4" id="sidebar">
 
 						<!-- Featured Jobs Start -->
-						<div class="sidebar-widget">
+						<div class="sidebar-widget jdetail">
 							<h2>Job Details</h2>
-							<a href="#">
-								<img src="images/featured-job.jpg" alt="Featured Job" class="img-responsive" />
+							<a class="jdet">
+                                <img src="/static/templates/projects/jobs/det-job.jpg" alt="Featured Job" class="img-responsive">
 								<div class="featured-job">
-									<img src="images/job1.jpg" alt="" class="img-circle pull-left" />
+									<img src="{{ jobDet.proj_fields.proj_Logo }}" alt="" class="img-circle pull-left" />
 									<div class="title">
 										<h5>{{ jobDet.name }}</h5>
-										<p>Amazon</p>
+										<p>Project Manager: <strong>{{ jobDet.proj_fields.pm_name }}</strong></p>
+                                        <p>Posted on: <strong>{{ jobDateTime }}</strong></p>
 									</div>
 									<div class="data">
 										<span class="city"><i class="fa fa-map-marker"></i>{{ jobDet.location }}</span>
@@ -61,6 +63,11 @@
 										<span class="sallary"><i class="fa fa-dollar"></i>{{ jobDet.profit=='free'? 'free':jobDet.profit=='percentage'?jobDet.profit_value+' %': jobDet.profit_value}}</span>
 									</div>
 									<div class="description">{{ jobDet.description }}</div>
+
+                                    <div ng-if="!jobDet.proj_fields.is_pm" style="text-align: center"><a ng-click="vm.applyForJob(jobDet.id,jobDet.project)" class="btn btn-primary btn-lg">Apply Now</a></div>
+                                    <div class="description">&nbsp;</div>
+                                    <div class="description">&nbsp;</div>
+                                    <br/>
 								</div>
 							</a>
 						</div>

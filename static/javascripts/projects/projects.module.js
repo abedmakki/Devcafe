@@ -15,5 +15,5 @@
     .module('devcafe.projects.services', []);
 
   angular
-    .module('devcafe.projects.jobs', []);
+    .module('devcafe.projects.jobs', ['yaru22.angular-timeago']);
 })();

@@ -101,7 +101,7 @@
 
 
     function applyForJob(jobId){
-      return $http.post('/projects/jobs/' + jobId + '/');
+      return $http.post('/projects/applyjobs/' + jobId + '/');
     }
 
 

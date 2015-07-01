@@ -21,7 +21,8 @@
     "jquery-ui": "~1.11.4",
     "ng-file-upload": "~4.0.4",
     "notifyjs": "~0.3.2",
-    "jqueryui-timepicker-addon": "~1.5.5"
+    "jqueryui-timepicker-addon": "~1.5.5",
+    "angular-timeago": "~0.1.12"
   },
   "resolutions": {
     "bootstrap": "~3.3.0",
