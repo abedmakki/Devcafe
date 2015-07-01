@@ -18,9 +18,11 @@
       buy: buy,
       tags: tags,
       view_transactions: view_transactions,
-      view_my_apps: view_my_apps
+      view_my_apps: view_my_apps,
+      set_releas_edata : setreldata,
+      get_release_data : getreldata
     };
-
+    var releaseData={};
     return Market;
 
    
@@ -79,6 +81,14 @@
     //     window.location = '/market';
     //   });
     // }
-}
+
+      function setreldata(data) {
+          releaseData = data;
+      }
+      function getreldata() {
+          return releaseData;
+      }
+
+  }
 
 })();

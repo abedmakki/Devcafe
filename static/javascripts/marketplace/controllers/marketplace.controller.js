@@ -16,15 +16,15 @@
     var createdAppId = null;
 
     /******* release from project **************/
-    var projTitle =$routeParams.title;
-    var projDesc =$routeParams.desc;
+    var projTitle =Market.get_release_data().title;
+    var projDesc =Market.get_release_data().desc;
     if(projTitle!=null && projTitle.replace(/\s+/g, '')!='' && projTitle!=undefined){
         if(projDesc!=null && projDesc.replace(/\s+/g, '')!='' && projDesc!=undefined){
             vm.appname = projTitle;
             vm.description = projDesc;
+            Market.set_releas_edata({})
         }
     }
-    //else{$location.path('/market')}
     /*****************************************/
 
     Market.all().success(function(data, status, headers, config) {

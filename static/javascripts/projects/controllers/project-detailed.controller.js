@@ -6,9 +6,9 @@
   .module('devcafe.projects.controllers')
   .controller('ProjectDetailedController', ProjectDetailedController);
 
-  ProjectDetailedController.$inject = ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Projects'];
+  ProjectDetailedController.$inject = ['$http', '$location', '$scope', '$routeParams', '$timeout', 'Projects', 'Market'];
 
-  function ProjectDetailedController($http, $location, $scope, $routeParams, $timeout, Projects) {
+  function ProjectDetailedController($http, $location, $scope, $routeParams, $timeout, Projects ,Market) {
     var vm = this;
     vm.assignTask = assignTask;
     vm.changeLogo = changeLogo;
@@ -181,7 +181,8 @@
 
     /**** release project ****/
     function release(title , desc){
-        $location.path('/market/post/new/release/'+title+'/'+desc);
+        Market.set_releas_edata({title:title , desc:desc});
+        $location.path('/market/post/new/');
     }
     /*************************/
 
