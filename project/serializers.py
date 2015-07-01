@@ -27,10 +27,10 @@ class JobSerializer(serializers.ModelSerializer):
         proj = Project.objects.get(id=obj.project_id)
         logo = proj.logo.thumbnail.url
         isPM = False
-        pmname = proj.PM.username
+        pmid=proj.PM.id;pmname = proj.PM.username
         if proj.PM == user:
             isPM= True
-        return {'proj_Logo':logo , 'is_pm':isPM , 'pm_name':pmname }
+        return {'proj_Logo':logo , 'is_pm':isPM , 'pm_id':pmid , 'pm_name':pmname }
 
     class Meta:
         model = Job

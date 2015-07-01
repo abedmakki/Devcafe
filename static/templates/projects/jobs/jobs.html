@@ -17,7 +17,7 @@
 								<img src="{{ job.proj_fields.proj_Logo }}" alt="" class="img-circle jobImg" />
 								<div class="title">
 									<h5>{{ job.name }}</h5>
-									<p><span class="fa fa-user">&nbsp;</span> <strong>{{ job.proj_fields.pm_name }}</strong></p>
+									<p class="pmuser" ng-click="vm.getUser(job.proj_fields.pm_id)"><span class="fa fa-user">&nbsp;</span> <strong>{{ job.proj_fields.pm_name }}</strong></p>
 								</div>
 								<div class="data">
 									<span class="city"><i class="fa fa-map-marker"></i>{{ job.location }}</span>
@@ -54,8 +54,8 @@
 									<img src="{{ jobDet.proj_fields.proj_Logo }}" alt="" class="img-circle pull-left" />
 									<div class="title">
 										<h5>{{ jobDet.name }}</h5>
-										<p>Project Manager: <strong>{{ jobDet.proj_fields.pm_name }}</strong></p>
-                                        <p>Posted on: <strong>{{ jobDateTime }}</strong></p>
+										<p ng-click="vm.getUser(jobDet.proj_fields.pm_id)">Project Manager: <strong class="pmuser" title="Go to User page">{{ jobDet.proj_fields.pm_name }}</strong></p>
+                                        <p>Posted on: <strong title="Go to Project page" class="pmuser" ng-click="vm.getProj(jobDet.project)">{{ jobDateTime }}</strong></p>
 									</div>
 									<div class="data">
 										<span class="city"><i class="fa fa-map-marker"></i>{{ jobDet.location }}</span>

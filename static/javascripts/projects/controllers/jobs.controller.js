@@ -18,6 +18,8 @@
         var vm = this;
         vm.details = details;
         vm.applyForJob = applyForJob;
+        vm.getUser = getUser;
+        vm.getProj = getProj;
 
         /***** get all jobs ****************/
         $http.get('/projects/jobs/').success(function(data){
@@ -56,6 +58,14 @@
                 var dd= new Date(datetime)
                 return $.datepicker.formatDate("dd/mm/yy", dd)+' '+$.datepicker.formatTime('hh:mm TT', {hour: dd.getHours(), minute: dd.getMinutes(), timezone: '+2000' })
             }
+        /*********************************/
 
+        function getUser(uid){
+            $location.path('/users/'+uid);
+        }
+
+        function getProj(pid){
+            $location.path('/projects/'+pid);
+        }
     }
 })();
