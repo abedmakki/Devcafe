@@ -22,7 +22,7 @@ class IdeaComment(Comment):
     idea = models.ForeignKey(Idea, related_name='comments')
 
     def __unicode__(self):
-        return self.text[:20] + ' - by:' + self.owner
+        return self.text[:20] + ' - by:' + self.owner.username
 
 
 class IdeaRating(models.Model):
