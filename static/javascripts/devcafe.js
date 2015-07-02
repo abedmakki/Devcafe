@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('devcafe', ['devcafe.routes', 'devcafe.config','devcafe.userapp', 'devcafe.layout', 'devcafe.ideas', 'devcafe.marketplace', 'devcafe.projects', 'devcafe.utils', 'devcafe.datepicker', 'devcafe.fileUpload' , 'devcafe.countrySelect' , 'devcafe.errorValidation' , 'angulike']);
+    angular.module('devcafe', ['devcafe.routes', 'devcafe.config','devcafe.userapp', 'devcafe.layout', 'devcafe.ideas', 'devcafe.marketplace', 'devcafe.projects', 'devcafe.utils', 'devcafe.datepicker', 'devcafe.fileUpload' , 'devcafe.countrySelect' , 'devcafe.errorValidation' , 'angulike' ,'angular-loading-bar', 'ngAnimate']);
 
     angular.module('devcafe.routes', ['ngRoute']);
 
@@ -18,5 +18,6 @@
             $rootScope.login=true;
         }else{$rootScope.login=false;}
         $rootScope.facebookAppId = '1585590368357539';
+        window.setTimeout(function(){$('#loader').hide("fold" , { direction: "down" }, "slow")} , 2000)
     }
 }) ();
