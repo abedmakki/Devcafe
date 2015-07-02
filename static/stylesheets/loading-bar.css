@@ -75,7 +75,7 @@
 #loading-bar-spinner .spinner-icon {
   width: 150px;
   height: 150px;
-    background-image: url("../../../stylesheets/images/cafe.GIF");
+    background-image: url("images/cafe.GIF");
 
 
   border:  solid 2px transparent;
@@ -135,7 +135,7 @@
 			top: 36%;
 		}
     #loader div.imgCafe {
-        background-image: url("../static/stylesheets/images/cafe.GIF");
+        background-image: url("images/cafe.GIF");
         background-repeat: no-repeat;
         width: 150px;
         height: 150px;
