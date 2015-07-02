@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('devcafe', ['devcafe.routes', 'devcafe.config','devcafe.userapp', 'devcafe.layout', 'devcafe.ideas', 'devcafe.marketplace', 'devcafe.projects', 'devcafe.utils', 'devcafe.datepicker', 'devcafe.fileUpload' , 'devcafe.countrySelect' , 'devcafe.errorValidation' , 'angulike' ,'angular-loading-bar', 'ngAnimate']);
+    angular.module('devcafe', ['devcafe.routes', 'devcafe.config','devcafe.userapp', 'devcafe.layout', 'devcafe.ideas', 'devcafe.marketplace', 'devcafe.projects', 'devcafe.utils', 'devcafe.datepicker', 'devcafe.fileUpload' , 'devcafe.countrySelect' , 'devcafe.errorValidation' , 'angulike' ,'angular-loading-bar', 'ngAnimate'])
+    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {cfpLoadingBarProvider.spinnerTemplate = '<div id="loading-bar-spinner"><img class="prog-cafe" src="/static/stylesheets/images/cafe.GIF"></img><div class="spinner-icon"></div></div>';}]);
 
     angular.module('devcafe.routes', ['ngRoute']);
 

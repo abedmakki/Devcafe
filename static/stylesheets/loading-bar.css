@@ -73,9 +73,13 @@
 }
 
 #loading-bar-spinner .spinner-icon {
-  width: 150px;
-  height: 150px;
-    background-image: url("images/cafe.GIF");
+  width: 100px;
+  height: 100px;
+  display: block;
+  position: fixed;
+  z-index: 10002;
+  top: 62px;
+  left: 10px;
 
 
   border:  solid 2px transparent;
@@ -88,6 +92,13 @@
   -ms-animation:     loading-bar-spinner 400ms linear infinite;
   -o-animation:      loading-bar-spinner 400ms linear infinite;
   animation:         loading-bar-spinner 400ms linear infinite;
+}
+
+#loading-bar-spinner .prog-cafe{
+    width: 90px;
+    height: 90px;
+    left: 15px;
+    position: fixed;
 }
 
 @-webkit-keyframes loading-bar-spinner {
@@ -111,36 +122,36 @@
   100% { transform: rotate(360deg); transform: rotate(360deg); }
 }
 
-    	#loader {
-		background: #fff;
-		bottom: 0;
-		left: 0;
-		position: fixed;
-		right: 0;
-		top: 0;
-		z-index: 50000;
-	}
+#loader {
+    background: #fff;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 50000;
+}
 
-		#loader i {
-			color: #14b1bb;
-			left: 50%;
-			margin: -24px 0 0 -24px;
-			position: absolute;
-			top: 50%;
-		}
-        #loader div.cafe {
-			left: 45%;
-			margin: -24px 0 0 -24px;
-			position: absolute;
-			top: 36%;
-		}
-    #loader div.imgCafe {
-        background-image: url("images/cafe.GIF");
-        background-repeat: no-repeat;
-        width: 150px;
-        height: 150px;
-    }
-    #loader p{
+#loader i {
+    color: #14b1bb;
+    left: 50%;
+    margin: -24px 0 0 -24px;
+    position: absolute;
+    top: 50%;
+}
+#loader div.cafe {
+    left: 45%;
+    margin: -24px 0 0 -24px;
+    position: absolute;
+    top: 36%;
+}
+#loader div.imgCafe {
+    background-image: url("images/cafe.GIF");
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+}
+#loader p{
     border: medium none;
     box-sizing: content-box;
     color: rgb(32, 44, 45);
@@ -149,4 +160,4 @@
     position: fixed;
     text-align: center;
     text-overflow: clip;
-    }
+}
