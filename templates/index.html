@@ -28,6 +28,15 @@
 </head>
 <body style="padding-top: 50px;"> <!--add to correct content after navbar -->
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=1585590368357539";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
   {% include 'navbar.html' %}
 
 
@@ -56,10 +65,10 @@
 <!-- {% include 'footer.html' %} -->
 
 {% include 'javascripts.html' %}
-
+<!--
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-<div id="fb-root"></div>
+-->
+<!--<div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -67,6 +76,6 @@
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=1585590368357539";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-
+-->
 </body>
 </html>
