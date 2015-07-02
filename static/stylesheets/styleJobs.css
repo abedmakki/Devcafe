@@ -41,6 +41,9 @@ a[ng-click]{
 a.jdet:hover{
     text-decoration: none;
 }
+.pmuser{
+    display: inline-block;
+}
 .pmuser:hover{
     text-decoration: underline;
     cursor: pointer;
@@ -71,7 +74,7 @@ a.jdet:hover{
 		}
 
 		.jobs a .featured {
-			background: #14b1bb;
+			background: #222 ;/*#14b1bb;*/
 			display: block;
 			height: 30px;
 			left: -15px;
@@ -411,6 +414,9 @@ a.jdet:hover{
 		.featured-job img {
 			margin-left: 15px;
 		}
+        .featured-job p {
+			margin: 0;
+		}
 
 		.featured-job .data {
 			border-bottom: 1px solid #d1d1d1;
@@ -429,34 +435,38 @@ a.jdet:hover{
               font-size: 12px;
   padding-bottom: 5px;
 		}
-
+        .imglogo{
+            margin: 0 auto;
+        }
 
 #sidebar{
-    border-left: 1px solid;
+    /*border-left: 1px solid;*/
     height: 100%;
     position: fixed;
     right: 0;
     overflow: scroll;
+    margin: 20px auto;
 }
 @media (max-width: 767px) {
     #sidebar{
-        border-left: 1px solid;
+        /*border-left: 1px solid;*/
         display: block;
         position: relative;
         overflow: scroll;
+        margin: 20px auto;
     }
 }
 
 .jdetail h2{
-    -webkit-box-sizing: content-box;
+    /*-webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
-    border: none;
-    font: normal normal 900 40px/normal "Aldrich", Helvetica, sans-serif;
+    border: none;*/
+    font: normal normal 700 30px/normal "Aldrich", Helvetica, sans-serif;
     color: rgb(32, 44, 45);
     text-align: center;
-    -o-text-overflow: clip;
+    /*-o-text-overflow: clip;
     text-overflow: clip;
     text-shadow: 0 1px 0 rgb(128,141,147) , -1px 0 0 rgb(205,210,213) , -1px 2px 0 rgb(128,141,147) , -2px 1px 0 rgb(205,210,213) , -2px 3px 0 rgb(128,141,147) , -3px 2px 0 rgb(205,210,213) , -3px 4px 0 rgb(128,141,147) , -4px 3px 0 rgb(205,210,213) , -4px 5px 0 rgb(128,141,147) , -5px 4px 0 rgb(205,210,213) , -5px 6px 0 rgb(128,141,147) , -6px 5px 0 rgb(205,210,213) , -6px 7px 0 rgb(128,141,147) , -7px 6px 0 rgb(205,210,213) , -7px 8px 0 rgb(128,141,147) , -8px 7px 0 rgb(205,210,213) ;
-
+*/
 }
