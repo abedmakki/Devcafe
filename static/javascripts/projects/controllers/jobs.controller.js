@@ -51,7 +51,9 @@
         function applyForJob(jobId , pid){
             Projects.applyForJob(jobId).success(function(data){
                 $('#JobModal').modal('hide');
-                $location.path('/projects/'+pid)
+                $timeout(function() {
+                    $location.path('/projects/' + pid)
+                },500);
                 $.notify("Congratulation\nsuccess applying for job\nthis is the project's page\nNow wait project manager to accept",{ position:"bottom right" ,className:"success",autoHideDelay: 8000});
             })
         }
