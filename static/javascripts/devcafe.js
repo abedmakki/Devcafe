@@ -17,8 +17,9 @@
         $http.defaults.xsrfCookieName = 'csrftoken';
         if(!!$cookies.authenticatedAccount){
             $rootScope.login=true;
+            $rootScope.loginID=$cookies.accId;
         }else{$rootScope.login=false;}
         $rootScope.facebookAppId = '1585590368357539';
-        window.setTimeout(function(){$('#loader').hide("fold" , { direction: "down" }, "slow")} , 2000)
+        window.setTimeout(function(){$('#loader').hide("fold" , { direction: "down" }, "slow")} , 1600)
     }
 }) ();

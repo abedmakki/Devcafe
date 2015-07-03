@@ -1,7 +1,7 @@
 from rest_framework.parsers import FileUploadParser
 from project.serializers import ProjectSerializer, PostSerializer, \
     TaskSerializer, PostJobSerializer, \
-    PostTaskSerializer, RequestSerializer , LogoSerializer , ContributorSerializer, ProjectSerializerForNoncontibutor,JobSerializer
+    PostTaskSerializer, RequestSerializer , LogoSerializer , ContributorSerializer, ProjectSerializerForNoncontibutor,JobSerializer,ContribProjectSerializer
 from project.models import Project, Post, Contributor, Task, Job, Request
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -250,4 +250,15 @@ class ViewJobs(APIView):
             serliaizer = JobSerializer(jobs , many=True ,context={'request': request})
             return Response(data=serliaizer.data,status=status.HTTP_200_OK)
         except Job.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+class ViewMyProjects(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get(self , request):
+        try:
+            myprojs = Contributor.objects.filter(user=request.user)
+            serializer = ContribProjectSerializer(myprojs , many=True)
+            return Response(data=serializer.data,status=status.HTTP_200_OK)
+        except Contributor.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)

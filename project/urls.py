@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^changelogo/$', views.UploadProjectLogo.as_view(), name='project-change-logo'),
     url(r'^(?P<pk>[0-9]+)/quit/$', views.Quit.as_view(), name='quit'),
     url(r'^jobs/$', views.ViewJobs.as_view(), name='jobs'),
+    url(r'^my_projects/$', views.ViewMyProjects.as_view(), name='my_projects'),
 )
 
 

@@ -49,6 +49,28 @@ class ContributorSerializer(serializers.ModelSerializer):
         read_only_fields = ('project', 'user')
 
 
+class ContribProjectSerializer(serializers.ModelSerializer):
+    proj_fields = serializers.SerializerMethodField('get_proj_fld')
+    def get_proj_fld(self, obj):
+        proj = Project.objects.get(id=obj.project_id)
+        tasks = Task.objects.filter(project_id=obj.project_id)
+        allCount = tasks.count()
+        if allCount==0:
+            progress=0
+        else:
+            doneCount = tasks.filter(is_done=True).count()
+            progress = int(float(doneCount)*100.00/float(allCount))
+        logo = proj.logo.thumbnail.url
+        pmname = proj.PM.username
+        pmid = proj.PM.id
+        projname = proj.title
+        return {'proj_Logo':logo , 'proj_title':projname  , 'pm_name':pmname , 'progress':progress , 'PM_id':pmid}
+    class Meta:
+        model= Contributor
+        fields = ('id','is_pm','user','project','proj_fields',)
+
+
+
 class ProjectSerializer(serializers.ModelSerializer):
     PM = UserSerializer(read_only=True)
     posts = PostSerializer(many=True, read_only=True)

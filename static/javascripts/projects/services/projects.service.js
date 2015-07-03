@@ -30,7 +30,8 @@
       resolveRequest: resolveRequest,
       markTaskDone: markTaskDone,
       startProject: startProject,
-      quit: quit
+      quit: quit,
+      getMyProjects:getMyProjects
       };
 
     return Projects;
@@ -170,6 +171,10 @@
 
     function quit(id){
       return $http.post('/projects/' + id + '/quit/');
+    }
+
+    function getMyProjects(){
+        return $http.get('/projects/my_projects/');
     }
 
   }

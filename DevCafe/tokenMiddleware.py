@@ -48,4 +48,5 @@ class AuthenticationMiddlewareToken(object):
                     response.delete_cookie('authenticatedAccount')
                 else:
                     response.set_cookie( 'authenticatedAccount', remember_token , max_age=30*24*60*60 , expires=None )
+                    response.set_cookie( 'accId', request.user.id , max_age=30*24*60*60 , expires=None )
         return response

@@ -8,6 +8,9 @@
     ViewAnotherProfileController.$inject = ['$http', '$location', '$scope', '$routeParams', '$cookies', 'Userapp'];
         function ViewAnotherProfileController($http, $location, $scope, $routeParams, $cookies, Userapp) {
             var userId = $routeParams.id;
+            if (userId === $cookies.accId) {
+                    $location.path('/profile');
+                }
             $http.get('/users/' + userId + '/').success(function(data, status, headers, config) {
                 $scope.user = data;
                 if (userId === $cookies.accId) {

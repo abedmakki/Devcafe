@@ -15,7 +15,8 @@
     $routeProvider.when('/profile', {
         controller: 'ProfileController',
         controllerAs: 'vm',
-        templateUrl: '/static/templates/userapp/profile.html'
+        templateUrl: '/static/templates/userapp/profile.html',
+        reloadOnSearch: false
     }).when('/users/:id', {
         controller: 'ViewAnotherProfileController',
         controllerAs: 'vm',

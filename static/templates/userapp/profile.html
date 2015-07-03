@@ -82,3 +82,184 @@
   </div>
 </div>
     </div>
+
+<!---------------------------------------------------------------------->
+<div ng-if="!otherProfile" id="accordions">
+<!------------My Transactions ------------------------------------------------>
+<div class="panel-group content-size" id="Tranaccordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" style="display: block;" data-toggle="collapse" data-parent="#Tranaccordion" ng-click="vm.scrolto('collapseOne')" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          <i class="fa fa-angle-right"></i> My Transactions
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
+          <div class="row mt">
+                  <div class="col-md-12">
+                      <div class="content-panel">
+
+                          <div ng-if="!transactions"><p>You have no <strong>transactions</strong></p></div>
+                          <table ng-if="transactions" class="table table-striped table-advance table-hover">
+
+                              <label ng-show="transactions">Search:
+                                  <input ng-model="searchText">
+                                  <select ng-model="status">
+                                      <option value="" selected="selected">--------</option>
+                                      <option value="true">Paid</option>
+                                      <option value="false">UnPaid</option>
+                                  </select>
+                              </label>
+
+                              <thead>
+                              <tr>
+                                  <th class="text-center">#ID</th>
+                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i><strong> App Name</strong></th>
+                                  <th class="text-center"><i class="fa fa-usd"></i><strong> Price</strong></th>
+                                  <th class="text-center"><i class="fa fa-barcode"></i><strong> Transaction ID</strong></th>
+                                  <th class="text-center"><i class="fa fa-edit"></i><strong> Status</strong></th>
+                                  <th class="text-center"><i class="fa fa-cloud-download"></i><strong> Download</strong></th>
+                              </tr>
+                              </thead>
+
+                              <tbody><!--filter:{app:{price:searchText}}-->
+                              <tr ng-repeat="transaction in transactions | filter:searchText | filter:{paid:status}" title="purchase date: {{ vm.getDateTime(transaction.purchase_time) }}">
+                                  <td class="text-center"><a>{{$index + 1}}</a></td>
+                                  <td class="hidden-phone"><a title="Go to App page" ng-href="/market/{{ transaction.app.id }}">{{transaction.app.name}}</a></td>
+                                  <td class="text-center">${{transaction.app.price}}</td>
+                                  <td class="text-center">{{transaction.unique_id}}</td>
+                                  <td class="text-center"><span ng-class="{ 'label label-success label-mini' : transaction.paid==true ,'label label-danger label-mini':transaction.paid==false }" >{{transaction.paid?'Paid':'Unpaid'}}</span></td>
+                                  <td class="text-center">
+                                      <a href="{{ transaction.paid ? transaction.app.uploaded_file :'#' }}" class="btn btn-primary btn-xs" ng-class="{'disabled':!transaction.paid}"><i class="fa fa-pencil"></i></a>
+                                  </td>
+                              </tr>
+
+                              </tbody>
+                          </table>
+                      </div><!-- /content-panel -->
+                  </div><!-- /col-md-12 -->
+              </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!------------End My Transactions ------------------------------------------------>
+
+
+<!------------My Apps ------------------------------------------------>
+<div class="panel-group content-size" id="Appaccordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" style="display: block;" data-toggle="collapse" data-parent="#Appaccordion" ng-click="vm.scrolto('collapseTwo')" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <i class="fa fa-angle-right"></i> My Applications
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
+          <div class="row mt">
+                  <div class="col-md-12">
+                      <div class="content-panel">
+
+                          <div ng-if="!my_apps"><p>You have no <strong>Applications &nbsp;</strong> now</p></div>
+                          <table ng-if="my_apps" class="table table-striped table-advance table-hover">
+
+                              <label ng-show="my_apps">Search:
+                                  <input ng-model="searchText2">
+                              </label>
+
+                              <thead>
+                              <tr>
+                                  <th class="text-center">#ID</th>
+                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i><strong> App Name</strong></th>
+                                  <th class="text-center"><i class="fa fa-usd"></i><strong> Price</strong></th>
+                                  <th class="text-center"><i class="fa fa-list-ol"></i><strong> Transactions</strong></th>
+                                  <th class="text-center"><i class="fa fa-money"></i><strong> Total Profit</strong></th>
+                                  <th class="text-center"><i class="fa fa-line-chart"></i><strong> Your Profit</strong></th>
+                              </tr>
+                              </thead>
+
+                              <tbody>
+                              <tr ng-repeat="app in my_apps | filter:searchText2 ">
+                                  <td class="text-center"><a>{{$index + 1}}</a></td>
+                                  <td class="hidden-phone"><a title="Go to App page" ng-href="/market/{{ app.id }}">{{app.name}}</a></td>
+                                  <td class="text-center">${{app.price}}</td>
+                                  <td class="text-center">{{app.transactions}}</td>
+                                  <td class="text-center"><span>{{app.price*app.transactions}}</span></td>
+                                  <td class="text-center">{{ (app.price-.05*app.price)*app.transactions }}</td>
+                              </tr>
+
+                              </tbody>
+                          </table>
+                      </div><!-- /content-panel -->
+                  </div><!-- /col-md-12 -->
+              </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!------------End My Apps ------------------------------------------------>
+
+<!------------My Projects ------------------------------------------------>
+<div class="panel-group content-size" id="projaccordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" style="display: block;" data-toggle="collapse" data-parent="#projaccordion" ng-click="vm.scrolto('collapseThr')" data-target="#collapseThr" aria-expanded="false" aria-controls="collapseThr">
+          <i class="fa fa-angle-right"></i> My Projects
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThr" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+
+          <div class="row mt">
+                  <div class="col-md-12">
+                      <div class="content-panel">
+
+                          <div ng-if="!myProjects"><p>You have no <strong>Projects &nbsp;</strong> now</p></div>
+                          <table ng-if="myProjects" class="table table-striped table-advance table-hover">
+
+                              <label ng-show="myProjects">Search:
+                                  <input ng-model="searchText3">
+                              </label>
+
+                              <thead>
+                              <tr>
+                                  <th class="text-center">#ID</th>
+                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i><strong> Project </strong></th>
+                                  <th class="text-center"><i class="fa fa-usd"></i><strong> My Status</strong></th>
+                                  <th class="text-center"><i class="fa fa-list-ol"></i><strong> PM </strong></th>
+                                  <th class="text-center"><i class="fa fa-line-chart"></i><strong> Progress</strong></th>
+                              </tr>
+                              </thead>
+
+                              <tbody>
+                              <tr ng-repeat="proj in myProjects | filter:searchText3 ">
+                                  <td class="text-center"><a>{{$index + 1}}</a></td>
+                                  <td class="hidden-phone"><a title="Go to Project page" ng-href="/projects/{{ proj.project }}"><img ng-src="{{ proj.proj_fields.proj_Logo }}">&nbsp;{{proj.proj_fields.proj_title}}</a></td>
+                                  <td class="text-center">{{proj.is_pm ? 'P-Manager' : 'Contributor'}}</td>
+                                  <td class="text-center"><a title="Go to User profile page" ng-href="/users/{{proj.proj_fields.PM_id}}">{{proj.is_pm ? user.username : proj.proj_fields.pm_name}}</a></td>
+                                  <td class="text-center"><span>%{{proj.proj_fields.progress}}</span></td>
+                              </tr>
+
+                              </tbody>
+                          </table>
+                      </div><!-- /content-panel -->
+                  </div><!-- /col-md-12 -->
+              </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!------------End My Apps ------------------------------------------------>
+
+</div>
