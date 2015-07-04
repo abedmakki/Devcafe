@@ -80,7 +80,7 @@
           </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button ng-if="!jobDet.proj_fields.is_pm" ng-click="vm.applyForJob(jobDet.id,jobDet.project)" class="btn btn-primary btn-lg">Apply Now</button>
+        <button ng-if="!(jobDet.proj_fields.is_pm || jobDet.proj_fields.applied)" ng-click="vm.applyForJob(jobDet.id,jobDet.project)" class="btn btn-primary btn-lg">Apply Now</button>
       </div>
     </div>
   </div>

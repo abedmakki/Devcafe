@@ -25,12 +25,19 @@ class JobSerializer(serializers.ModelSerializer):
     def get_proj_status(self, obj):
         user = self.context['request'].user
         proj = Project.objects.get(id=obj.project_id)
+        isapply = False
+        try:
+            req = Request.objects.get(job=obj , owner=user)
+            if req:
+                isapply = True
+        except Request.DoesNotExist : isapply=False
         logo = proj.logo.thumbnail.url
         isPM = False
         pmid=proj.PM.id;pmname = proj.PM.username
         if proj.PM == user:
             isPM= True
-        return {'proj_Logo':logo , 'is_pm':isPM , 'pm_id':pmid , 'pm_name':pmname }
+
+        return {'proj_Logo':logo , 'is_pm':isPM , 'pm_id':pmid , 'pm_name':pmname , 'applied':isapply}
 
     class Meta:
         model = Job
