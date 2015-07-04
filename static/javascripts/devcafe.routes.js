@@ -21,6 +21,10 @@
         controller: 'ViewAnotherProfileController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/userapp/profile.html'
+    }).when('/', {
+        controller: 'LandingPageController',
+        controllerAs: 'vm',
+        templateUrl: '/static/templates/index.html'
     }).when('/register', {
         controller: 'RegisterController',
         controllerAs: 'vm',
@@ -33,10 +37,6 @@
         controller: 'LoginController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/userapp/login.html'
-    }).when('/', {
-        controller: 'IdeasController',
-        controllerAs: 'vm',
-        templateUrl: '/static/templates/ideas/ideas.html'
     }).when('/ideas', {
         controller: 'IdeasController',
         controllerAs: 'vm',
@@ -85,7 +85,7 @@
         controller: 'ProjectDetailedController',
         controllerAs: 'vm',
         templateUrl: '/static/templates/projects/project-detailed-page.html'
-    }).otherwise('/ideas')
+    }).otherwise('/')
 }
 })();
 
