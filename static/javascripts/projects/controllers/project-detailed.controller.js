@@ -133,7 +133,11 @@
     /**** Resolve Job's request ****/
     function resolveRequest(reqID,yn){
       Projects.resolveRequest(reqID,yn).success(function(){
-        $.notify("Congratulation\nsuccess accepting a new contributer for job",{ position:"bottom right" ,className:"success"});
+        if (yn === 1) {  
+          $.notify("Congratulation\nsuccess accepting a new contributer for job",{ position:"bottom right" ,className:"success"});
+        } else {
+          $.notify("Job request rejected",{ position:"bottom right" ,className:"success"});
+        };
       }).error(function(){
         $.notify("Sorry\nError in accepting a new contributer for job",{ position:"bottom right" });
       })
