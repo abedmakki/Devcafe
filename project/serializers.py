@@ -27,10 +27,12 @@ class JobSerializer(serializers.ModelSerializer):
         proj = Project.objects.get(id=obj.project_id)
         isapply = False
         try:
-            req = Request.objects.get(job=obj , owner=user)
-            if req:
-                isapply = True
-        except Request.DoesNotExist : isapply=False
+            if user.is_authenticated():
+                req = Request.objects.get(job=obj , owner=user)
+                if req:
+                    isapply = True
+        except Request.DoesNotExist :
+            isapply=False
         logo = proj.logo.thumbnail.url
         isPM = False
         pmid=proj.PM.id;pmname = proj.PM.username

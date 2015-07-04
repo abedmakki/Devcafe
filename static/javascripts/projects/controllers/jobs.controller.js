@@ -9,18 +9,18 @@
         .module('devcafe.projects.jobs')
         .controller('JobsController', JobsController);
 
-    JobsController.$inject = ['$http', '$location','$scope', 'Projects','$timeout'];
+    JobsController.$inject = ['$http', '$location','$scope', 'Projects','$timeout','$rootScope'];
 
     /**
      * @namespace JobsController
      */
-    function JobsController($http, $location, $scope, Projects,$timeout) {
+    function JobsController($http, $location, $scope, Projects,$timeout,$rootScope) {
         var vm = this;
         vm.details = details;
         vm.applyForJob = applyForJob;
         vm.getUser = getUser;
         vm.getProj = getProj;
-
+        vm.loginme = $rootScope.login;
         /***** get all jobs ****************/
         $http.get('/projects/jobs/').success(function(data){
             $scope.jobs = data
